@@ -13,7 +13,7 @@ const ROUTES: { path: string; h1: RegExp }[] = [
   { path: "/design", h1: /shape follows composure/i },
   { path: "/story", h1: /quieter idea/i },
   { path: "/gallery", h1: /studio and road/i },
-  { path: "/contact", h1: /talk to orvane/i },
+  { path: "/contact", h1: /request information/i },
   { path: "/test-drive", h1: /book a test drive/i },
 ];
 

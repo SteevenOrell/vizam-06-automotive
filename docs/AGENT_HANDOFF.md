@@ -194,5 +194,24 @@ image-manifest.json and ASSET_LICENSES.md. No fallbacks in use. Soft notes: ed-b
 Small shared edits: StatRow value is nowrap; globals.css has .panel-in keyframes; smoke.spec h1 regexes updated for the new titles.
 Tests: e2e/slice-c.spec.ts, src/lib/editorial.test.ts, src/data/editorial-images.test.ts. Checkpoints: docs/checkpoints/slice-c/ (git-ignored; shoot.mjs and frames.mjs re-shoot against a server on 3006).
 
+## Slice D (step 6, done): /gallery, /test-drive, /contact
+**Gallery**: src/data/gallery.ts (30 curated entries: all views, interiors, details, heroes, 7 ed-* scenes; max one extra paint per model, order interleaves models and subjects; per-entry caption + meta "model · colour · view"; film strip = the other 5 ed-* scenes, not repeated), src/lib/gallery.ts (filters all/aren/sola/vire/interior/detail/scene, countByFilter, wrapIndex, swipeDirection; tested), src/components/gallery/GalleryExplorer.tsx (chips = buttons with aria-pressed + counts, live count, CSS-columns masonry that keeps each image ratio, first 3 eager rest lazy, sizes set) and Lightbox.tsx (native dialog showModal, Esc via cancel, arrows/Home/End wrap, swipe, caption, scroll lock on html, data-fixed; focus returns to the tile of the image showing when closed). Film strip reuses vehicle/Gallery.
+**Forms architecture**: primitives in src/components/forms/ (Field render-prop with ids/aria-describedby/aria-invalid and "(required)/(optional)" text, TextInput, Textarea, Select, Checkbox, Honeypot, ErrorSummary, FormStatus + DEMO_NOTICE strings, DemoSuccess, useDemoForm). Logic in src/lib/demo-forms.ts (validateTestDrive/validateContact shared by client and server, processTestDrive/processContact, readFormValues, FormResult = idle | error{fieldErrors,values} | success{summary}); schemas extended in src/lib/schemas.ts (max date 183 days, control-character rejection, optional attachedConfig, contact topics now vehicle/configurator/press/partnership/other + optional model + consent). Server Actions: src/app/test-drive/actions.ts, src/app/contact/actions.ts (thin wrappers, "use server"). Forms use useActionState with action={formAction}, so they work without JavaScript (tested with JS off); client validation runs on blur (adds messages only), live on change (removes fixed ones) and on submit (summary focused). The summary only changes on submit so layout does not jump under the pointer. Server date check uses now minus 24h for time-zone slack. /test-drive is fully static; ?model= is read client-side (useSearchParams in Suspense; the fallback is the same form, so no-JS works).
+**Demonstration workflow**: the action validates, returns a summary, and does nothing else: no email, storage, logging or external call (e2e asserts no cross-origin request). Honeypot (field "website") returns the same success with no summary. Saved configuration (opt-in) is read client-side from CONFIG_STORAGE_KEY, sent as hidden JSON only when ticked, and re-validated server-side with isValidConfig.
+**Real deployment would need**: an email or CRM provider and its key (env var names to define, never committed), rate limiting and bot protection (the honeypot is only a first layer), reviewed consent/privacy wording and retention policy for the target country, real locations/dealer data if wanted, a confirmation email, error monitoring without logging personal data, and an independent security/privacy review.
+Deviations: /contact h1 is "Request information." (smoke test regex updated); playwright.config.ts has workers 3 locally (2 on CI).
+Tests: e2e/slice-d.spec.ts (29), src/lib/{demo-forms,gallery}.test.ts, schemas.test.ts extended. Checkpoints docs/checkpoints/slice-d/ (git-ignored; shoot.mjs re-shoots against a server on 3006).
+
+## Last verified checks (step 6)
+| Check | Result |
+|---|---|
+| lint / typecheck | pass |
+| unit | pass, 10 files / 88 tests |
+| build | pass (/test-drive and /contact and /gallery static) |
+| e2e (full, workers 3) | pass, 123/123 (smoke 19, slice-a 23, configurator 25, slice-c, slice-d 29) |
+| content-qa (gallery, contact, test-drive) | 0 FAIL, 24 WARN kept: no Open Graph tags (step 7); tiles 1.05x soft-on-retina is the srcset-normalisation artefact noted in step 3 (sources 1672px); one registry alt over 140 chars (ed-platform, film strip) |
+| quality-gate script | not run as a whole (its parts lint/typecheck/test/build/e2e/layout were run separately; audit and secret scan not rerun in step 6) |
+| browser | 240/390/768/1440 viewed for gallery, lightbox, test-drive (errors, success), contact; 240 locks at 500, no h-scroll 300+ |
+
 ## Next step
-Step 6: Gallery, Contact, Test-drive pages and forms. Before any PR: image-audit validate (accept the 7 variant near-duplicate FAILs) then register; rerun gate and content-qa.
+Step 7: polish (Open Graph tags, motion/responsive fixes, content-qa WARNs), then QA/security (step 8), portfolio screenshots. Before any PR: image-audit validate (accept the 7 variant near-duplicate FAILs) then register; rerun gate and content-qa. Step 6 content-qa contact sheets and the quality-gate script were not run by the step-6 agent (see checks).

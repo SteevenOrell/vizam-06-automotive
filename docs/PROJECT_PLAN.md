@@ -19,7 +19,7 @@ No push, merge or deploy without his say. Night run: not authorised.
 - [x] 3 Slice A: Homepage, Models, vehicle detail template (3 models) → screenshot checkpoint for Steeven
 - [x] 4 Slice B: Configurator (state, pricing, summary, save/restart)
 - [x] 5 Slice C: Technology, Innovation, Performance, Design Philosophy, Brand Story
-- [ ] 6 Slice D: Gallery, Contact, Book a Test Drive
+- [x] 6 Slice D: Gallery, Contact, Book a Test Drive
 - [ ] 7 Polish: motion pass, reduced motion, mobile nav, image performance
 - [ ] 8 QA: unit + e2e, quality gate, content QA, dependency audit, security review (Opus)
 - [ ] 9 Delivery: README, architecture, design system, deploy notes, portfolio screenshots, handoff, retro
