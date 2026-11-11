@@ -5,7 +5,8 @@ ORVANE is a fictional concept brand (VIZAM portfolio project). All imagery is sy
 ## Images
 Every file under `public/images/` is **AI-generated (Codex built-in image generation)**. The prompts are in:
 - `docs/image-requests/01-vehicle-sets.md` (model views, paint and interior sets, details), and
-- `docs/image-requests/02-heroes-and-wheels.md` (cinematic heroes, wheel designs).
+- `docs/image-requests/02-heroes-and-wheels.md` (cinematic heroes, wheel designs), and
+- `docs/image-requests/03-editorial.md` (12 editorial scenes for Technology, Innovation, Performance, Design and Story, under `public/images/editorial/`).
 
 Per-file slot, page, subject and composition: `docs/image-manifest.json`. The shipped files are compressed WebP;
 the PNG originals stay in the git-ignored `docs/image-requests/returned/`. No stock photos are used. The vehicles are

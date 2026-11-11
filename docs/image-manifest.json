@@ -470,6 +470,126 @@
       "photographer": null,
       "subject": "Forge 22-inch wheel, satin black with amber ring",
       "composition": "side-on detail"
+    },
+    {
+      "file": "public/images/editorial/ed-battery-module.webp",
+      "slot": "ed-battery-module",
+      "page": "/technology",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/03-editorial.md#ed-battery-module",
+      "photographer": null,
+      "subject": "Machined battery module macro",
+      "composition": "macro detail"
+    },
+    {
+      "file": "public/images/editorial/ed-brake-detail.webp",
+      "slot": "ed-brake-detail",
+      "page": "/performance",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/03-editorial.md#ed-brake-detail",
+      "photographer": null,
+      "subject": "Brake disc and caliper through spokes",
+      "composition": "close detail"
+    },
+    {
+      "file": "public/images/editorial/ed-cockpit-night.webp",
+      "slot": "ed-cockpit-night",
+      "page": "/technology",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/03-editorial.md#ed-cockpit-night",
+      "photographer": null,
+      "subject": "Aren cockpit at night",
+      "composition": "driver-eye interior"
+    },
+    {
+      "file": "public/images/editorial/ed-lab-light.webp",
+      "slot": "ed-lab-light",
+      "page": "/innovation",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/03-editorial.md#ed-lab-light",
+      "photographer": null,
+      "subject": "Light blade on a test rig",
+      "composition": "rig with engineer from behind"
+    },
+    {
+      "file": "public/images/editorial/ed-platform.webp",
+      "slot": "ed-platform",
+      "page": "/technology",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/03-editorial.md#ed-platform",
+      "photographer": null,
+      "subject": "Bare electric platform, battery and motors",
+      "composition": "high three-quarter studio"
+    },
+    {
+      "file": "public/images/editorial/ed-track-vire.webp",
+      "slot": "ed-track-vire",
+      "page": "/performance",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/03-editorial.md#ed-track-vire",
+      "photographer": null,
+      "subject": "Vire in Ember on a circuit",
+      "composition": "low front three-quarter"
+    },
+    {
+      "file": "public/images/editorial/ed-wind-tunnel.webp",
+      "slot": "ed-wind-tunnel",
+      "page": "/innovation",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/03-editorial.md#ed-wind-tunnel",
+      "photographer": null,
+      "subject": "Aren in a wind tunnel",
+      "composition": "side profile"
+    },
+    {
+      "file": "public/images/editorial/ed-atelier.webp",
+      "slot": "ed-atelier",
+      "page": "/story",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/03-editorial.md#ed-atelier",
+      "photographer": null,
+      "subject": "Assembly atelier with an Aren",
+      "composition": "wide interior"
+    },
+    {
+      "file": "public/images/editorial/ed-clay-studio.webp",
+      "slot": "ed-clay-studio",
+      "page": "/design",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/03-editorial.md#ed-clay-studio",
+      "photographer": null,
+      "subject": "Clay model of the Aren in a design studio",
+      "composition": "wide studio"
+    },
+    {
+      "file": "public/images/editorial/ed-coast-road.webp",
+      "slot": "ed-coast-road",
+      "page": "/story",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/03-editorial.md#ed-coast-road",
+      "photographer": null,
+      "subject": "Aerial coast road at blue hour",
+      "composition": "aerial"
+    },
+    {
+      "file": "public/images/editorial/ed-founding-garage.webp",
+      "slot": "ed-founding-garage",
+      "page": "/story",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/03-editorial.md#ed-founding-garage",
+      "photographer": null,
+      "subject": "Workshop at dusk with a covered car",
+      "composition": "wide interior at dusk"
+    },
+    {
+      "file": "public/images/editorial/ed-sketch-desk.webp",
+      "slot": "ed-sketch-desk",
+      "page": "/design",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/03-editorial.md#ed-sketch-desk",
+      "photographer": null,
+      "subject": "Designer desk with sketches and swatches",
+      "composition": "overhead flat lay"
     }
   ]
 }

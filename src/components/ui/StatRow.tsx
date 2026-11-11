@@ -24,7 +24,7 @@ export function StatRow({ stats, className, conceptLabel = true, size = "md" }: 
           <div key={s.label} className="flex flex-col-reverse gap-1 border-l border-current/20 pl-4">
             <dt className="text-xs uppercase tracking-[0.18em] opacity-75">{s.label}</dt>
             <dd className={cn("font-display font-semibold leading-none [font-stretch:112%]", size === "lg" ? "text-[clamp(2.25rem,5vw,4.5rem)]" : "text-3xl md:text-4xl")}>
-              {s.value}
+              <span className="whitespace-nowrap">{s.value}</span>
               {s.unit ? <span className="ml-1 align-baseline text-base font-normal opacity-75">{s.unit}</span> : null}
             </dd>
           </div>

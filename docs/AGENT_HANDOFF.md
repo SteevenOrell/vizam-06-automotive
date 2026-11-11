@@ -180,5 +180,19 @@ Checkpoints: docs/checkpoints/slice-b/ (git-ignored): model/colour/wheels/interi
 - No 360; the angle views exist for Lunar Silver only. Not tested in Firefox/WebKit or with a screen reader. Print layout checked with print media emulation, not a real printer.
 - Save state is per browser profile; a second tab updates through the storage event.
 
+## Slice C (step 5, done): /technology, /innovation, /performance, /design, /story
+Components: src/components/editorial/ (EdImage, SectionIntro, PlatformExplorer [client tabs], InnovationSequence [client, sticky media],
+ModelSwitcher [client], CompareChart). Data: src/data/editorial.ts (all copy; numbers derived from vehicles.ts via src/lib/editorial.ts:
+specRange, driveLayouts, compareBars), src/data/editorial-images.ts (editorialImage / resolveImage / imageProps; EDITORIAL_FALLBACKS is a safety net, unused now).
+Images: 12 ed-* scenes accepted (none rejected), WebP 1672x941 in public/images/editorial/, wired in image-assets.ts + images.ts (editorialSlots),
+image-manifest.json and ASSET_LICENSES.md. No fallbacks in use. Soft notes: ed-brake-detail shows 12 spokes (brief said ten); ed-track-vire is an Ember coupe close to but not identical to vire-ext-ember; ed-lab-light engineer is a large soft back-of-head at left.
+- technology: stats header, platform explorer (tabs Battery / Motors / Thermal [SVG loop diagram] / Software), drive layouts, charging steps, cockpit (ed-cockpit-night), assistance, CTA.
+- innovation: concept-direction note, numbered sequence with pinned media (CSS sticky, active item from scroll position; stacked under lg), method, CTA.
+- performance: full-height ed-track-vire opener (the only scrubbed effect, ScrollMedia), model + trim switcher (aria-pressed buttons, StatRow from data), chassis and braking, CSS bar comparison plus data table, drive modes, CTA (vire).
+- design: paper header, principles, process (ed-sketch-desk, ed-clay-studio), light blade triptych, swatches from vehicle data, silhouette strip (Gallery), CTA.
+- story: visible concept-narrative note, origin, five-chapter timeline (chapters, not dates), values, atelier, closing coast-road band with Models / Test drive.
+Small shared edits: StatRow value is nowrap; globals.css has .panel-in keyframes; smoke.spec h1 regexes updated for the new titles.
+Tests: e2e/slice-c.spec.ts, src/lib/editorial.test.ts, src/data/editorial-images.test.ts. Checkpoints: docs/checkpoints/slice-c/ (git-ignored; shoot.mjs and frames.mjs re-shoot against a server on 3006).
+
 ## Next step
-Step 5 (Slice C): Technology, Innovation, Performance, Design Philosophy, Brand Story pages. Before any PR: image-audit validate (accept the 7 variant near-duplicate FAILs) then register; rerun gate and content-qa.
+Step 6: Gallery, Contact, Test-drive pages and forms. Before any PR: image-audit validate (accept the 7 variant near-duplicate FAILs) then register; rerun gate and content-qa.
