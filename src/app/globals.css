@@ -1,0 +1,128 @@
+@import "tailwindcss";
+
+/* ORVANE design tokens (docs/DESIGN_REFERENCE.md). Define once here; Tailwind reads them via @theme. */
+:root {
+  --ink: #0b0c0e;
+  --carbon: #15171a;
+  --graphite: #2a2d32;
+  --mist: #8a8f98; /* secondary text on dark only, >= 14px */
+  --slate: #5b616b; /* secondary text on light */
+  --paper: #f4f1ec;
+  --bone: #e7e2da;
+  --amber: #d9772b; /* single accent */
+  --amber-soft: #e58b45; /* hover state of amber surfaces */
+  --amber-ink: #a8541a; /* amber for text on light surfaces (AA) */
+
+  --radius-sharp: 2px;
+  --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-ui: 300ms;
+
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-carbon: var(--carbon);
+  --color-graphite: var(--graphite);
+  --color-mist: var(--mist);
+  --color-slate: var(--slate);
+  --color-paper: var(--paper);
+  --color-bone: var(--bone);
+  --color-amber: var(--amber);
+  --color-amber-soft: var(--amber-soft);
+  --color-amber-ink: var(--amber-ink);
+
+  --font-sans: var(--font-text), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-display-face), var(--font-text), ui-sans-serif, sans-serif;
+
+  --radius-sharp: var(--radius-sharp);
+  --ease-out-expo: var(--ease-out-expo);
+}
+
+/* ---------- Base ---------- */
+
+html {
+  /* Lets visitors pan the 500px locked layout below 250px. */
+  overflow-x: auto;
+  background: var(--ink);
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+}
+
+#root {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  /* No accidental horizontal scroll from 300px up; clip keeps position: sticky working. */
+  overflow-x: clip;
+}
+
+::selection {
+  background: var(--amber);
+  color: var(--ink);
+}
+
+/* Visible focus everywhere, keyboard only. */
+:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 3px;
+}
+
+[data-tone="paper"] :focus-visible,
+[data-tone="bone"] :focus-visible {
+  outline-color: var(--amber-ink);
+}
+
+/* Skip link: off-screen until focused. */
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -100px;
+  z-index: 100;
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--radius-sharp);
+  background: var(--amber);
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* ---------- 250px lock (Steeven's rule) ----------
+   Below 250px the layout is locked at 500px and visitors pan. #root and every fixed element
+   (mark fixed elements with the data-fixed attribute) get width 500px; fixed elements also right:auto. */
+@media (max-width: 250px) {
+  #root,
+  [data-fixed] {
+    width: 500px;
+  }
+
+  [data-fixed] {
+    right: auto;
+  }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
