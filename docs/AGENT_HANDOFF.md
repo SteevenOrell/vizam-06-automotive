@@ -1,6 +1,6 @@
 # Agent handoff — ORVANE (vizam-06-automotive)
 
-_Last updated: 2026-11-11 America/Toronto, after step 3 (Slice A), by the step-3 build agent_
+_Last updated: 2026-11-11 America/Toronto, after step 4 (Slice B, configurator), by the step-4 build agent_
 
 ## Objective
 VIZAM portfolio concept: premium site for ORVANE, a fictional electric performance car brand. 12 page types, a working
@@ -9,7 +9,7 @@ image-based configurator, validated demo forms, tests, docs, portfolio screensho
 
 ## Repository
 - Path: `C:\Users\SteevenWemin\Documents\Projects\vizam-06-automotive`. No remote. Never push, merge or deploy without Steeven.
-- Branch: `feat/initial-build`. Commit: see `git log --oneline -1` (step 1 setup commit).
+- Branch: `feat/initial-build`. Commit: see `git log --oneline -1`.
 - `docs/design-references/*.jpg` are third-party screenshots with real brand logos: kept local via `.git/info/exclude`,
   never commit them. `docs/image-requests/returned/` is git-ignored (Codex originals).
 
@@ -135,5 +135,50 @@ Checkpoint screenshots: docs/checkpoints/slice-a/ (git-ignored): home and models
 | quality gate (5 routes) | all PASS except e2e at that moment (a test selector clash I then fixed; e2e rerun 42/42); audit prod 0, 7 dev-only moderate |
 | content-qa (5 routes) | 0 FAIL after fixes; WARNs: no Open Graph tags (step 7), retina '1x' notes are density-normalised naturalWidth artefacts of next/image srcset (real ratios: 1672px sources, hero 1.16x at 1440) |
 
+## Slice B (step 4, done): /configure (configurator)
+**State shape** (`ConfigState`, version 1): `{version, model, trim, colour, wheels, interior, packages: string[]}`. UI-only state lives in
+`Configurator.tsx`: step, stage view (exterior|interior|wheel), angle, visited steps, pending model switch, banner dismissal.
+**Pure logic** (`src/lib/configurator.ts`, tested in `configurator.test.ts` + `configurator-flow.test.ts`): getDefaultConfig, setOption (re-applies
+package rules), switchModel (always model defaults), isCustomised, normalizeConfig + getPackageState + togglePackage (package rules), getSelection,
+getPriceBreakdown/getTotalPrice, formatPrice/formatDelta, getSummaryText, repairConfig/isValidConfig, serializeSaved/parseSaved, CONFIG_STEPS +
+parseUrlParams/buildSearch, getStageSlot/getStageLabel/availableAngles.
+**Package rules are data**: `PackageOption.requires` / `conflictsWith` (symmetric) and `TrimVariant.includesPackages` in `src/data/vehicles.ts`.
+Current rules: Aren Rear Lounge requires Acoustic Comfort; Sola Terrain includes Winter; Sola Third Row conflicts with Utility; Vire Track conflicts
+with Grand Tour; Vire Track trim includes Carbon Aero. Blocked options are disabled with the reason shown; included ones show 0 in the breakdown.
+**Storage**: key `orvane.configurator.v1` (CONFIG_STORAGE_KEY). Value `{version:1, savedAt: ISO, config: ConfigState}`. `parseSaved` repairs wrong
+version / unknown ids / bare legacy config (flags `repaired`, the banner tells the visitor) and returns null for corrupt data (the key is then removed).
+Labelled "Saved on this device" everywhere; nothing is sent anywhere. Read via `useSyncExternalStore` (`savedStore.ts`), so hydration is safe.
+**URL**: `?model=<slug>&step=<id>` read once on load (useSearchParams inside Suspense; /configure still prerenders), rewritten with
+history.replaceState after the first change. A saved build is never loaded silently: the banner offers Resume / Start new and says whether a deep link is being loaded.
+**Component map** (`src/components/configurator/`): Configurator (orchestrator, layout, live regions, price and Next bars), StepNav (numbered stepper, aria-current=step),
+StepPanels (Model/Trim/Colour/Wheel/Interior/Packages panels), OptionCard (native radio/checkbox card), VehicleStage (dark stage, view switcher,
+other-view thumbnail, caption), StageImage (400ms crossfade, keeps the previous layer until the new one loads), SummaryPanel (spec, breakdown, actions:
+copy/print/save/delete/restart), savedStore (localStorage hook), preload (getImageProps-based cache warming: idle for the five paints, cabin and wheels; hover/focus for neighbours).
+**Layout**: >=1024 stage left / 440px rail right / stepper on top / price + Back/Next in the rail footer. <1024 sticky stage band (16:9, max 45vh), stepper in flow,
+fixed bottom bar (`data-fixed data-config-bar`, price + Back/Next; the footer gets extra bottom padding via CSS `:has`). Print CSS in globals.css prints only #config-summary.
+**Wheel honesty**: exterior renders all show Blade; the wheel step shows a dedicated wheel view plus the note "Vehicle preview shown with Blade 21 wheels".
+**Views control**: kept. Front 3/4 always; Rear 3/4 / Side / Front enabled only in Lunar Silver with the note "Additional views shown in Lunar Silver." (radios in the Colour step; resets to Front 3/4 on step change). No 360.
+**Adding an option**: add it to the lists in `vehicles.ts` (paints/wheels/interiors are shared lists with per-model price deltas; the delta count must match), add the image slot
+(`<model>-ext-<id>`, `<model>-int-<id>`, `wheel-<id>`) in image-assets; panels, price, summary, repair and stage pick it up. Packages: add to the model's list, optionally `requires`/`conflictsWith`.
+Also changed: exterior hotspots on /models/sola (tailgate) and /models/vire (doors, rear light) re-positioned after viewing at 1440; Aren and the other Sola hotspots were already on target.
+Checkpoints: docs/checkpoints/slice-b/ (git-ignored): model/colour/wheels/interior/summary at 240/390/768/1440 plus hotspots-sola/vire. QA output docs/qa/ (git-ignored).
+
+## Last verified checks (step 4)
+| Check | Result |
+|---|---|
+| lint / typecheck | pass |
+| unit | pass, 6 files / 56 tests |
+| build | pass (/configure prerendered static) |
+| e2e | pass, 67/67 (smoke 19 + slice-a 23 + configurator 25) |
+| quality gate (configure, models/sola, models/vire; e2e and history skipped in that run, e2e run separately) | 0 FAIL, 0 WARN; audit prod 0, 7 dev-only moderate |
+| content-qa (/configure) | 0 FAIL; WARN no Open Graph tags (step 7); WARN stage image shows 1000px at 1x (srcset picks the next device size, retina gets the 1672px source) |
+| browser | 240/390/768/1440 on model, colour, wheels, interior, summary viewed; no h-scroll 300+, 240 locks at 500 |
+
+## Known limits (configurator)
+- Cache Components: /configure prerenders only the fallback; the configurator itself renders on the client after hydration.
+- Stage view switch exterior<->wheel remounts the image (no crossfade across that switch; exterior<->interior and all option changes crossfade).
+- No 360; the angle views exist for Lunar Silver only. Not tested in Firefox/WebKit or with a screen reader. Print layout checked with print media emulation, not a real printer.
+- Save state is per browser profile; a second tab updates through the storage event.
+
 ## Next step
-Step 4 (Slice B): configurator. Before any PR: image-audit validate (accept 7 variant FAILs) then register; rerun gate and content-qa.
+Step 5 (Slice C): Technology, Innovation, Performance, Design Philosophy, Brand Story pages. Before any PR: image-audit validate (accept the 7 variant near-duplicate FAILs) then register; rerun gate and content-qa.

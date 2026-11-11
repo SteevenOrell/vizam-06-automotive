@@ -59,7 +59,7 @@ export const vehicleContent: Record<VehicleSlug, VehicleContent> = {
       { id: "suspension", title: "Adaptive air suspension", text: "Ride height changes by up to 60 mm between access, normal and terrain modes.", x: 52, y: 64 },
       { id: "light", title: "Light-bar front signature", text: "A slim light bar with a wide beam pattern replaces conventional lamp clusters.", x: 28, y: 47 },
       { id: "rails", title: "Flush roof rails", text: "Rails sit flat against the roof and carry cross bars when needed. No wind noise when bare.", x: 60, y: 19 },
-      { id: "tailgate", title: "Powered tailgate", text: "Opens with a foot gesture, the phone key or a button on the door.", x: 91, y: 42 },
+      { id: "tailgate", title: "Powered tailgate", text: "Opens with a foot gesture, the phone key or a button on the door.", x: 91, y: 37 },
     ],
     interiorNotes: [
       { title: "Five seats", text: "Wide, upright seating with real headroom for adults in every position." },
@@ -91,8 +91,8 @@ export const vehicleContent: Record<VehicleSlug, VehicleContent> = {
     hotspots: [
       { id: "overhangs", title: "Short overhangs", text: "Wheels are pushed to the corners so the car rotates quickly and fits tight roads comfortably.", x: 11, y: 60 },
       { id: "aero", title: "Active aero flaps", text: "Flaps in the front intake open for cooling and close for drag, controlled by drive mode and speed.", x: 34, y: 68 },
-      { id: "doors", title: "Frameless doors", text: "Glass drops a few millimetres as the door opens, so the roofline stays clean and the seal is tight.", x: 62, y: 33 },
-      { id: "blade", title: "Full-width rear light blade", text: "A single red line spans the tail and brightens under braking.", x: 91, y: 48 },
+      { id: "doors", title: "Frameless doors", text: "Glass drops a few millimetres as the door opens, so the roofline stays clean and the seal is tight.", x: 72, y: 38 },
+      { id: "blade", title: "Full-width rear light blade", text: "A single red line spans the tail and brightens under braking.", x: 93, y: 36 },
     ],
     interiorNotes: [
       { title: "Two seats plus occasional bench", text: "Two bucket seats and a small rear bench for bags, or a short trip with children." },

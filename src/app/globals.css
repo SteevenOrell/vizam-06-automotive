@@ -140,3 +140,55 @@ body {
     scroll-behavior: auto !important;
   }
 }
+
+/* ---------- Configurator ---------- */
+.stage-fade-x {
+  mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent);
+}
+
+.stage-fade-y {
+  mask-image: linear-gradient(to bottom, transparent, #000 8%, #000 92%, transparent);
+}
+
+/* The fixed price bar sits over the page bottom on phones; keep the footer clear of it. */
+@media (max-width: 1023px) {
+  body:has([data-config-bar]) #root > footer {
+    padding-bottom: 5.5rem;
+  }
+}
+
+/* Print only the configuration summary, on white. */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  #config-summary,
+  #config-summary * {
+    visibility: visible;
+  }
+
+  #config-summary {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    padding: 0;
+    background: #fff;
+    color: #000;
+  }
+
+  #config-summary * {
+    color: #000 !important;
+    border-color: #999 !important;
+  }
+
+  html,
+  body {
+    background: #fff !important;
+  }
+}
+
+.stage-fade-radial {
+  mask-image: radial-gradient(closest-side, #000 86%, transparent 100%);
+}

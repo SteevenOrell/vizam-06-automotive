@@ -1,17 +1,25 @@
 import type { Metadata } from "next";
-import { PageHeader } from "@/components/ui/PageHeader";
+import { Suspense } from "react";
+import { Configurator } from "@/components/configurator/Configurator";
 
 export const metadata: Metadata = {
   title: "Configure",
   description: "Build an ORVANE concept vehicle: choose model, paint, wheels, interior and packages, with a live concept price.",
 };
 
+function ConfiguratorFallback() {
+  return (
+    <div aria-hidden="true" className="lg:flex lg:h-[max(100dvh,640px)] lg:pt-[4.75rem]">
+      <div className="h-[calc(3.75rem+min(56.25vw,45vh))] bg-ink lg:h-full lg:flex-1" />
+      <div className="min-h-[60vh] bg-carbon lg:w-[440px]" />
+    </div>
+  );
+}
+
 export default function Page() {
   return (
-    <PageHeader
-      eyebrow="Configurator"
-      title="Configure your ORVANE."
-      intro="Choose a model, then paint, wheels, interior and packages. Your build saves on this device."
-    />
+    <Suspense fallback={<ConfiguratorFallback />}>
+      <Configurator />
+    </Suspense>
   );
 }

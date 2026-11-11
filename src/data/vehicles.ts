@@ -125,6 +125,7 @@ const aren: Vehicle = {
       description: "A more generous second row.",
       includes: ["Reclining rear seats", "Rear climate zone", "Rear control tablet"],
       priceDelta: 5200,
+      requires: ["aren-acoustic"],
     },
   ],
   features: {
@@ -166,6 +167,7 @@ const sola: Vehicle = {
       name: "Sola Terrain",
       description: "Raised air suspension and terrain modes for unpaved roads.",
       priceDelta: 9000,
+      includesPackages: ["sola-winter"],
       specs: { powerKw: 460, zeroToHundredS: 4.0, rangeKm: 580, topSpeedKmh: 210, batteryKwh: 116, drive: "Dual-motor AWD" },
     },
     {
@@ -207,6 +209,7 @@ const sola: Vehicle = {
       description: "Two fold-flat seats for short trips.",
       includes: ["Two rear-facing seats", "Third-row air vents", "Powered fold"],
       priceDelta: 3800,
+      conflictsWith: ["sola-utility"],
     },
   ],
   features: {
@@ -255,6 +258,7 @@ const vire: Vehicle = {
       name: "Vire Track",
       description: "Tri-motor drive, carbon aero and track-ready cooling.",
       priceDelta: 46000,
+      includesPackages: ["vire-carbon"],
       specs: { powerKw: 720, zeroToHundredS: 2.3, rangeKm: 430, topSpeedKmh: 305, batteryKwh: 92, drive: "Tri-motor AWD" },
     },
   ],
@@ -268,6 +272,7 @@ const vire: Vehicle = {
       description: "Hardware for regular circuit days.",
       includes: ["Carbon-ceramic brakes", "Track telemetry app", "Battery pre-conditioning for laps"],
       priceDelta: 9800,
+      conflictsWith: ["vire-grand-tour"],
     },
     {
       id: "vire-carbon",

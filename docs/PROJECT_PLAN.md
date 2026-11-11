@@ -17,7 +17,7 @@ No push, merge or deploy without his say. Night run: not authorised.
 - [x] 1 Setup: Next.js scaffold, tokens, layout, nav, footer, data models, 250px lock, test tooling (Opus)
 - [x] 2 Assets: Codex briefs, stock picks, audit, manifest, licence doc
 - [x] 3 Slice A: Homepage, Models, vehicle detail template (3 models) → screenshot checkpoint for Steeven
-- [ ] 4 Slice B: Configurator (state, pricing, summary, save/restart)
+- [x] 4 Slice B: Configurator (state, pricing, summary, save/restart)
 - [ ] 5 Slice C: Technology, Innovation, Performance, Design Philosophy, Brand Story
 - [ ] 6 Slice D: Gallery, Contact, Book a Test Drive
 - [ ] 7 Polish: motion pass, reduced motion, mobile nav, image performance
