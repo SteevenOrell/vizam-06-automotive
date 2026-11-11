@@ -1,0 +1,475 @@
+{
+  "repoVisibility": "private",
+  "images": [
+    {
+      "file": "public/images/aren/aren-detail-cabin.webp",
+      "slot": "aren-detail-cabin",
+      "page": "/models/aren",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/01-vehicle-sets.md#aren-detail-cabin",
+      "photographer": null,
+      "subject": "Aren sedan centre console detail",
+      "composition": "close detail"
+    },
+    {
+      "file": "public/images/aren/aren-detail-light.webp",
+      "slot": "aren-detail-light",
+      "page": "/models/aren",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/01-vehicle-sets.md#aren-detail-light",
+      "photographer": null,
+      "subject": "Aren sedan light blade detail",
+      "composition": "close detail"
+    },
+    {
+      "file": "public/images/aren/aren-ext-basalt-black.webp",
+      "slot": "aren-ext-basalt-black",
+      "page": "/configure",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/01-vehicle-sets.md#aren-ext-basalt-black",
+      "photographer": null,
+      "subject": "Aren sedan, basalt black paint",
+      "composition": "studio front three-quarter"
+    },
+    {
+      "file": "public/images/aren/aren-ext-ember.webp",
+      "slot": "aren-ext-ember",
+      "page": "/configure",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/01-vehicle-sets.md#aren-ext-ember",
+      "photographer": null,
+      "subject": "Aren sedan, ember paint",
+      "composition": "studio front three-quarter"
+    },
+    {
+      "file": "public/images/aren/aren-ext-glacier-white.webp",
+      "slot": "aren-ext-glacier-white",
+      "page": "/configure",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/01-vehicle-sets.md#aren-ext-glacier-white",
+      "photographer": null,
+      "subject": "Aren sedan, glacier white paint",
+      "composition": "studio front three-quarter"
+    },
+    {
+      "file": "public/images/aren/aren-ext-lunar-silver.webp",
+      "slot": "aren-ext-lunar-silver",
+      "page": "/configure",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/01-vehicle-sets.md#aren-ext-lunar-silver",
+      "photographer": null,
+      "subject": "Aren sedan, lunar silver paint",
+      "composition": "studio front three-quarter"
+    },
+    {
+      "file": "public/images/aren/aren-ext-tide-blue.webp",
+      "slot": "aren-ext-tide-blue",
+      "page": "/configure",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/01-vehicle-sets.md#aren-ext-tide-blue",
+      "photographer": null,
+      "subject": "Aren sedan, tide blue paint",
+      "composition": "studio front three-quarter"
+    },
+    {
+      "file": "public/images/aren/aren-int-dune.webp",
+      "slot": "aren-int-dune",
+      "page": "/configure",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/01-vehicle-sets.md#aren-int-dune",
+      "photographer": null,
+      "subject": "Aren sedan cabin, dune trim",
+      "composition": "interior wide"
+    },
+    {
+      "file": "public/images/aren/aren-int-ember.webp",
+      "slot": "aren-int-ember",
+      "page": "/configure",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/01-vehicle-sets.md#aren-int-ember",
+      "photographer": null,
+      "subject": "Aren sedan cabin, ember trim",
+      "composition": "interior wide"
+    },
+    {
+      "file": "public/images/aren/aren-int-onyx.webp",
+      "slot": "aren-int-onyx",
+      "page": "/configure",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/01-vehicle-sets.md#aren-int-onyx",
+      "photographer": null,
+      "subject": "Aren sedan cabin, onyx trim",
+      "composition": "interior wide"
+    },
+    {
+      "file": "public/images/aren/aren-view-front.webp",
+      "slot": "aren-view-front",
+      "page": "/models/aren",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/01-vehicle-sets.md#aren-view-front",
+      "photographer": null,
+      "subject": "Aren sedan front view",
+      "composition": "studio front"
+    },
+    {
+      "file": "public/images/aren/aren-view-rear.webp",
+      "slot": "aren-view-rear",
+      "page": "/models/aren",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/01-vehicle-sets.md#aren-view-rear",
+      "photographer": null,
+      "subject": "Aren sedan rear view",
+      "composition": "studio rear"
+    },
+    {
+      "file": "public/images/aren/aren-view-side.webp",
+      "slot": "aren-view-side",
+      "page": "/models/aren",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/01-vehicle-sets.md#aren-view-side",
+      "photographer": null,
+      "subject": "Aren sedan side view",
+      "composition": "studio side"
+    },
+    {
+      "file": "public/images/brand/hero-aren.webp",
+      "slot": "hero-aren",
+      "page": "/models/aren",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/02-heroes-and-wheels.md#hero-aren",
+      "photographer": null,
+      "subject": "Aren sedan, Glacier White, daylight studio",
+      "composition": "symmetrical front, centred"
+    },
+    {
+      "file": "public/images/brand/hero-home-desktop.webp",
+      "slot": "hero-home-desktop",
+      "page": "/",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/02-heroes-and-wheels.md#hero-home-desktop",
+      "photographer": null,
+      "subject": "Aren sedan, Lunar Silver, wet coastal road at blue hour",
+      "composition": "wide three-quarter"
+    },
+    {
+      "file": "public/images/brand/hero-home-mobile.webp",
+      "slot": "hero-home-mobile",
+      "page": "/",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/02-heroes-and-wheels.md#hero-home-mobile",
+      "photographer": null,
+      "subject": "Aren sedan, Lunar Silver, wet coastal road at blue hour",
+      "composition": "vertical three-quarter"
+    },
+    {
+      "file": "public/images/brand/hero-sola.webp",
+      "slot": "hero-sola",
+      "page": "/models/sola",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/02-heroes-and-wheels.md#hero-sola",
+      "photographer": null,
+      "subject": "Sola SUV, Tide Blue, mountain pass at dawn",
+      "composition": "rear three-quarter, wide"
+    },
+    {
+      "file": "public/images/brand/hero-vire.webp",
+      "slot": "hero-vire",
+      "page": "/models/vire",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/02-heroes-and-wheels.md#hero-vire",
+      "photographer": null,
+      "subject": "Vire coupe, Ember, concrete courtyard at dusk",
+      "composition": "exact side profile, wide"
+    },
+    {
+      "file": "public/images/sola/sola-detail-cabin.webp",
+      "slot": "sola-detail-cabin",
+      "page": "/models/sola",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/01-vehicle-sets.md#sola-detail-cabin",
+      "photographer": null,
+      "subject": "Sola SUV centre console detail",
+      "composition": "close detail"
+    },
+    {
+      "file": "public/images/sola/sola-detail-light.webp",
+      "slot": "sola-detail-light",
+      "page": "/models/sola",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/01-vehicle-sets.md#sola-detail-light",
+      "photographer": null,
+      "subject": "Sola SUV light blade detail",
+      "composition": "close detail"
+    },
+    {
+      "file": "public/images/sola/sola-ext-basalt-black.webp",
+      "slot": "sola-ext-basalt-black",
+      "page": "/configure",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/01-vehicle-sets.md#sola-ext-basalt-black",
+      "photographer": null,
+      "subject": "Sola SUV, basalt black paint",
+      "composition": "studio front three-quarter"
+    },
+    {
+      "file": "public/images/sola/sola-ext-ember.webp",
+      "slot": "sola-ext-ember",
+      "page": "/configure",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/01-vehicle-sets.md#sola-ext-ember",
+      "photographer": null,
+      "subject": "Sola SUV, ember paint",
+      "composition": "studio front three-quarter"
+    },
+    {
+      "file": "public/images/sola/sola-ext-glacier-white.webp",
+      "slot": "sola-ext-glacier-white",
+      "page": "/configure",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/01-vehicle-sets.md#sola-ext-glacier-white",
+      "photographer": null,
+      "subject": "Sola SUV, glacier white paint",
+      "composition": "studio front three-quarter"
+    },
+    {
+      "file": "public/images/sola/sola-ext-lunar-silver.webp",
+      "slot": "sola-ext-lunar-silver",
+      "page": "/configure",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/01-vehicle-sets.md#sola-ext-lunar-silver",
+      "photographer": null,
+      "subject": "Sola SUV, lunar silver paint",
+      "composition": "studio front three-quarter"
+    },
+    {
+      "file": "public/images/sola/sola-ext-tide-blue.webp",
+      "slot": "sola-ext-tide-blue",
+      "page": "/configure",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/01-vehicle-sets.md#sola-ext-tide-blue",
+      "photographer": null,
+      "subject": "Sola SUV, tide blue paint",
+      "composition": "studio front three-quarter"
+    },
+    {
+      "file": "public/images/sola/sola-int-dune.webp",
+      "slot": "sola-int-dune",
+      "page": "/configure",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/01-vehicle-sets.md#sola-int-dune",
+      "photographer": null,
+      "subject": "Sola SUV cabin, dune trim",
+      "composition": "interior wide"
+    },
+    {
+      "file": "public/images/sola/sola-int-ember.webp",
+      "slot": "sola-int-ember",
+      "page": "/configure",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/01-vehicle-sets.md#sola-int-ember",
+      "photographer": null,
+      "subject": "Sola SUV cabin, ember trim",
+      "composition": "interior wide"
+    },
+    {
+      "file": "public/images/sola/sola-int-onyx.webp",
+      "slot": "sola-int-onyx",
+      "page": "/configure",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/01-vehicle-sets.md#sola-int-onyx",
+      "photographer": null,
+      "subject": "Sola SUV cabin, onyx trim",
+      "composition": "interior wide"
+    },
+    {
+      "file": "public/images/sola/sola-view-front.webp",
+      "slot": "sola-view-front",
+      "page": "/models/sola",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/01-vehicle-sets.md#sola-view-front",
+      "photographer": null,
+      "subject": "Sola SUV front view",
+      "composition": "studio front"
+    },
+    {
+      "file": "public/images/sola/sola-view-rear.webp",
+      "slot": "sola-view-rear",
+      "page": "/models/sola",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/01-vehicle-sets.md#sola-view-rear",
+      "photographer": null,
+      "subject": "Sola SUV rear view",
+      "composition": "studio rear"
+    },
+    {
+      "file": "public/images/sola/sola-view-side.webp",
+      "slot": "sola-view-side",
+      "page": "/models/sola",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/01-vehicle-sets.md#sola-view-side",
+      "photographer": null,
+      "subject": "Sola SUV side view",
+      "composition": "studio side"
+    },
+    {
+      "file": "public/images/vire/vire-detail-cabin.webp",
+      "slot": "vire-detail-cabin",
+      "page": "/models/vire",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/01-vehicle-sets.md#vire-detail-cabin",
+      "photographer": null,
+      "subject": "Vire coupe centre console detail",
+      "composition": "close detail"
+    },
+    {
+      "file": "public/images/vire/vire-detail-light.webp",
+      "slot": "vire-detail-light",
+      "page": "/models/vire",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/01-vehicle-sets.md#vire-detail-light",
+      "photographer": null,
+      "subject": "Vire coupe light blade detail",
+      "composition": "close detail"
+    },
+    {
+      "file": "public/images/vire/vire-ext-basalt-black.webp",
+      "slot": "vire-ext-basalt-black",
+      "page": "/configure",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/01-vehicle-sets.md#vire-ext-basalt-black",
+      "photographer": null,
+      "subject": "Vire coupe, basalt black paint",
+      "composition": "studio front three-quarter"
+    },
+    {
+      "file": "public/images/vire/vire-ext-ember.webp",
+      "slot": "vire-ext-ember",
+      "page": "/configure",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/01-vehicle-sets.md#vire-ext-ember",
+      "photographer": null,
+      "subject": "Vire coupe, ember paint",
+      "composition": "studio front three-quarter"
+    },
+    {
+      "file": "public/images/vire/vire-ext-glacier-white.webp",
+      "slot": "vire-ext-glacier-white",
+      "page": "/configure",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/01-vehicle-sets.md#vire-ext-glacier-white",
+      "photographer": null,
+      "subject": "Vire coupe, glacier white paint",
+      "composition": "studio front three-quarter"
+    },
+    {
+      "file": "public/images/vire/vire-ext-lunar-silver.webp",
+      "slot": "vire-ext-lunar-silver",
+      "page": "/configure",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/01-vehicle-sets.md#vire-ext-lunar-silver",
+      "photographer": null,
+      "subject": "Vire coupe, lunar silver paint",
+      "composition": "studio front three-quarter"
+    },
+    {
+      "file": "public/images/vire/vire-ext-tide-blue.webp",
+      "slot": "vire-ext-tide-blue",
+      "page": "/configure",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/01-vehicle-sets.md#vire-ext-tide-blue",
+      "photographer": null,
+      "subject": "Vire coupe, tide blue paint",
+      "composition": "studio front three-quarter"
+    },
+    {
+      "file": "public/images/vire/vire-int-dune.webp",
+      "slot": "vire-int-dune",
+      "page": "/configure",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/01-vehicle-sets.md#vire-int-dune",
+      "photographer": null,
+      "subject": "Vire coupe cabin, dune trim",
+      "composition": "interior wide"
+    },
+    {
+      "file": "public/images/vire/vire-int-ember.webp",
+      "slot": "vire-int-ember",
+      "page": "/configure",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/01-vehicle-sets.md#vire-int-ember",
+      "photographer": null,
+      "subject": "Vire coupe cabin, ember trim",
+      "composition": "interior wide"
+    },
+    {
+      "file": "public/images/vire/vire-int-onyx.webp",
+      "slot": "vire-int-onyx",
+      "page": "/configure",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/01-vehicle-sets.md#vire-int-onyx",
+      "photographer": null,
+      "subject": "Vire coupe cabin, onyx trim",
+      "composition": "interior wide"
+    },
+    {
+      "file": "public/images/vire/vire-view-front.webp",
+      "slot": "vire-view-front",
+      "page": "/models/vire",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/01-vehicle-sets.md#vire-view-front",
+      "photographer": null,
+      "subject": "Vire coupe front view",
+      "composition": "studio front"
+    },
+    {
+      "file": "public/images/vire/vire-view-rear.webp",
+      "slot": "vire-view-rear",
+      "page": "/models/vire",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/01-vehicle-sets.md#vire-view-rear",
+      "photographer": null,
+      "subject": "Vire coupe rear view",
+      "composition": "studio rear"
+    },
+    {
+      "file": "public/images/vire/vire-view-side.webp",
+      "slot": "vire-view-side",
+      "page": "/models/vire",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/01-vehicle-sets.md#vire-view-side",
+      "photographer": null,
+      "subject": "Vire coupe side view",
+      "composition": "studio side"
+    },
+    {
+      "file": "public/images/brand/wheel-aero.webp",
+      "slot": "wheel-aero",
+      "page": "/configure",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/02-heroes-and-wheels.md#wheel-aero",
+      "photographer": null,
+      "subject": "Aero 20-inch wheel, satin silver",
+      "composition": "side-on detail"
+    },
+    {
+      "file": "public/images/brand/wheel-blade.webp",
+      "slot": "wheel-blade",
+      "page": "/configure",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/02-heroes-and-wheels.md#wheel-blade",
+      "photographer": null,
+      "subject": "Blade 21-inch wheel, machined silver ten-spoke",
+      "composition": "side-on detail"
+    },
+    {
+      "file": "public/images/brand/wheel-forge.webp",
+      "slot": "wheel-forge",
+      "page": "/configure",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/02-heroes-and-wheels.md#wheel-forge",
+      "photographer": null,
+      "subject": "Forge 22-inch wheel, satin black with amber ring",
+      "composition": "side-on detail"
+    }
+  ]
+}

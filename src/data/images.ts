@@ -1,11 +1,12 @@
 import type { ImageSlot, VehicleImageRole } from "@/types";
+import { imageAssets } from "./image-assets";
 import { vehicles } from "./vehicles";
 
 /**
  * Image slot registry. Keys match the filenames in docs/image-requests/ (01-vehicle-sets.md and
- * 02-heroes-and-wheels.md). `src: null` means the asset is pending and `VehicleImage` renders a labelled
- * placeholder at the final aspect ratio. Step 2 (assets) sets `src` to compressed WebP files under
- * /public/images and records each one in docs/image-manifest.json.
+ * 02-heroes-and-wheels.md). Real files and sizes come from ./image-assets (compressed WebP under /public/images, listed in
+ * docs/image-manifest.json). `src: null` means a slot has no asset and `VehicleImage` renders a labelled
+ * placeholder at the final aspect ratio.
  */
 const ROLE_SIZES: Record<VehicleImageRole, { width: number; height: number; label: string }> = {
   hero: { width: 2800, height: 1575, label: "Cinematic hero" },
@@ -56,7 +57,12 @@ const siteSlots: Record<string, ImageSlot> = {
   "wheel-forge": { src: null, alt: "Forge 22-inch wheel with five split spokes and amber ring", width: 1400, height: 1400, label: "Forge wheel" },
 };
 
-export const imageSlots: Record<string, ImageSlot> = { ...Object.fromEntries(entries), ...siteSlots };
+const allSlots: Record<string, ImageSlot> = { ...Object.fromEntries(entries), ...siteSlots };
+
+/** Slots with a delivered file get its path and real pixel size; the rest stay placeholders (src: null). */
+export const imageSlots: Record<string, ImageSlot> = Object.fromEntries(
+  Object.entries(allSlots).map(([key, slot]) => [key, imageAssets[key] ? { ...slot, ...imageAssets[key] } : slot]),
+);
 
 export function getImageSlot(key: string): ImageSlot | undefined {
   return imageSlots[key];
