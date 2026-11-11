@@ -111,6 +111,20 @@ body {
   }
 }
 
+/* ---------- Scroll cue (home hero) ---------- */
+@keyframes scroll-cue {
+  0% { transform: translateY(-100%); }
+  60%, 100% { transform: translateY(100%); }
+}
+
+.scroll-cue-line::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--paper);
+  animation: scroll-cue 2.2s var(--ease-out-expo) infinite;
+}
+
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   html {

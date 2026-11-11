@@ -1,3 +1,4 @@
+import { vehicleContent } from "./vehicle-content";
 import type { ColourOption, InteriorOption, Vehicle, VehicleSlug, WheelOption } from "@/types";
 
 /**
@@ -133,6 +134,7 @@ const aren: Vehicle = {
     safety: ["Eight airbags", "Automatic emergency braking", "Blind-spot monitoring", "Driver attention monitor"],
   },
   images: imageKeys("aren"),
+  content: vehicleContent.aren,
 };
 
 const sola: Vehicle = {
@@ -214,6 +216,7 @@ const sola: Vehicle = {
     safety: ["Ten airbags", "Automatic emergency braking", "Hill descent control", "Rear occupant alert"],
   },
   images: imageKeys("sola"),
+  content: vehicleContent.sola,
 };
 
 const vire: Vehicle = {
@@ -295,6 +298,7 @@ const vire: Vehicle = {
     safety: ["Six airbags", "Automatic emergency braking", "Stability control with track mode", "Rear cross-traffic alert"],
   },
   images: imageKeys("vire"),
+  content: vehicleContent.vire,
 };
 
 export const vehicles: readonly Vehicle[] = [aren, sola, vire];
@@ -307,4 +311,11 @@ export function isVehicleSlug(value: unknown): value is VehicleSlug {
 
 export function getVehicle(slug: string): Vehicle | undefined {
   return vehicles.find((v) => v.slug === slug);
+}
+
+/** Previous and next model in lineup order, wrapping around. */
+export function getAdjacentVehicles(slug: string): { prev: Vehicle; next: Vehicle } | undefined {
+  const i = vehicles.findIndex((v) => v.slug === slug);
+  if (i === -1) return undefined;
+  return { prev: vehicles[(i - 1 + vehicles.length) % vehicles.length], next: vehicles[(i + 1) % vehicles.length] };
 }

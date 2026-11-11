@@ -1,6 +1,6 @@
 # Agent handoff — ORVANE (vizam-06-automotive)
 
-_Last updated: 2026-11-11 America/Toronto, after step 2 (assets), by the step-2 build agent_
+_Last updated: 2026-11-11 America/Toronto, after step 3 (Slice A), by the step-3 build agent_
 
 ## Objective
 VIZAM portfolio concept: premium site for ORVANE, a fictional electric performance car brand. 12 page types, a working
@@ -107,9 +107,33 @@ Read `AGENTS.md`: this Next version differs from older docs; check `node_modules
   `wheel-*` slots); hero-home-desktop has the car in the right two-thirds as briefed.
 - Model pages (`/models/aren`) render real images via VehicleImage (checked at 1440 and 390; no h-scroll).
 
-## Next step
-Step 3 (Slice A): home page and shared sections using the real images. Before any PR: run `image-audit.mjs validate`
-(accept the 7 variant FAILs or extend the tool) then `register`; run vizam-quality-gate and vizam-content-qa.
+## Slice A (step 3, done): home, /models, /models/[slug]
+Components (new):
+- src/components/sections/: HomeHero (art-directed picture via getImageProps, GSAP scroll scale), FeaturedModels, BrandPhilosophy,
+  PerformanceHighlights, TechShowcase, CtaBand (reusable closing band, optional model query), ModelPanel, ComparisonTable.
+- src/components/vehicle/: VehicleHero (paper variant: name behind car via SVG mask traced in src/data/silhouettes.ts;
+  dark variant: name overlaid), SwitchableImage (client; aria-pressed switcher, crossfade, mounts other images on hover/focus),
+  FeatureHotspots (client; real buttons, popover, Esc, hidden <768px), ExteriorSection, InteriorSection (only scroll-scrubbed
+  vehicle effect), SpecsSection, FeatureGroups (+featureIcons.ts), Gallery/GallerySection (scroll-snap, keys, buttons), ModelPager.
+- Motion: Reveal gained variant="mask"; new RevealLines (line-by-line headline) and ScrollMedia (scrubbed scale/drift).
+- Data: src/data/vehicle-content.ts (story, hotspots in %, notes, gallery) wired as vehicle.content; getAdjacentVehicles.
+  Helpers with tests: src/lib/vehicle-stats.ts, src/lib/carousel.ts. StatRow got size="lg". VehicleImage: priority now maps to preload, optional quality.
+- next.config.ts: images.qualities [75,85]; deviceSizes capped at 1672 (sources are <=1672px; larger candidates make browsers mis-size srcset).
+Patterns to copy: Section tone alternation (ink/carbon/paper/bone) + Reveal; tables inside div role=region tabIndex=0 overflow-x-auto;
+accurate sizes per slot; data-fixed for any fixed element; hero layouts switch at lg (not md) because tablet portrait uses the portrait crop.
+Notes: Reveal hides content (visibility) until scrolled when JS runs, so tests use includeHidden for off-screen headings.
+Hero image max frame 1672px, fades to ink beyond. Tablet portrait >=1024px (e.g. iPad portrait) shows the portrait crop with the desktop text layout: untested edge.
+Checkpoint screenshots: docs/checkpoints/slice-a/ (git-ignored): home and models-aren at 390 and 1440. QA output docs/qa/ (git-ignored).
 
-## Waiting for approval
-- None for step 2. Pending from step 0: `media.env` (Pixabay/Unsplash keys) missing.
+## Last verified checks (step 3)
+| Check | Result |
+|---|---|
+| lint / typecheck | pass |
+| unit | pass, 5 files / 38 tests |
+| build | pass |
+| e2e | pass, 42/42 (smoke + e2e/slice-a.spec.ts, 23 tests) |
+| quality gate (5 routes) | all PASS except e2e at that moment (a test selector clash I then fixed; e2e rerun 42/42); audit prod 0, 7 dev-only moderate |
+| content-qa (5 routes) | 0 FAIL after fixes; WARNs: no Open Graph tags (step 7), retina '1x' notes are density-normalised naturalWidth artefacts of next/image srcset (real ratios: 1672px sources, hero 1.16x at 1440) |
+
+## Next step
+Step 4 (Slice B): configurator. Before any PR: image-audit validate (accept 7 variant FAILs) then register; rerun gate and content-qa.
