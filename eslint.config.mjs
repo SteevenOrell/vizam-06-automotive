@@ -18,6 +18,8 @@ const eslintConfig = defineConfig([
     "blob-report/**",
     // Local QA scripts and screenshots (git-ignored).
     "docs/qa/**",
+    "docs/checkpoints/**",
+    "docs/image-requests/returned/**",
   ]),
 ]);
 

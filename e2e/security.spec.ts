@@ -35,11 +35,20 @@ test("pages make no third-party requests and raise no CSP violations", async ({ 
   page.on("console", (msg) => {
     if (/content security policy|refused to/i.test(msg.text())) problems.push(msg.text());
   });
-  for (const path of ["/", "/models/aren", "/configure", "/technology", "/gallery", "/test-drive"]) {
+  // Swallowed violations (e.g. a library probing `new Function` in try/catch) log nothing to the console, but still
+  // fire securitypolicyviolation events: collect those too.
+  await page.addInitScript(() => {
+    const w = window as unknown as { __csp: string[] };
+    w.__csp = [];
+    document.addEventListener("securitypolicyviolation", (e) => w.__csp.push(`${e.violatedDirective} ${e.blockedURI} ${e.sourceFile}`));
+  });
+  for (const path of ["/", "/models/aren", "/configure", "/technology", "/gallery", "/test-drive", "/contact"]) {
     await page.goto(path);
     await page.waitForLoadState("networkidle");
     await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
     await page.waitForTimeout(300);
+    const events = await page.evaluate(() => (window as unknown as { __csp: string[] }).__csp);
+    problems.push(...events.map((e) => `${path}: ${e}`));
   }
   expect(external).toEqual([]);
   expect(problems).toEqual([]);
@@ -59,7 +68,14 @@ test("route metadata: lengths, Open Graph and Twitter tags", async ({ page }) =>
     await expect(page.locator('meta[property="og:image"]'), path).toHaveCount(1);
     await expect(page.locator('meta[name="twitter:card"]'), path).toHaveAttribute("content", "summary_large_image");
     await expect(page.locator('meta[name="theme-color"]'), path).toHaveCount(1);
+    await expect(page.locator('meta[name="twitter:image"]'), path).toHaveCount(1);
   }
+  const og = await page.locator('meta[property="og:image"]').getAttribute("content");
+  const tw = await page.locator('meta[name="twitter:image"]').getAttribute("content");
+  expect(tw).toBe(og);
+  const img = await page.request.get(new URL(og ?? "", page.url()).pathname);
+  expect(img.status()).toBe(200);
+  expect(img.headers()["content-type"]).toContain("image/png");
 });
 
 test("reduced motion: no motion class and nothing stays hidden", async ({ browser }) => {

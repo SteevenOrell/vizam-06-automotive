@@ -224,3 +224,19 @@ Scripts/tools in docs/checkpoints/polish (git-ignored): frames.mjs, axe.mjs, vit
 
 ## Next step
 Step 8: QA/security (Opus): dependency audit (7 dev-only moderate), full quality gate, image-audit validate then register, independent review notes. Then step 9 delivery and portfolio screenshots. Lighthouse scores still to be taken on a machine where it runs.
+
+## PAUSED by Steeven (step 8 in progress, stopped mid-run)
+
+Step 8 (QA, dependency audit, security review) was stopped part-way at Steeven's request. Do not resume until he says so.
+- Last fully verified commit: `67e8575` (step 7 polish: lint, typecheck, 88 unit, build, 162/162 e2e as reported by that agent).
+- The commit after it is a WIP save of the interrupted step-8 edits: audit override / package changes, Playwright
+  config (cross-browser projects), `/configure` stage-image LCP change, `Reveal.tsx`, `schemas.ts`, security spec,
+  removal of `twitter-image.*`, draft `docs/SECURITY_REVIEW.md`, image-variant notes in `docs/ASSET_LICENSES.md`.
+  Only `npm run typecheck` was run on it at save time. Treat everything in that commit as UNVERIFIED.
+- To resume step 8: review `git show --stat HEAD`, then rerun lint, typecheck, test, build and the full e2e suite
+  before anything else; finish the items of step 8 that are not evidenced in `docs/SECURITY_REVIEW.md`
+  (content-qa on all routes with every sheet viewed, real-browser review, cross-browser run, performance
+  re-measure, `image-audit validate` + `register`, final check table).
+- Then step 9: README, architecture, design system doc, deployment instructions, portfolio screenshots
+  (`vizam-case-study`), final handoff, `vizam-project-retro`.
+- Nothing has been pushed; there is no remote. No dev server is running.

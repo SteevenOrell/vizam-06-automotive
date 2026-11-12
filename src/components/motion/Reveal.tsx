@@ -52,8 +52,10 @@ export function Reveal({ children, as: Tag = "div", className, y = 24, delay = 0
           } else {
             gsap.fromTo(
               targets,
-              { y, autoAlpha: 0 },
-              { y: 0, autoAlpha: 1, duration: 0.8, ease: "power3.out", delay, stagger, scrollTrigger: trigger, clearProps: "transform,opacity,visibility" },
+              // opacity, not autoAlpha: autoAlpha sets visibility: hidden, which removes the content from the
+              // accessibility tree until it is scrolled into view.
+              { y, opacity: 0 },
+              { y: 0, opacity: 1, duration: 0.8, ease: "power3.out", delay, stagger, scrollTrigger: trigger, clearProps: "transform,opacity" },
             );
           }
         }, el);

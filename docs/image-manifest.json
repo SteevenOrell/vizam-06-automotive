@@ -594,17 +594,7 @@
     {
       "file": "src/app/opengraph-image.png",
       "slot": "og-card",
-      "page": "social share (all routes)",
-      "source": "derived",
-      "sourceId": "public/images/brand/hero-home-desktop.webp (Codex AI) + ORVANE mark and wordmark, rendered by scripts/make-brand-assets.mjs",
-      "photographer": null,
-      "subject": "Aren on a coastal road with ORVANE wordmark, 1200x630 PNG",
-      "composition": "social card"
-    },
-    {
-      "file": "src/app/twitter-image.png",
-      "slot": "twitter-card",
-      "page": "social share (all routes)",
+      "page": "social share (all routes; also twitter:image)",
       "source": "derived",
       "sourceId": "public/images/brand/hero-home-desktop.webp (Codex AI) + ORVANE mark and wordmark, rendered by scripts/make-brand-assets.mjs",
       "photographer": null,

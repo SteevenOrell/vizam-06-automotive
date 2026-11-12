@@ -1,6 +1,10 @@
 import { z } from "zod";
 import { VEHICLE_SLUGS } from "@/data/vehicles";
 
+// No JIT: Zod otherwise probes `new Function` once, which our CSP (no 'unsafe-eval') reports as a violation in the
+// browser even though Zod catches it. These schemas are small, so the interpreted path costs nothing noticeable.
+z.config({ jitless: true });
+
 /** Configurator state saved to localStorage. Option ids are checked against the model in configurator.ts. */
 export const configStateSchema = z.object({
   version: z.literal(1),

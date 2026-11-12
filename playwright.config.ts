@@ -15,7 +15,13 @@ export default defineConfig({
     baseURL: BASE_URL,
     trace: "retain-on-failure",
   },
-  projects: [{ name: "chromium", use: { ...devices["Desktop Chrome"] } }],
+  // `npm run e2e` runs chromium only (fast default); `npm run e2e:all` adds Firefox and WebKit
+  // (needs `npx playwright install firefox webkit` once).
+  projects: [
+    { name: "chromium", use: { ...devices["Desktop Chrome"] } },
+    { name: "firefox", use: { ...devices["Desktop Firefox"] } },
+    { name: "webkit", use: { ...devices["Desktop Safari"] } },
+  ],
   // Builds and serves the production app itself; reuses a server already running on 3006 locally.
   webServer: {
     command: "npm run build && npm run start",

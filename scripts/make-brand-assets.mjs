@@ -1,7 +1,7 @@
 // Dev-time helper (not part of the app build): renders the ORVANE icons and the 1200x630 social card with Playwright.
 // Run from the project root: node scripts/make-brand-assets.mjs   (needs `npx playwright install chromium` once).
 // Outputs: src/app/icon.svg (hand-written), src/app/icon.png, src/app/apple-icon.png, src/app/favicon.ico,
-//          src/app/opengraph-image.png, src/app/twitter-image.png (same picture), public/images/brand/og-card source stays the hero.
+//          src/app/opengraph-image.png (also used as twitter:image via src/lib/metadata.ts); the source stays the hero.
 import { chromium } from "@playwright/test";
 import fs from "node:fs";
 import path from "node:path";
@@ -53,8 +53,7 @@ img{position:absolute;right:-60px;top:0;height:630px;width:auto;opacity:.95}
 </style><body><img src="data:image/webp;base64,${hero}"><div class="g"></div><div class="c">Concept project by VIZAM</div>
 <div class="t"><div class="w"><svg width="84" height="48" viewBox="0 0 28 16" fill="none">${MARK("#f4f1ec", "#d9772b")}</svg><span class="n">Orvane</span></div><div class="s">Electric performance. Calm at any speed.</div></div></body>`;
 const og = await render(ogHtml, 1200, 630, path.join(app, "opengraph-image.png"));
-fs.writeFileSync(path.join(app, "twitter-image.png"), og);
 fs.writeFileSync(path.join(app, "opengraph-image.alt.txt"), "ORVANE: a fictional electric performance car brand, a VIZAM concept project. The Aren sedan on a coastal road at blue hour.\n");
-fs.writeFileSync(path.join(app, "twitter-image.alt.txt"), "ORVANE: a fictional electric performance car brand, a VIZAM concept project. The Aren sedan on a coastal road at blue hour.\n");
+// No separate twitter-image file: src/lib/metadata.ts points twitter:image at the same /opengraph-image.png.
 await browser.close();
 console.log("done", og.length, "bytes og");
