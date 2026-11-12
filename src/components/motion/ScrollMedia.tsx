@@ -3,7 +3,6 @@
 import { useEffect, useRef, type ReactNode } from "react";
 import { prefersReducedMotion } from "@/hooks/useReducedMotion";
 import { loadGsap } from "@/lib/gsap";
-import { cn } from "@/lib/cn";
 
 interface ScrollMediaProps {
   children: ReactNode;
@@ -57,7 +56,7 @@ export function ScrollMedia({ children, className, scaleFrom = 1, scaleTo = 1.15
   }, [scaleFrom, scaleTo, yPercent, range]);
 
   return (
-    <div ref={ref} className={cn("will-change-transform", className)}>
+    <div ref={ref} className={className}>
       {children}
     </div>
   );

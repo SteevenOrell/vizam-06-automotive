@@ -11,7 +11,7 @@ interface ConceptNoteProps {
 /** Small disclaimer line for any block showing specs, ranges or prices. */
 export function ConceptNote({ children = CONCEPT_DATA_NOTE, className }: ConceptNoteProps) {
   return (
-    <p className={cn("flex items-start gap-2 text-xs leading-relaxed opacity-80", className)}>
+    <p className={cn("flex items-start gap-2 text-xs leading-relaxed", className)}>
       <Info aria-hidden="true" className="mt-0.5 size-3.5 shrink-0" />
       <span>{children}</span>
     </p>

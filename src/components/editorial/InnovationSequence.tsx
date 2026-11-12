@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { Eyebrow } from "@/components/ui/Typography";
 import type { ResearchTheme } from "@/data/editorial";
 import { cn } from "@/lib/cn";
 
@@ -75,9 +76,7 @@ export function InnovationSequence({ items }: { items: SequenceItem[] }) {
             aria-labelledby={`theme-${it.id}`}
             className="lg:min-h-[50vh]"
           >
-            <p aria-hidden="true" className="font-display text-[clamp(5rem,14vw,11rem)] font-semibold leading-[0.8] tracking-[-0.03em] text-ink/15 [font-stretch:125%]">
-              {it.n}
-            </p>
+            <p aria-hidden="true" data-n={it.n} className="font-display text-[clamp(5rem,14vw,11rem)] font-semibold leading-[0.8] tracking-[-0.03em] text-ink/15 before:content-[attr(data-n)] [font-stretch:125%]"></p>
             <Image
               src={it.img.src}
               alt={it.img.alt}
@@ -86,7 +85,7 @@ export function InnovationSequence({ items }: { items: SequenceItem[] }) {
               sizes="(min-width: 1024px) 1px, 100vw"
               className="mt-6 aspect-[16/10] w-full rounded-sharp object-cover lg:hidden"
             />
-            <p className="mt-8 text-xs font-medium uppercase tracking-[0.24em] text-amber-ink">Concept direction</p>
+            <Eyebrow accent="light" className="mt-8">Concept direction</Eyebrow>
             <h3 id={`theme-${it.id}`} className="mt-3 font-display text-[clamp(1.75rem,3.6vw,3rem)] font-semibold leading-[1.08] [font-stretch:112%]">
               {it.title}
             </h3>

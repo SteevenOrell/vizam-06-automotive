@@ -104,7 +104,7 @@ export function SummaryPanel({ config, saved, onEdit, onSave, onDeleteSaved, onR
           <Shot slot={getStageSlot(config, "wheel")} label="Wheels" />
         </div>
 
-        <h3 className="mt-6 text-xs uppercase tracking-[0.2em] text-mist">Specification</h3>
+        <h3 className="mt-6 text-xs uppercase tracking-[0.24em] text-mist">Specification</h3>
         <dl className="mt-2 divide-y divide-graphite border-y border-graphite">
           {rows.map((r) => (
             <div key={r.label} className="flex items-start gap-3 py-2.5">
@@ -131,7 +131,7 @@ export function SummaryPanel({ config, saved, onEdit, onSave, onDeleteSaved, onR
           </div>
         </dl>
 
-        <h3 className="mt-6 text-xs uppercase tracking-[0.2em] text-mist">Concept price breakdown</h3>
+        <h3 className="mt-6 text-xs uppercase tracking-[0.24em] text-mist">Concept price breakdown</h3>
         <table className="mt-2 w-full text-sm">
           <caption className="sr-only">Itemised concept price</caption>
           <tbody className="divide-y divide-graphite">

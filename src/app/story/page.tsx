@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { Info } from "lucide-react";
 import { EdImage } from "@/components/editorial/EdImage";
 import { SectionIntro } from "@/components/editorial/SectionIntro";
@@ -9,10 +10,12 @@ import { PageHeader } from "@/components/ui/PageHeader";
 import { Eyebrow, Heading } from "@/components/ui/Typography";
 import { storyChapters, storyNotice, storyValues } from "@/data/editorial";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Brand story",
-  description: "An imagined origin for ORVANE, a fictional electric car brand: a workshop by the sea, a single line of light and a calm atelier. A VIZAM concept narrative.",
-};
+  description:
+    "An imagined origin for ORVANE, a fictional electric car brand: a workshop by the sea, a single line of light and a calm atelier. A VIZAM concept.",
+  path: "/story",
+});
 
 export default function Page() {
   return (
@@ -64,7 +67,7 @@ export default function Page() {
                   {c.n}
                 </span>
                 <div className={i % 2 === 0 ? "lg:col-start-1 lg:pr-12" : "lg:col-start-2 lg:pl-12"}>
-                  <p className="text-xs font-medium uppercase tracking-[0.24em] text-amber">Chapter {c.n}</p>
+                  <Eyebrow accent="dark">Chapter {c.n}</Eyebrow>
                   <h3 className="mt-3 font-display text-2xl font-semibold [font-stretch:112%] md:text-3xl">{c.title}</h3>
                   <p className="mt-3 max-w-xl text-base leading-relaxed text-paper/80">{c.text}</p>
                 </div>

@@ -152,7 +152,7 @@ export function ColourStep({
       </div>
 
       <fieldset className="mt-6 min-w-0 border-0 p-0">
-        <legend className="text-xs uppercase tracking-[0.2em] text-mist">Views</legend>
+        <legend className="text-xs uppercase tracking-[0.24em] text-mist">Views</legend>
         <div className="mt-2 flex flex-wrap gap-2">
           {STAGE_ANGLES.map((a) => {
             const enabled = angles.includes(a.id);

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { GalleryExplorer } from "@/components/gallery/GalleryExplorer";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { Gallery, type GallerySlide } from "@/components/vehicle/Gallery";
@@ -10,10 +11,12 @@ import { filmStripSlots, galleryEntries } from "@/data/gallery";
 import { getImageSlot } from "@/data/images";
 import type { GalleryTile } from "@/lib/gallery";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Gallery",
-  description: "Studio, interior, detail and road imagery of the ORVANE concept lineup. AI-generated for this concept.",
-};
+  description:
+    "Studio, interior, detail and road imagery of the ORVANE concept lineup. AI-generated for this concept.",
+  path: "/gallery",
+});
 
 function buildTiles(): GalleryTile[] {
   return galleryEntries.flatMap((entry) => {

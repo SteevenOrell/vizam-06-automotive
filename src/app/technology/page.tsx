@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { EdImage } from "@/components/editorial/EdImage";
 import { PlatformExplorer, type ExplorerTab } from "@/components/editorial/PlatformExplorer";
 import { SectionIntro } from "@/components/editorial/SectionIntro";
@@ -12,10 +13,12 @@ import { Heading } from "@/components/ui/Typography";
 import { assistPoints, chargingSteps, cockpitPoints, driveCards, platformTabs, technologyStats } from "@/data/editorial";
 import { imageProps } from "@/data/editorial-images";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Technology",
-  description: "One platform, three drive layouts, a shared thermal loop and software that improves over the air: the engineering behind the ORVANE concept lineup.",
-};
+  description:
+    "One platform, three drive layouts, a shared thermal loop and software that improves over the air: the engineering behind the ORVANE concepts.",
+  path: "/technology",
+});
 
 export default function Page() {
   const tabs: ExplorerTab[] = platformTabs.map((t) => ({ ...t, image: t.visual === "thermal" ? null : imageProps(t.visual, t.alt) }));

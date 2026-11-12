@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { Suspense } from "react";
 import { Configurator } from "@/components/configurator/Configurator";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Configure",
-  description: "Build an ORVANE concept vehicle: choose model, paint, wheels, interior and packages, with a live concept price.",
-};
+  description:
+    "Build an ORVANE concept vehicle: choose model, paint, wheels, interior and packages, with a live concept price.",
+  path: "/configure",
+});
 
 function ConfiguratorFallback() {
   return (

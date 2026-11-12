@@ -1,14 +1,17 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { Container, Section } from "@/components/ui/Layout";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Heading } from "@/components/ui/Typography";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Contact",
-  description: "Request information about the ORVANE concept lineup. Demonstration form: nothing is sent or stored.",
-};
+  description:
+    "Request information about the ORVANE concept lineup. Demonstration form: nothing is sent or stored.",
+  path: "/contact",
+});
 
 const FAQ = [
   {

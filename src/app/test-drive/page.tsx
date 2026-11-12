@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { TestDriveExperience } from "@/components/forms/TestDriveExperience";
 import { Container, Section } from "@/components/ui/Layout";
 import { PageHeader } from "@/components/ui/PageHeader";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Book a test drive",
-  description: "Request an ORVANE concept test drive. Demonstration form: nothing is sent or stored.",
-};
+  description:
+    "Request an ORVANE concept test drive. Demonstration form: nothing is sent or stored.",
+  path: "/test-drive",
+});
 
 export default function Page() {
   return (

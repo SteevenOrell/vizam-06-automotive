@@ -13,6 +13,7 @@ import { SpecsSection } from "@/components/vehicle/SpecsSection";
 import { VehicleHero } from "@/components/vehicle/VehicleHero";
 import { getVehicle, vehicles } from "@/data/vehicles";
 import { formatPrice } from "@/lib/configurator";
+import { pageMetadata } from "@/lib/metadata";
 import { headlineStats } from "@/lib/vehicle-stats";
 
 // Render the whole route statically; unknown slugs are generated on demand and resolve to notFound().
@@ -26,10 +27,11 @@ export async function generateMetadata({ params }: PageProps<"/models/[slug]">):
   const { slug } = await params;
   const vehicle = getVehicle(slug);
   if (!vehicle) return { title: "Model not found" };
-  return {
+  return pageMetadata({
     title: `${vehicle.name}, ${vehicle.category.toLowerCase()}`,
     description: `${vehicle.name}, ${vehicle.category.toLowerCase()}. ${vehicle.tagline} Concept data for a fictional ORVANE model.`,
-  };
+    path: `/models/${vehicle.slug}`,
+  });
 }
 
 export default async function ModelPage({ params }: PageProps<"/models/[slug]">) {

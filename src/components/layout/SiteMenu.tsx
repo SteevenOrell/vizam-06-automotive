@@ -2,7 +2,7 @@
 
 import { X } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, type CSSProperties } from "react";
 import { SITE, navGroups } from "@/data/site";
 import { cn } from "@/lib/cn";
 import { isActivePath } from "@/lib/nav";
@@ -59,6 +59,7 @@ export function SiteMenu({ open, onClose, pathname }: SiteMenuProps) {
     };
   }, [open, onClose]);
 
+  let itemIndex = 0;
   return (
     <div
       ref={dialogRef}
@@ -94,7 +95,7 @@ export function SiteMenu({ open, onClose, pathname }: SiteMenuProps) {
                 {group.links.map((link) => {
                   const active = isActivePath(pathname, link.href) && (link.href !== "/models" || pathname === "/models");
                   return (
-                    <li key={`${group.group}-${link.href}`}>
+                    <li key={`${group.group}-${link.href}`} className="menu-item" style={{ "--i": itemIndex++ } as CSSProperties}>
                       <Link
                         href={link.href}
                         onClick={onClose}
@@ -114,7 +115,7 @@ export function SiteMenu({ open, onClose, pathname }: SiteMenuProps) {
           ))}
         </nav>
 
-        <p className="mt-12 border-t border-graphite pt-6 text-xs uppercase tracking-[0.2em] text-mist">{SITE.conceptLabel}</p>
+        <p className="mt-12 border-t border-graphite pt-6 text-xs uppercase tracking-[0.24em] text-mist">{SITE.conceptLabel}</p>
       </div>
     </div>
   );

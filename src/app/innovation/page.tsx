@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { InnovationSequence, type SequenceItem } from "@/components/editorial/InnovationSequence";
 import { SectionIntro } from "@/components/editorial/SectionIntro";
 import { Reveal } from "@/components/motion/Reveal";
@@ -9,10 +10,12 @@ import { PageHeader } from "@/components/ui/PageHeader";
 import { researchStages, researchThemes } from "@/data/editorial";
 import { imageProps } from "@/data/editorial-images";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Innovation",
-  description: "Four research directions in the ORVANE concept: aerodynamics, light engineering, circular materials and over-the-air evolution. Ideas under study, not achieved results.",
-};
+  description:
+    "Four research directions in the ORVANE concept: aerodynamics, light engineering, circular materials and over-the-air evolution. Ideas, not results.",
+  path: "/innovation",
+});
 
 export default function Page() {
   const items: SequenceItem[] = researchThemes.map((t) => ({ ...t, img: imageProps(t.image, t.alt) }));

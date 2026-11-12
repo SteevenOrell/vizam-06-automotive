@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { Eyebrow } from "@/components/ui/Typography";
 import { StatRow } from "@/components/ui/StatRow";
 import { headlineStats } from "@/lib/vehicle-stats";
 import { cn } from "@/lib/cn";
@@ -59,7 +60,7 @@ export function ModelSwitcher({ models }: { models: SwitcherModel[] }) {
           />
         </div>
         <div className="lg:col-span-5">
-          <p className="text-xs uppercase tracking-[0.24em] text-amber">{model.category}</p>
+          <Eyebrow accent="dark">{model.category}</Eyebrow>
           <div role="group" aria-label={`${model.name} trim`} className="mt-5 flex flex-wrap gap-2">
             {model.trims.map((t, i) => (
               <button

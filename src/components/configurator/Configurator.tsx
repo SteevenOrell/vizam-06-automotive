@@ -259,7 +259,7 @@ export function Configurator() {
               </div>
             ) : null}
 
-            <h1 className="text-xs uppercase tracking-[0.2em] text-mist">
+            <h1 className="text-xs uppercase tracking-[0.24em] text-mist">
               Configure your ORVANE <span aria-hidden="true">·</span> Step {stepIndex(step) + 1} of {CONFIG_STEPS.length}
             </h1>
             <h2 id="step-heading" ref={headingRef} tabIndex={-1} className="mt-1 font-display text-2xl font-semibold outline-none [font-stretch:112%]">

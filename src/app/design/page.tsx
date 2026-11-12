@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { EdImage } from "@/components/editorial/EdImage";
 import { SectionIntro } from "@/components/editorial/SectionIntro";
 import { Reveal } from "@/components/motion/Reveal";
@@ -13,10 +14,12 @@ import { designPrinciples, designProcess, lightBladeNotes } from "@/data/editori
 import { imageProps } from "@/data/editorial-images";
 import { vehicles } from "@/data/vehicles";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Design philosophy",
-  description: "How ORVANE concept cars are drawn: composed, honest and precise. Process, the single light blade, and the paints and interiors behind the three models.",
-};
+  description:
+    "How ORVANE concept cars are drawn: composed, honest and precise. Process, the light blade, and the paints and interiors of the lineup.",
+  path: "/design",
+});
 
 export default function Page() {
   const aren = vehicles[0];
@@ -117,7 +120,7 @@ export default function Page() {
             <SectionIntro light id="palette-title" eyebrow="Colour and material" title="A small palette, chosen slowly." text="Five paints and three interiors, shared by the whole lineup. Swatches are approximate on screen; the names match the configurator." />
           </Reveal>
 
-          <h3 className="mt-14 text-xs font-medium uppercase tracking-[0.24em] text-amber-ink md:mt-20">Exterior paints</h3>
+          <Eyebrow as="h3" accent="light" className="mt-14 md:mt-20">Exterior paints</Eyebrow>
           <Reveal as="ul" stagger={0.08} className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
             {aren.colours.map((c) => (
               <li key={c.id} className="flex flex-col">
@@ -128,7 +131,7 @@ export default function Page() {
             ))}
           </Reveal>
 
-          <h3 className="mt-14 text-xs font-medium uppercase tracking-[0.24em] text-amber-ink">Interiors</h3>
+          <Eyebrow as="h3" accent="light" className="mt-14">Interiors</Eyebrow>
           <Reveal as="ul" stagger={0.08} className="mt-6 grid gap-4 sm:grid-cols-3">
             {aren.interiors.map((i) => (
               <li key={i.id} className="flex flex-col rounded-sharp bg-bone p-4">

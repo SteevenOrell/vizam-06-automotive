@@ -1,6 +1,6 @@
 # Agent handoff — ORVANE (vizam-06-automotive)
 
-_Last updated: 2026-11-11 America/Toronto, after step 4 (Slice B, configurator), by the step-4 build agent_
+_Last updated: 2026-11-11 America/Toronto, after step 7 (polish)_
 
 ## Objective
 VIZAM portfolio concept: premium site for ORVANE, a fictional electric performance car brand. 12 page types, a working
@@ -213,5 +213,14 @@ Tests: e2e/slice-d.spec.ts (29), src/lib/{demo-forms,gallery}.test.ts, schemas.t
 | quality-gate script | not run as a whole (its parts lint/typecheck/test/build/e2e/layout were run separately; audit and secret scan not rerun in step 6) |
 | browser | 240/390/768/1440 viewed for gallery, lightbox, test-drive (errors, success), contact; 240 locks at 500, no h-scroll 300+ |
 
+## Polish (step 7, done)
+**Consistency**: eyebrow label unified (tracking 0.24em everywhere, Eyebrow gained `as`; story chapters, design subheads, innovation, form status, model switcher now use it); TwoTone muted is opacity-60; --amber-ink darkened to #9a4a14 (4.5:1 on bone); text-wrap balance on h1-h3, pretty on p; scroll-padding-top 5.5rem (header), scroll-padding-bottom with the configurator bar; scrollbar-gutter stable (e2e overflow checks now use <= 0).
+**Nav**: header pill active state incl. nested (/models/aren -> Models), Test drive link active, wordmark aria-current on home, non-pill routes show an amber dot + sr-only "current page" on the Menu button; hide on scroll down / show on scroll up (off under reduced motion, never while focus is inside or menu open); menu links stagger in (CSS, --i); page fade on route change via html[data-nav] (set in SiteHeader layout effect on pathname change; React ViewTransition was not used because it would snapshot the whole page element).
+**Motion**: Reveal/RevealLines hide via CSS only under html.js-motion (head script in layout.tsx, skipped for reduced motion), GSAP uses fromTo + clearProps, data-revealed hands over, 4s failsafe adds motion-failed. will-change removed from ScrollMedia. Tested: reduced motion, no JS, scripts blocked (e2e/security.spec.ts).
+**Metadata**: src/lib/metadata.ts pageMetadata (title/description/canonical/OG/Twitter) used by every route; metadataBase from NEXT_PUBLIC_SITE_URL (default http://localhost:3006; name in .env.example); opengraph-image.png and twitter-image.png (1200x630 PNG, made by scripts/make-brand-assets.mjs, in image-manifest), icon.svg/icon.png/apple-icon.png/favicon.ico, manifest.ts, robots.ts (disallow all; comment says how to flip), noindex kept.
+**Headers** (next.config.ts, all routes): CSP, nosniff, Referrer-Policy strict-origin-when-cross-origin, Permissions-Policy (camera/mic/geo/payment/usb off), X-Frame-Options DENY + frame-ancestors none, HSTS, COOP. CSP compromises: script-src and style-src keep 'unsafe-inline' (static prerendered pages cannot carry a nonce; Next bootstrap + RSC payload scripts and the motion guard are inline; next/font, next/image and style props need inline styles). Dev adds unsafe-eval and ws.
+**404**: designed, with link grid. **a11y**: e2e/a11y.spec.ts (axe on 15 routes x 390/1440 fail on serious/critical, heading order, one h1, skip link). **Perf**: docs/PERFORMANCE_REVIEW.md (Lighthouse unavailable here; Playwright vitals instead); gallery preloads 1 image.
+Scripts/tools in docs/checkpoints/polish (git-ignored): frames.mjs, axe.mjs, vitals-pw.mjs, sizes.mjs, net.mjs.
+
 ## Next step
-Step 7: polish (Open Graph tags, motion/responsive fixes, content-qa WARNs), then QA/security (step 8), portfolio screenshots. Before any PR: image-audit validate (accept the 7 variant near-duplicate FAILs) then register; rerun gate and content-qa. Step 6 content-qa contact sheets and the quality-gate script were not run by the step-6 agent (see checks).
+Step 8: QA/security (Opus): dependency audit (7 dev-only moderate), full quality gate, image-audit validate then register, independent review notes. Then step 9 delivery and portfolio screenshots. Lighthouse scores still to be taken on a machine where it runs.

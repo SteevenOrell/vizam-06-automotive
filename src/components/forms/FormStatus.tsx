@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { Eyebrow } from "@/components/ui/Typography";
 import { cn } from "@/lib/cn";
 
 interface FormStatusProps {
@@ -23,7 +24,7 @@ export function FormStatus({ tone, title, children, className, role, id }: FormS
         className,
       )}
     >
-      <p className="mb-1 text-xs font-medium uppercase tracking-[0.2em] text-amber-ink">{title}</p>
+      <Eyebrow accent="light" className="mb-1">{title}</Eyebrow>
       {children}
     </div>
   );

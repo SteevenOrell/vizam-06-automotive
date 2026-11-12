@@ -32,7 +32,7 @@ export function BrandPhilosophy() {
 
         <div className="mt-14 grid gap-10 md:mt-20 md:grid-cols-3 md:gap-8">
           <Reveal className="md:col-span-1">
-            <p className="text-lg leading-relaxed text-slate md:text-xl">
+            <p className="text-lg leading-relaxed text-ink md:text-xl">
               <TwoTone muted="Speed is easy to sell." strong="Composure is harder to build." />
             </p>
           </Reveal>

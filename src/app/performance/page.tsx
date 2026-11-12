@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { CompareChart } from "@/components/editorial/CompareChart";
 import { EdImage } from "@/components/editorial/EdImage";
 import { ModelSwitcher, type SwitcherModel } from "@/components/editorial/ModelSwitcher";
@@ -15,10 +16,12 @@ import { vehicles } from "@/data/vehicles";
 import { compareBars } from "@/lib/editorial";
 import { cn } from "@/lib/cn";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Performance",
-  description: "Concept figures for Aren, Sola and Vire: power, acceleration and range compared, plus chassis, braking and the four drive modes of the ORVANE lineup.",
-};
+  description:
+    "Concept figures for Aren, Sola and Vire: power, acceleration and range compared, plus chassis, braking and the four drive modes.",
+  path: "/performance",
+});
 
 const meterLabels = { throttle: "Throttle", damping: "Damping", steering: "Steering" } as const;
 

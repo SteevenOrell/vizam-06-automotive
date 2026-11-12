@@ -1,14 +1,17 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { ComparisonTable } from "@/components/sections/ComparisonTable";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { ModelPanel } from "@/components/sections/ModelPanel";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { vehicles } from "@/data/vehicles";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Models",
-  description: "Aren, Sola and Vire: three electric ORVANE concept models compared side by side.",
-};
+  description:
+    "Aren, Sola and Vire: three electric ORVANE concept models compared side by side.",
+  path: "/models",
+});
 
 export default function Page() {
   return (

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, type ElementType } from "react";
 import { prefersReducedMotion } from "@/hooks/useReducedMotion";
-import { loadGsap } from "@/lib/gsap";
+import { loadGsap, markRevealed, motionDisabled } from "@/lib/gsap";
 
 interface RevealLinesProps {
   /** One entry per visual line. Each line slides up out of its own mask, one after another. */
@@ -15,8 +15,8 @@ interface RevealLinesProps {
 }
 
 /**
- * Headline reveal: lines rise out of overflow masks with a stagger. The text is plain, readable markup
- * without JavaScript and under prefers-reduced-motion.
+ * Headline reveal: lines rise out of overflow masks with a stagger (transform only, 1000ms power3.out). The text is
+ * plain, readable markup without JavaScript, under prefers-reduced-motion, and if GSAP fails to load.
  */
 export function RevealLines({ lines, as: Tag = "span", className, delay = 0, immediate = false }: RevealLinesProps) {
   const ref = useRef<HTMLElement>(null);
@@ -28,20 +28,32 @@ export function RevealLines({ lines, as: Tag = "span", className, delay = 0, imm
     let cancelled = false;
     let revert: (() => void) | undefined;
 
-    loadGsap().then((gsap) => {
-      if (cancelled) return;
-      const ctx = gsap.context(() => {
-        gsap.from(el.querySelectorAll("[data-line]"), {
-          yPercent: 110,
-          duration: 1,
-          ease: "power3.out",
-          delay,
-          stagger: 0.12,
-          scrollTrigger: immediate ? undefined : { trigger: el, start: "top 88%", once: true },
-        });
-      }, el);
-      revert = () => ctx.revert();
-    });
+    loadGsap()
+      .then((gsap) => {
+        if (cancelled) return;
+        if (motionDisabled()) {
+          markRevealed(el);
+          return;
+        }
+        const ctx = gsap.context(() => {
+          gsap.fromTo(
+            el.querySelectorAll("[data-line]"),
+            { yPercent: 110 },
+            {
+              yPercent: 0,
+              duration: 1,
+              ease: "power3.out",
+              delay,
+              stagger: 0.12,
+              scrollTrigger: immediate ? undefined : { trigger: el, start: "top 88%", once: true },
+              clearProps: "transform",
+            },
+          );
+        }, el);
+        markRevealed(el);
+        revert = () => ctx.revert();
+      })
+      .catch(() => markRevealed(el));
 
     return () => {
       cancelled = true;
@@ -50,10 +62,10 @@ export function RevealLines({ lines, as: Tag = "span", className, delay = 0, imm
   }, [delay, immediate]);
 
   return (
-    <Tag ref={ref} className={className}>
+    <Tag ref={ref} className={className} data-reveal="lines">
       {lines.map((line, i) => (
         <span key={`${i}-${line}`} className="block overflow-hidden pb-[0.12em] -mb-[0.12em]">
-          <span data-line className="block">
+          <span data-line className="block text-balance">
             {line}{" "}
           </span>
         </span>

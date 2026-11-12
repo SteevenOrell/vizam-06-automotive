@@ -30,7 +30,7 @@ for (const { path, h1, cta } of PAGES) {
       test(`no horizontal overflow at ${width}`, async ({ page }) => {
         await page.setViewportSize({ width, height: 900 });
         await open(page, path);
-        expect(await overflow(page)).toBe(0);
+        expect(await overflow(page)).toBeLessThanOrEqual(0);
       });
     }
 

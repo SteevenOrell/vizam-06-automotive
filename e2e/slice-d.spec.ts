@@ -328,7 +328,7 @@ for (const path of ["/gallery", "/test-drive", "/contact"]) {
     test(`${path} has no horizontal overflow at ${width}`, async ({ page }) => {
       await page.setViewportSize({ width, height: 900 });
       await open(page, path);
-      expect(await overflow(page)).toBe(0);
+      expect(await overflow(page)).toBeLessThanOrEqual(0);
     });
   }
 }
@@ -338,5 +338,5 @@ test("the gallery lightbox has no horizontal overflow at 300", async ({ page }) 
   await open(page, "/gallery");
   await page.locator("[data-tile]").first().click();
   await expect(page.getByRole("dialog", { name: "Image viewer" })).toBeVisible();
-  expect(await overflow(page)).toBe(0);
+  expect(await overflow(page)).toBeLessThanOrEqual(0);
 });

@@ -46,7 +46,7 @@ export function GalleryExplorer({ tiles }: { tiles: readonly GalleryTile[] }) {
                 )}
               >
                 {f.label}
-                <span className={cn("text-xs tabular-nums", active ? "text-ink/70" : "text-mist")}>{counts[f.id]}</span>
+                <span className={cn("text-xs tabular-nums", active ? "text-ink" : "text-mist")}>{counts[f.id]}</span>
               </button>
             );
           })}
@@ -75,7 +75,7 @@ export function GalleryExplorer({ tiles }: { tiles: readonly GalleryTile[] }) {
                 width={tile.width}
                 height={tile.height}
                 sizes={SIZES}
-                loading={i < 3 ? "eager" : "lazy"}
+                loading={i < 1 ? "eager" : "lazy"}
                 className="h-auto w-full transition-[filter] duration-500 group-hover:brightness-110"
               />
               <span
