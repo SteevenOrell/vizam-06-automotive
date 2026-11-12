@@ -187,8 +187,8 @@ export function Configurator() {
   const linkModel = initial.model ? getVehicle(initial.model)?.name : undefined;
 
   const price = (
-    <div>
-      <p className="text-xs uppercase tracking-[0.16em] text-mist">Concept price</p>
+    <div className="shrink-0">
+      <p className="whitespace-nowrap text-xs uppercase tracking-[0.1em] text-mist lg:tracking-[0.16em]">Concept price</p>
       <p data-testid="concept-price" className="whitespace-nowrap font-display text-xl font-semibold tabular-nums leading-tight lg:text-2xl">
         {formatPrice(total)} <span className="text-xs font-normal text-mist">CAD</span>
       </p>
@@ -200,7 +200,7 @@ export function Configurator() {
       {prev ? (
         <Button variant="ghost" onClick={() => goStep(prev)} className="px-3 sm:px-5">
           <ArrowLeft aria-hidden="true" className="size-4" />
-          Back
+          <span className="sr-only sm:not-sr-only">Back</span>
         </Button>
       ) : null}
       {next ? (
@@ -208,7 +208,7 @@ export function Configurator() {
           {nextLabel}
         </Button>
       ) : (
-        <LinkButton href={`/test-drive?model=${config.model}`} variant="primary" className="lg:whitespace-nowrap">
+        <LinkButton href={`/test-drive?model=${config.model}`} variant="primary" className="whitespace-nowrap px-4">
           Book a test drive
         </LinkButton>
       )}

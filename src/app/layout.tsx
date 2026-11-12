@@ -43,7 +43,7 @@ export const metadata: Metadata = {
   // Concept brand: keep search engines out. To allow indexing, change this and src/app/robots.ts together.
   robots: { index: false, follow: false },
   openGraph: { type: "website", siteName: SITE.name, locale: "en_CA", title: `${SITE.name} | Electric performance, concept by VIZAM`, description: SITE.description, images: [{ url: "/opengraph-image.png", width: 1200, height: 630, alt: "ORVANE: a fictional electric performance car brand, a VIZAM concept project." }] },
-  twitter: { card: "summary_large_image", title: `${SITE.name} | Electric performance, concept by VIZAM`, description: SITE.description, images: ["/twitter-image.png"] },
+  twitter: { card: "summary_large_image", title: `${SITE.name} | Electric performance, concept by VIZAM`, description: SITE.description, images: ["/opengraph-image.png"] },
 };
 
 export const viewport: Viewport = {

@@ -22,7 +22,11 @@ No push, merge or deploy without his say. Night run: not authorised.
 - [x] 6 Slice D: Gallery, Contact, Book a Test Drive
 - [x] 7 Polish: motion pass, reduced motion, mobile nav, image performance, metadata, headers, a11y sweep (see PERFORMANCE_REVIEW.md)
 - [x] 8 QA: unit + e2e, quality gate, content QA, dependency audit, security review (Opus) (see SECURITY_REVIEW.md, PERFORMANCE_REVIEW.md)
-- [ ] 9 Delivery: README, architecture, design system, deploy notes, portfolio screenshots, handoff, retro
+- [x] 9 Delivery: README, architecture, design system, deploy notes, portfolio screenshots, case study, handoff (retro: main session)
+
+## Estimated vs actual
+
+Estimate 1.8-2.6M tokens. Actual: ____ (to be filled in by the main session).
 
 ## Blocked / waiting on Steeven
 
