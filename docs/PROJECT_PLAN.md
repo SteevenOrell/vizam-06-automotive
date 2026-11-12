@@ -26,7 +26,10 @@ No push, merge or deploy without his say. Night run: not authorised.
 
 ## Estimated vs actual
 
-Estimate 1.8-2.6M tokens. Actual: ____ (to be filled in by the main session).
+Estimate 1.8-2.6M tokens. Actual: ~2.3M Claude tokens (9 subagent rounds 2.07M: setup 181k, assets 86k, Slice A 323k, configurator 237k,
+Slice C 231k, Slice D 228k, polish 223k, QA 259k, delivery 306k; main session ~0.25M), within estimate. Plus ~0.15M
+Codex tokens for 59 generated images (separate Codex quota). Over budget per step: Slice A (+8%), delivery (+100%:
+contact-sheet review and WebKit reruns folded in). Two stops on the 5-hour limit (one 429, one at Steeven's 90% rule).
 
 ## Blocked / waiting on Steeven
 
