@@ -110,7 +110,8 @@ export function SummaryPanel({ config, saved, onEdit, onSave, onDeleteSaved, onR
             <div key={r.label} className="flex items-start gap-3 py-2.5">
               <dt className="w-20 shrink-0 text-sm text-mist">{r.label}</dt>
               <dd className="min-w-0 flex-1 text-sm">{r.value}</dd>
-              <dd className="shrink-0 print:hidden">
+              {/* -mt-3 lines the 44px target's label up with the first line of the value. */}
+              <dd className="-mt-3 shrink-0 print:hidden">
                 <button
                   type="button"
                   onClick={() => onEdit(r.step)}

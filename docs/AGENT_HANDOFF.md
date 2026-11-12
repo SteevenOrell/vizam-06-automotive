@@ -1,6 +1,6 @@
 # Agent handoff — ORVANE (vizam-06-automotive)
 
-_Last updated: 2026-11-11 America/Toronto, after step 7 (polish)_
+_Last updated: 2026-11-12 America/Toronto, after step 8 (QA, dependency audit, security review)_
 
 ## Objective
 VIZAM portfolio concept: premium site for ORVANE, a fictional electric performance car brand. 12 page types, a working
@@ -222,21 +222,45 @@ Tests: e2e/slice-d.spec.ts (29), src/lib/{demo-forms,gallery}.test.ts, schemas.t
 **404**: designed, with link grid. **a11y**: e2e/a11y.spec.ts (axe on 15 routes x 390/1440 fail on serious/critical, heading order, one h1, skip link). **Perf**: docs/PERFORMANCE_REVIEW.md (Lighthouse unavailable here; Playwright vitals instead); gallery preloads 1 image.
 Scripts/tools in docs/checkpoints/polish (git-ignored): frames.mjs, axe.mjs, vitals-pw.mjs, sizes.mjs, net.mjs.
 
+## QA / security (step 8, done)
+Independent review by an Opus agent (interrupted once by Steeven; the WIP save 9cc6859 was re-verified before continuing).
+**Fixed:** lint warnings (eslint ignores `docs/checkpoints/**` and `docs/image-requests/returned/**`); dev-only audit via
+scoped override `@typescript-eslint/typescript-estree > minimatch ^11.0.1` (remove when typescript-eslint depends on
+minimatch >=11.0.1); redundant `src/app/twitter-image.png` removed (twitter:image = /opengraph-image.png); `/configure`
+fallback paints the default stage image (LCP 4264 -> 1268 ms, CLS 0.016 -> 0); Reveal hides with opacity only (was
+visibility: hidden = content missing from the accessibility tree); Zod `jitless` (its `new Function` probe raised a CSP
+violation); `data-scroll-behavior="smooth"` on <html> (route changes no longer animate from the old offset, Back
+restores position); summary "Edit" buttons aligned. e2e: `npm run e2e` = chromium only, `npm run e2e:all` adds Firefox
+and WebKit; option cards are picked by clicking their label (WebKit ignores forced clicks on sr-only inputs); CSP test
+also collects `securitypolicyviolation` events.
+**Docs:** `docs/SECURITY_REVIEW.md` (new), `docs/PERFORMANCE_REVIEW.md` (step-8 section with Lighthouse scores),
+`docs/ASSET_LICENSES.md` (accepted image-audit FAILs). Images registered in the shared VIZAM registry (59).
+QA scripts (git-ignored): `docs/checkpoints/qa8/` (review.mjs real-browser frames, lcp-el, headings, csp, radio probes).
+
+## Last verified checks (2026-11-12, final tree, step 8)
+| Check | Result |
+|---|---|
+| `npm run lint` | pass, 0 problems |
+| `npm run typecheck` | pass |
+| `npm test` | pass, 10 files / 88 tests |
+| `npm run build` | pass |
+| `npm run e2e` (chromium, full, final tree) | pass, 162/162 |
+| WebKit (`--project=webkit`) | full run 150/162 before fixes; all 12 were test-harness issues (forced clicks on sr-only inputs, clipboard permission, Tab-to-links, timeout); after fixes the changed specs (configurator, a11y, security) pass in WebKit: 62 passed + 1 skipped (clipboard), skip link 2/2. The full 162 were not rerun in WebKit after the fix |
+| Firefox | not run: Playwright Firefox 159 fails to start here (Windows "side-by-side configuration is incorrect") |
+| `npm audit` / `--omit=dev` | 0 / 0 |
+| quality gate (audit, secrets tree + history, layout 240-1440, links, images, cards; 15 routes) | all PASS except the deliberate 404 route's HTTP 404 |
+| content-qa (14 routes) | 0 FAIL, 104 WARN (kept: retina 1.0-1.1x srcset normalisation of 1672px sources; shared spec/notes paragraphs on model pages; same vehicle images across model/design/gallery pages for a 3-car brand; one gallery alt > 140 chars) |
+| image-audit validate / register | only the 7 accepted paint-variant FAILs / 59 registered |
+| Lighthouse 13.6 (mobile, simulated) | see PERFORMANCE_REVIEW.md: a11y 100 (/ and /configure after fixes), BP 100, SEO 69 by design |
+
+## Open risks
+- Firefox not verified (Playwright Firefox fails to start here: Windows side-by-side configuration error). Real Safari,
+  real phones and screen readers not tested.
+- CSP keeps 'unsafe-inline' (static prerender); forms are demonstrations (no rate limit / bot protection needed until
+  they send anything). See SECURITY_REVIEW.md section 10.
+- Deep link `/configure?model=sola|vire` shows the Aren stage image until hydration (trade-off of the LCP fix).
+- Lighthouse Performance 44-65 (simulated mobile) is hydration TBT; SEO 69 by design (noindex).
+
 ## Next step
-Step 8: QA/security (Opus): dependency audit (7 dev-only moderate), full quality gate, image-audit validate then register, independent review notes. Then step 9 delivery and portfolio screenshots. Lighthouse scores still to be taken on a machine where it runs.
-
-## PAUSED by Steeven (step 8 in progress, stopped mid-run)
-
-Step 8 (QA, dependency audit, security review) was stopped part-way at Steeven's request. Do not resume until he says so.
-- Last fully verified commit: `67e8575` (step 7 polish: lint, typecheck, 88 unit, build, 162/162 e2e as reported by that agent).
-- The commit after it is a WIP save of the interrupted step-8 edits: audit override / package changes, Playwright
-  config (cross-browser projects), `/configure` stage-image LCP change, `Reveal.tsx`, `schemas.ts`, security spec,
-  removal of `twitter-image.*`, draft `docs/SECURITY_REVIEW.md`, image-variant notes in `docs/ASSET_LICENSES.md`.
-  Only `npm run typecheck` was run on it at save time. Treat everything in that commit as UNVERIFIED.
-- To resume step 8: review `git show --stat HEAD`, then rerun lint, typecheck, test, build and the full e2e suite
-  before anything else; finish the items of step 8 that are not evidenced in `docs/SECURITY_REVIEW.md`
-  (content-qa on all routes with every sheet viewed, real-browser review, cross-browser run, performance
-  re-measure, `image-audit validate` + `register`, final check table).
-- Then step 9: README, architecture, design system doc, deployment instructions, portfolio screenshots
-  (`vizam-case-study`), final handoff, `vizam-project-retro`.
-- Nothing has been pushed; there is no remote. No dev server is running.
+Step 9 delivery (Sonnet): README, architecture, design-system doc, deployment notes (set NEXT_PUBLIC_SITE_URL),
+portfolio screenshots (`vizam-case-study`), final handoff, `vizam-project-retro`. No push/merge/deploy without Steeven.

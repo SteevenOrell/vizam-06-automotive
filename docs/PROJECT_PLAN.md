@@ -21,7 +21,7 @@ No push, merge or deploy without his say. Night run: not authorised.
 - [x] 5 Slice C: Technology, Innovation, Performance, Design Philosophy, Brand Story
 - [x] 6 Slice D: Gallery, Contact, Book a Test Drive
 - [x] 7 Polish: motion pass, reduced motion, mobile nav, image performance, metadata, headers, a11y sweep (see PERFORMANCE_REVIEW.md)
-- [ ] 8 QA: unit + e2e, quality gate, content QA, dependency audit, security review (Opus)
+- [x] 8 QA: unit + e2e, quality gate, content QA, dependency audit, security review (Opus) (see SECURITY_REVIEW.md, PERFORMANCE_REVIEW.md)
 - [ ] 9 Delivery: README, architecture, design system, deploy notes, portfolio screenshots, handoff, retro
 
 ## Blocked / waiting on Steeven

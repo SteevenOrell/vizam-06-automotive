@@ -48,10 +48,13 @@ test("landmarks, one h1 and heading order on every route", async ({ page }) => {
   }
 });
 
-test("skip link moves focus to main on every page", async ({ page }) => {
+test("skip link moves focus to main on every page", async ({ page, browserName }) => {
+  // Playwright's WebKit (like Safari's default setting) does not move Tab focus to links, and Option+Tab is not available on the
+  // Windows build, so in WebKit the link is focused directly and only the Enter -> main behaviour is checked.
   for (const path of ["/", "/models/aren", "/configure", "/gallery", "/contact", "/does-not-exist"]) {
     await page.goto(path);
-    await page.keyboard.press("Tab");
+    if (browserName === "webkit") await page.getByRole("link", { name: "Skip to content" }).focus();
+    else await page.keyboard.press("Tab");
     await expect(page.getByRole("link", { name: "Skip to content" }), path).toBeFocused();
     await page.keyboard.press("Enter");
     await expect(page.locator("main"), path).toBeFocused();

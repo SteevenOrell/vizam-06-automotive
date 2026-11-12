@@ -98,7 +98,40 @@ Every direct dependency is used (grep of imports and configs); placement is corr
   The only tracked PNGs are the app icons and the social card under `src/app/`.
 
 ## 9. Automated results and fixes in this review
-(filled in below from the final runs)
+**Dependency audit** (`vizam-dependency-audit-fix`):
+- Before: `npm audit` 7 moderate, all dev-only: GHSA-g3hv-75wg-m249 (minimatch >=7.0.0 <11.0.1, "potential denial of
+  service via globparts amplification", CWE-405) at `node_modules/@typescript-eslint/typescript-estree/node_modules/minimatch`
+  (10.2.6), pulled in by eslint-config-next 16.4.6 -> typescript-eslint 8.72.2 -> @typescript-eslint/{typescript-estree,
+  parser, type-utils, utils, eslint-plugin}. `npm audit --omit=dev`: 0. typescript-eslint 8.72.2 is the latest release,
+  so no upstream upgrade exists.
+- Fix: scoped override in `package.json`: `"overrides": { "@typescript-eslint/typescript-estree": { "minimatch": "^11.0.1" } }`
+  (resolves 11.0.8; Node 20 or >=22 required, we use 24). Only that one nested copy changed; eslint and the other
+  plugins keep minimatch 3.1.5 (not affected). No `--force`, no `--legacy-peer-deps`.
+- After: `npm audit` 0, `npm audit --omit=dev` 0. Lint still applies the typescript-eslint rules (21 `@typescript-eslint/*`
+  rules active in `eslint --print-config`), typecheck, unit, build and e2e pass.
+- **Removal condition:** delete the override once typescript-eslint ships a release that depends on minimatch >=11.0.1
+  (check with `npm view @typescript-eslint/typescript-estree dependencies.minimatch`), then reinstall and re-audit.
+
+**Secrets / tracked files** (quality gate, full run on 2026-11-11): tracked private files PASS, secret scan of the
+working tree PASS, secret scan of the full git history PASS.
+
+**Fixed during this review:**
+| Finding | Severity | Fix |
+|---|---|---|
+| Zod's `new Function` probe raised a CSP `securitypolicyviolation` (script-src, `eval`) on `/configure` and `/test-drive` (swallowed, so no console error and the old e2e check missed it) | Low (CSP noise; no bypass) | `z.config({ jitless: true })` in `src/lib/schemas.ts`; `e2e/security.spec.ts` now also collects `securitypolicyviolation` events on 7 routes |
+| Reveal content not yet scrolled into view was `visibility: hidden`, removing headings and links from the accessibility tree (Lighthouse `heading-order`) | Accessibility | opacity-only hiding in `src/app/globals.css` and `src/components/motion/Reveal.tsx` |
+| Redundant `src/app/twitter-image.png` (tracked non-WebP + duplicate image-audit FAIL) | Hygiene | removed; `twitter:image` points at the same `/opengraph-image.png` (e2e asserts it and that the PNG returns 200) |
+| Smooth `scroll-behavior` on `<html>` animated route changes: a new page could open part-way down and Back did not restore the position | UX | `data-scroll-behavior="smooth"` on `<html>` (Next 16 opt-in) |
+
+No vulnerability of medium or higher severity was found in the application code.
+
+**Quality gate on the final tree (2026-11-12, audit / secrets / layout part):** npm audit prod 0 and all 0; tracked
+private files PASS; secret scan working tree PASS; secret scan full git history PASS; no horizontal scroll from 300 px
+(15 routes) PASS; 250 px lock PASS; images PASS; cards PASS; internal links PASS. The single "browser" FAIL is the
+deliberate 404 route returning HTTP 404 (correct behaviour; the gate counts any 4xx document as a failure).
+
+**Not verified:** Firefox (Playwright's Firefox does not start on this machine), real Safari/iOS, real devices,
+screen readers, a hosted deployment's headers (checked only on `next start`).
 
 ## 10. Open risks and what a real deployment must add
 1. Forms do nothing; a real version needs an email/CRM provider (key in env vars with secret visibility, never in the

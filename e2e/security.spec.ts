@@ -55,6 +55,7 @@ test("pages make no third-party requests and raise no CSP violations", async ({ 
 });
 
 test("route metadata: lengths, Open Graph and Twitter tags", async ({ page }) => {
+  test.setTimeout(60_000); // 12 page loads plus the image request; WebKit needs more than the 30s default.
   const paths = ["/", "/models", "/models/aren", "/configure", "/technology", "/innovation", "/performance", "/design", "/story", "/gallery", "/contact", "/test-drive"];
   for (const path of paths) {
     await page.goto(path);

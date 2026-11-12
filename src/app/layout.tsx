@@ -53,7 +53,9 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${display.variable} ${text.variable} antialiased`} suppressHydrationWarning>
+    // data-scroll-behavior="smooth": Next 16 then turns the CSS smooth scrolling off during route changes, so a new page
+    // starts at the top instantly and Back restores the previous position (without it both animate from the old offset).
+    <html lang="en" data-scroll-behavior="smooth" className={`${display.variable} ${text.variable} antialiased`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: motionGuard }} />
       </head>

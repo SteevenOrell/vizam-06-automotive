@@ -36,6 +36,45 @@ Reading: LCP on the home and model pages is the hero image (1672 px WebP, preloa
 - Reveal / RevealLines no longer rely on `gsap.from` (which flashed content before GSAP loaded): CSS hides reveal content only while `html.js-motion` is set, GSAP animates with explicit `fromTo`, and a 4 s failsafe (`motion-failed`) shows everything if GSAP never arrives. `will-change: transform` removed from ScrollMedia (GSAP promotes the layer while tweening). Only transform, opacity and clip-path are animated.
 - Security headers and the page fade add no requests.
 
+## Step 8 follow-up (2026-11-11/12): /configure LCP
+**Change:** the prerendered Suspense fallback of `/configure` (`src/app/configure/page.tsx`) now paints the default
+model's stage image (Aren, Lunar Silver, front 3/4) in the same box, `sizes` and quality as the live stage, with
+`preload`. The live stage then reuses the cached file. The fallback's stepper row is 57 px (measured, same as the live
+row) and its rail is `100dvh` tall below lg, so hydration no longer pushes the footer (that was the 0.016 CLS).
+Saved-build banner and `?model=` / `?step=` deep links are unchanged (all e2e green). Trade-off: a deep link to Sola or
+Vire shows the Aren image until hydration, then switches.
+
+Same method as above (Playwright vitals, mobile 390x844 @2x, CPU 4x, 1.6 Mbps / 150 ms, median of 3), final build:
+
+| Route | FCP | LCP | CLS | TBT (approx.) | Transferred |
+|---|---|---|---|---|---|
+| `/` | 1736 ms | 1736 ms | 0.000 | 1205 ms | 506 KB |
+| `/models/aren` | 1708 ms | 1708 ms | 0.000 | 1100 ms | 497 KB |
+| `/configure` | 1268 ms | **1268 ms** (was 4264) | **0.000** (was 0.016) | 1449 ms | 399 KB |
+
+LCP element on `/configure` confirmed as the fallback stage image (PerformanceObserver), no layout shifts recorded.
+
+**Lighthouse now runs** (`npx lighthouse@13.6.0 … --chrome-flags="--headless=new"` with `CHROME_PATH` set to
+Playwright's Chromium 1248; default mobile preset, simulated throttling). Single runs on a busy laptop, so treat as
+indicative:
+
+| Route | Performance | Accessibility | Best practices | SEO | FCP | LCP | TBT | CLS |
+|---|---|---|---|---|---|---|---|---|
+| `/` | 65 | 98 → **100** after fix | 100 | 69 | 1.0 s | 1.0 s | 3410 ms | 0 |
+| `/models/aren` | 44 | 98 (same cause, fixed; Lighthouse not re-run on this route) | 100 | 69 | 1.1 s | 5.7 s | 2930 ms | 0 |
+| `/configure` | 50 | 100 | 96 → **100** after fix | 69 | 1.0 s | 4.4 s | 4193 ms | 0 |
+
+- SEO 69 is by design (`noindex` + disallow-all robots for a concept brand; the only failing SEO audit is "is-crawlable").
+- Accessibility 98: `heading-order`, because Reveal hid not-yet-scrolled headings with `visibility: hidden`, which also
+  removed them from the accessibility tree. **Fixed**: reveals now use opacity only (`globals.css`, `Reveal.tsx`); rerun: 100.
+- Best practices 96 on `/configure`: a CSP issue from Zod's `new Function` feature probe (swallowed, but reported as a
+  violation). **Fixed** with `z.config({ jitless: true })` in `src/lib/schemas.ts`; rerun: 100; e2e now collects
+  `securitypolicyviolation` events too.
+- Lighthouse's simulated LCP for `/models/aren` and `/configure` is much higher than the observed throttled LCP: its
+  Lantern model attributes the image to the post-hydration element and adds the CPU work. With real DevTools throttling
+  (`--throttling-method=devtools`) `/configure` measured FCP 3.1 s / LCP 3.8 s (LCP 0.7 s after FCP, i.e. not waiting
+  for hydration). The remaining performance cost is main-thread JavaScript (TBT), i.e. React/Next hydration under 4x CPU.
+
 ## Inherent / not changed
 - `noindex` and the disallow-all `robots.txt` mean Lighthouse's SEO "is crawlable" audit would fail by design (concept brand). Flip in `src/app/layout.tsx` and `src/app/robots.ts` to index.
 - Source images are at most 1672 px wide (details 1448 px), so full-bleed heroes on 2x or very wide screens are upscaled and cannot be sharper without regenerating larger sources.

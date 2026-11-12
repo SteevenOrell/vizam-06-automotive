@@ -1,8 +1,17 @@
-import { expect, test, type Page } from "@playwright/test";
+import { expect, test, type Locator, type Page } from "@playwright/test";
 
 const KEY = "orvane.configurator.v1";
 const stageImg = (page: Page) => page.locator("[data-stage] img:not([alt=''])");
 const money = (text: string | null) => Number((text ?? "").replace(/[^\d]/g, ""));
+
+/**
+ * Pick an option card the way a pointer user does: click its label. (A forced click on the visually hidden native
+ * input works in Chromium but not in WebKit, where the 1px clipped input does not receive the click.)
+ */
+async function choose(input: Locator) {
+  await input.locator("xpath=ancestor::label[1]").click();
+  await expect(input).toBeChecked();
+}
 
 /** Press Tab until the focused element matches, like a keyboard user would. */
 async function tabTo(page: Page, name: RegExp) {
@@ -83,16 +92,16 @@ test.describe("configurator flow", () => {
   test("colour change swaps the stage image and updates the live region", async ({ page }) => {
     await page.goto("/configure?model=aren&step=colour");
     await expect(stageImg(page)).toHaveAttribute("src", /aren-ext-lunar-silver/);
-    await page.getByRole("radio", { name: /^Tide Blue/ }).check({ force: true });
+    await choose(page.getByRole("radio", { name: /^Tide Blue/ }));
     await expect(stageImg(page)).toHaveAttribute("src", /aren-ext-tide-blue/);
     await expect(page.getByTestId("stage-live")).toHaveText("Exterior: Tide Blue");
   });
 
   test("angle views exist only in Lunar Silver", async ({ page }) => {
     await page.goto("/configure?model=aren&step=colour");
-    await page.getByRole("radio", { name: "Rear 3/4" }).check({ force: true });
+    await choose(page.getByRole("radio", { name: "Rear 3/4" }));
     await expect(stageImg(page)).toHaveAttribute("src", /aren-view-rear/);
-    await page.getByRole("radio", { name: /^Ember/ }).check({ force: true });
+    await choose(page.getByRole("radio", { name: /^Ember/ }));
     await expect(stageImg(page)).toHaveAttribute("src", /aren-ext-ember/);
     await expect(page.getByRole("radio", { name: "Rear 3/4" })).toBeDisabled();
     await expect(page.getByText("Additional views shown in Lunar Silver.")).toBeVisible();
@@ -102,7 +111,7 @@ test.describe("configurator flow", () => {
     await page.goto("/configure?model=vire&step=wheels");
     await expect(page.getByText("Vehicle preview shown with Blade 21 wheels", { exact: false }).first()).toBeVisible();
     await expect(stageImg(page)).toHaveAttribute("src", /wheel-aero/);
-    await page.getByRole("radio", { name: /^Forge/ }).check({ force: true });
+    await choose(page.getByRole("radio", { name: /^Forge/ }));
     await expect(stageImg(page)).toHaveAttribute("src", /wheel-forge/);
     await expect(page.getByTestId("stage-live")).toHaveText("Wheels: Forge, 22 inch");
   });
@@ -110,22 +119,22 @@ test.describe("configurator flow", () => {
   test("interior step switches the stage to the cabin", async ({ page }) => {
     await page.goto("/configure?model=aren&step=interior");
     await expect(stageImg(page)).toHaveAttribute("src", /aren-int-onyx/);
-    await page.getByRole("radio", { name: /^Ember/ }).check({ force: true });
+    await choose(page.getByRole("radio", { name: /^Ember/ }));
     await expect(stageImg(page)).toHaveAttribute("src", /aren-int-ember/);
   });
 
   test("price total matches the itemised sum", async ({ page }) => {
     await page.goto("/configure?model=aren&step=trim");
-    await page.getByRole("radio", { name: /Aren Performance/ }).check({ force: true });
+    await choose(page.getByRole("radio", { name: /Aren Performance/ }));
     await page.getByRole("button", { name: "Next" }).click();
-    await page.getByRole("radio", { name: /^Ember/ }).check({ force: true });
+    await choose(page.getByRole("radio", { name: /^Ember/ }));
     await page.getByRole("button", { name: "Next" }).click();
-    await page.getByRole("radio", { name: /^Forge/ }).check({ force: true });
+    await choose(page.getByRole("radio", { name: /^Forge/ }));
     await page.getByRole("button", { name: "Next" }).click();
-    await page.getByRole("radio", { name: /^Dune/ }).check({ force: true });
+    await choose(page.getByRole("radio", { name: /^Dune/ }));
     await page.getByRole("button", { name: "Next" }).click();
-    await page.getByRole("checkbox", { name: /^Acoustic Comfort/ }).check({ force: true });
-    await page.getByRole("checkbox", { name: /^Rear Lounge/ }).check({ force: true });
+    await choose(page.getByRole("checkbox", { name: /^Acoustic Comfort/ }));
+    await choose(page.getByRole("checkbox", { name: /^Rear Lounge/ }));
     await page.getByRole("button", { name: "View summary" }).click();
 
     const amounts = await page.locator("#config-summary tbody td").allTextContents();
@@ -140,7 +149,7 @@ test.describe("configurator flow", () => {
     await expect(page.getByRole("checkbox", { name: /Rear Lounge/ })).toBeDisabled();
     await expect(page.getByText("Requires Acoustic Comfort")).toBeVisible();
     await page.goto("/configure?model=vire&step=packages");
-    await page.getByRole("checkbox", { name: /Track/ }).check({ force: true });
+    await choose(page.getByRole("checkbox", { name: /^Track/ }));
     await expect(page.getByRole("checkbox", { name: /Grand Tour/ })).toBeDisabled();
     await expect(page.getByText("Not available with Track")).toBeVisible();
   });
@@ -155,15 +164,15 @@ test.describe("configurator flow", () => {
 
   test("changing model after edits asks for confirmation", async ({ page }) => {
     await page.goto("/configure?model=aren&step=colour");
-    await page.getByRole("radio", { name: /^Ember/ }).check({ force: true });
+    await choose(page.getByRole("radio", { name: /^Ember/ }));
     await page.getByRole("button", { name: "Back" }).click();
     await page.getByRole("button", { name: "Back" }).click();
-    await page.getByRole("radio", { name: /Vire From/ }).click({ force: true });
+    await page.getByRole("radio", { name: /Vire From/ }).locator("xpath=ancestor::label[1]").click();
     await expect(page.getByRole("group", { name: "Confirm model change" })).toBeVisible();
     await expect(page.getByRole("radio", { name: /Aren From/ })).toBeChecked();
     await page.getByRole("button", { name: "Keep Aren" }).click();
     await expect(page.getByRole("group", { name: "Confirm model change" })).toHaveCount(0);
-    await page.getByRole("radio", { name: /Vire From/ }).click({ force: true });
+    await page.getByRole("radio", { name: /Vire From/ }).locator("xpath=ancestor::label[1]").click();
     await page.getByRole("button", { name: "Switch to Vire" }).click();
     await expect(page.getByRole("radio", { name: /Vire From/ })).toBeChecked();
     await expect(page.getByTestId("concept-price").first()).toContainText("149,000");
@@ -171,13 +180,13 @@ test.describe("configurator flow", () => {
 
   test("save, reload, resume restores everything; delete removes it", async ({ page }) => {
     await page.goto("/configure?model=vire&step=colour");
-    await page.getByRole("radio", { name: /^Ember/ }).check({ force: true });
+    await choose(page.getByRole("radio", { name: /^Ember/ }));
     await page.getByRole("button", { name: "Next" }).click();
-    await page.getByRole("radio", { name: /^Forge/ }).check({ force: true });
+    await choose(page.getByRole("radio", { name: /^Forge/ }));
     await page.getByRole("button", { name: "Next" }).click();
-    await page.getByRole("radio", { name: /^Dune/ }).check({ force: true });
+    await choose(page.getByRole("radio", { name: /^Dune/ }));
     await page.getByRole("button", { name: "Next" }).click();
-    await page.getByRole("checkbox", { name: /Carbon Aero/ }).check({ force: true });
+    await choose(page.getByRole("checkbox", { name: /Carbon Aero/ }));
     await page.getByRole("button", { name: "View summary" }).click();
     const total = await page.getByTestId("summary-total").textContent();
 
@@ -235,7 +244,8 @@ test.describe("configurator flow", () => {
     await expect(page.getByRole("button", { name: "Colour" }).first()).toHaveAttribute("aria-current", "step");
   });
 
-  test("copy summary reports success or shows a manual fallback", async ({ page, context }) => {
+  test("copy summary reports success or shows a manual fallback", async ({ page, context, browserName }) => {
+    test.skip(browserName === "webkit", "Playwright cannot grant clipboard permissions in WebKit");
     await context.grantPermissions(["clipboard-read", "clipboard-write"]);
     await page.goto("/configure?model=aren&step=summary");
     await page.getByRole("button", { name: "Copy summary as text" }).click();
@@ -328,7 +338,7 @@ test.describe("reduced motion", () => {
 
   test("changes are instant and still work", async ({ page }) => {
     await page.goto("/configure?model=aren&step=colour");
-    await page.getByRole("radio", { name: /^Tide Blue/ }).check({ force: true });
+    await choose(page.getByRole("radio", { name: /^Tide Blue/ }));
     await expect(stageImg(page)).toHaveAttribute("src", /aren-ext-tide-blue/);
     const seconds = await stageImg(page).evaluate((el) => parseFloat(getComputedStyle(el).transitionDuration));
     expect(seconds).toBeLessThan(0.05);
