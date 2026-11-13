@@ -83,3 +83,15 @@ Architecture and the how-to for adding models, paints, packages: [ARCHITECTURE.m
 2. His decision on pushing: create or add a GitHub remote, push the branch, and open a Vercel **preview** (follow
    [DEPLOYMENT.md](DEPLOYMENT.md); `NEXT_PUBLIC_SITE_URL` as "config"). Production deployment needs his separate approval.
 3. Main session: run `vizam-project-retro`, and fill the "Actual" token figure in [PROJECT_PLAN.md](PROJECT_PLAN.md).
+
+## Deployment (2026-11-12)
+- GitHub: `SteevenOrell/vizam-06-automotive` (private), default branch `main`. PR #1 (`feat/initial-build`) merged.
+- Vercel: project `orvane-automotive` (team vizam-projects), deployed from `main` with the Vercel CLI. Live at
+  https://orvane-automotive.vercel.app (public alias; the team alias asks for Vercel sign-in).
+- Env: `NEXT_PUBLIC_SITE_URL=https://orvane-automotive.vercel.app` (Production, config visibility). Preview builds fall
+  back to localhost for canonical/OG URLs.
+- The Vercel project is NOT connected to the GitHub repo: pushes do not redeploy. Redeploy with `npx vercel deploy --prod`
+  from `main`, or connect the repo in the Vercel dashboard (Settings > Git).
+- Live checks after deploy (quality gate against the live URL, 14 routes): 0 FAIL, 0 WARN (no horizontal scroll from
+  300 px, 250 px lock, no console errors or broken images, equal cards, links). All 15 routes return 200, unknown 404;
+  CSP, HSTS and X-Frame-Options present; OG URLs point at the live domain.
