@@ -3,14 +3,16 @@ import { cn } from "@/lib/cn";
 
 interface EyebrowProps {
   children: ReactNode;
+  /** Element to render; use h3 etc. when the label is a real subheading. */
+  as?: "p" | "h2" | "h3" | "span";
   className?: string;
   /** Use the amber accent (on dark surfaces) or the darker amber (on light). */
   accent?: "dark" | "light" | "none";
 }
 
-export function Eyebrow({ children, className, accent = "none" }: EyebrowProps) {
+export function Eyebrow({ children, className, accent = "none", as: Tag = "p" }: EyebrowProps) {
   const colour = { dark: "text-amber", light: "text-amber-ink", none: "opacity-75" }[accent];
-  return <p className={cn("text-xs font-medium uppercase tracking-[0.24em]", colour, className)}>{children}</p>;
+  return <Tag className={cn("text-xs font-medium uppercase tracking-[0.24em]", colour, className)}>{children}</Tag>;
 }
 
 type Level = 1 | 2 | 3 | 4;
@@ -48,7 +50,7 @@ export function Heading({ children, level = 2, size, className, id }: HeadingPro
 export function TwoTone({ muted, strong }: { muted: ReactNode; strong: ReactNode }) {
   return (
     <>
-      <span className="opacity-55">{muted}</span> <span>{strong}</span>
+      <span className="opacity-60">{muted}</span> <span>{strong}</span>
     </>
   );
 }

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { getDefaultConfig } from "./configurator";
-import { configStateSchema, contactSchema, createTestDriveSchema, todayIsoDate } from "./schemas";
+import { CONTACT_TOPICS, MAX_DAYS_AHEAD, configStateSchema, contactSchema, createTestDriveSchema, isoDateAfter, todayIsoDate } from "./schemas";
 
 const NOW = new Date(2026, 10, 11, 12, 0, 0); // 11 Nov 2026, local time
 const schema = createTestDriveSchema(NOW);
@@ -74,6 +74,65 @@ describe("contact schema", () => {
     const result = contactSchema.safeParse({ ...valid, email: "bad" });
     expect(result.success).toBe(false);
     expect(result.error?.issues[0].message).toBe("Please enter a valid email address.");
+  });
+});
+
+describe("test-drive schema: edge cases", () => {
+  it("accepts the last day of the booking window and rejects the day after", () => {
+    expect(schema.safeParse({ ...validDrive, preferredDate: isoDateAfter(NOW, MAX_DAYS_AHEAD) }).success).toBe(true);
+    expect(fieldErrors(schema.safeParse({ ...validDrive, preferredDate: isoDateAfter(NOW, MAX_DAYS_AHEAD + 1) }))).toContain("preferredDate");
+    expect(fieldErrors(schema.safeParse({ ...validDrive, preferredDate: "2031-01-01" }))).toContain("preferredDate");
+  });
+
+  it("accepts common phone formats and rejects letters or too few digits", () => {
+    for (const phone of ["+1 416 555 0100", "(416) 555-0100", "416.555.0100", "4165550100"]) {
+      expect(schema.safeParse({ ...validDrive, phone }).success, phone).toBe(true);
+    }
+    for (const phone of ["call me", "123", "+1 416 555 0100 ext 5"]) {
+      expect(fieldErrors(schema.safeParse({ ...validDrive, phone })), phone).toContain("phone");
+    }
+  });
+
+  it("rejects over-long input", () => {
+    const errors = fieldErrors(
+      schema.safeParse({ ...validDrive, name: "a".repeat(81), preferredLocation: "b".repeat(81), message: "c".repeat(1001), email: `${"d".repeat(160)}@example.com` }),
+    );
+    expect(errors).toEqual(expect.arrayContaining(["name", "preferredLocation", "message", "email"]));
+  });
+
+  it("rejects control characters; line breaks are fine in the message only", () => {
+    expect(fieldErrors(schema.safeParse({ ...validDrive, name: "Alex\u0000Example" }))).toContain("name");
+    expect(fieldErrors(schema.safeParse({ ...validDrive, name: "Alex\nExample" }))).toContain("name");
+    expect(fieldErrors(schema.safeParse({ ...validDrive, preferredLocation: "Toronto\r\nBcc: x" }))).toContain("preferredLocation");
+    expect(fieldErrors(schema.safeParse({ ...validDrive, message: "bell\u0007" }))).toContain("message");
+    expect(schema.safeParse({ ...validDrive, message: "line one\nline two\ttabbed" }).success).toBe(true);
+  });
+
+  it("rejects malformed emails", () => {
+    for (const email of ["", "alex", "alex@", "@example.com", "alex@example", "a b@example.com"]) {
+      expect(fieldErrors(schema.safeParse({ ...validDrive, email })), email).toContain("email");
+    }
+  });
+
+  it("accepts a valid attached configuration and rejects a malformed one", () => {
+    expect(schema.safeParse({ ...validDrive, attachedConfig: getDefaultConfig("sola") }).success).toBe(true);
+    expect(fieldErrors(schema.safeParse({ ...validDrive, attachedConfig: { model: "x" } })).some((p) => p.startsWith("attachedConfig"))).toBe(true);
+  });
+});
+
+describe("contact schema: edge cases", () => {
+  const valid = { name: "Sam Example", email: "sam@example.com", topic: "vehicle", message: "I would like to know more about the lineup." };
+
+  it("accepts every topic, an optional model and the consent flag", () => {
+    for (const topic of CONTACT_TOPICS) expect(contactSchema.safeParse({ ...valid, topic }).success, topic).toBe(true);
+    expect(contactSchema.safeParse({ ...valid, model: "vire", consent: true }).success).toBe(true);
+    expect(fieldErrors(contactSchema.safeParse({ ...valid, model: "zeta" }))).toContain("model");
+  });
+
+  it("rejects over-long messages, control characters and a filled honeypot", () => {
+    expect(fieldErrors(contactSchema.safeParse({ ...valid, message: "x".repeat(2001) }))).toContain("message");
+    expect(fieldErrors(contactSchema.safeParse({ ...valid, message: `${valid.message}\u0000` }))).toContain("message");
+    expect(fieldErrors(contactSchema.safeParse({ ...valid, website: "http://spam.example" }))).toContain("website");
   });
 });
 

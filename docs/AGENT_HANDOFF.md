@@ -1,98 +1,85 @@
-# Agent handoff — ORVANE (vizam-06-automotive)
+# Agent handoff: ORVANE (vizam-06-automotive)
 
-_Last updated: 2026-11-11 13:45 America/Toronto, after step 1 (setup), by the step-1 build agent_
+_Last updated: 2026-11-12 America/Toronto, after step 9 (delivery). All nine plan steps are done._
 
 ## Objective
-VIZAM portfolio concept: premium site for ORVANE, a fictional electric performance car brand. 12 page types, a working
-image-based configurator, validated demo forms, tests, docs, portfolio screenshots. Plan in
-[PROJECT_PLAN.md](PROJECT_PLAN.md); design in [DESIGN_REFERENCE.md](DESIGN_REFERENCE.md).
+VIZAM portfolio concept: premium website for ORVANE, a fictional electric performance car brand. 12 page types, an
+image-based configurator, validated demo forms, tests, documentation, portfolio screenshots. Plan: [PROJECT_PLAN.md](PROJECT_PLAN.md).
 
 ## Repository
-- Path: `C:\Users\SteevenWemin\Documents\Projects\vizam-06-automotive`. No remote. Never push, merge or deploy without Steeven.
-- Branch: `feat/initial-build`. Commit: see `git log --oneline -1` (step 1 setup commit).
-- `docs/design-references/*.jpg` are third-party screenshots with real brand logos: kept local via `.git/info/exclude`,
-  never commit them. `docs/image-requests/returned/` is git-ignored (Codex originals).
+- Path: `C:\Users\SteevenWemin\Documents\Projects\vizam-06-automotive`. Branch `feat/initial-build`. Commit: `git log --oneline -1`.
+- **No remote.** Never push, add a remote, merge or deploy without Steeven's approval.
+- `docs/design-references/*.jpg` are third-party screenshots with real brand logos: local only via `.git/info/exclude`,
+  never commit. Git-ignored: `docs/image-requests/returned/` (generation originals), `docs/qa/`, `docs/checkpoints/`.
 
-## Stack (installed versions)
-Next 16.4.6 (App Router, Turbopack, `cacheComponents: true`, `partialPrefetching: true`), React 19.3.0, TypeScript 5.9.3
-strict, Tailwind 4.3.3 (via `@tailwindcss/turbopack`, no PostCSS config), GSAP 3.15.1, lucide-react 1.72.0, Zod 4.6.7,
-Vitest 5.1.0 + Testing Library + jsdom 31, Playwright 1.65.0, ESLint 9 + eslint-config-next 16.4.6. Node 24.
-Read `AGENTS.md`: this Next version differs from older docs; check `node_modules/next/dist/docs/` before using APIs.
+## Current state
+Complete and verified locally; **not deployed**. Final deliverables:
+- [README.md](../README.md), [ARCHITECTURE.md](ARCHITECTURE.md), [DESIGN_SYSTEM.md](DESIGN_SYSTEM.md), [DEPLOYMENT.md](DEPLOYMENT.md),
+  [CASE_STUDY.md](CASE_STUDY.md), [SECURITY_REVIEW.md](SECURITY_REVIEW.md), [PERFORMANCE_REVIEW.md](PERFORMANCE_REVIEW.md),
+  [ASSET_LICENSES.md](ASSET_LICENSES.md), [DESIGN_REFERENCE.md](DESIGN_REFERENCE.md), `image-manifest.json`.
+- Portfolio screenshots: `docs/portfolio/` (34 WebP files, 17 screens at 1440 and 390 px, 1.2 MB, committed). No video was made
+  (not approved). Re-shoot after visible UI changes (script was a throwaway; see the case-study skill, scenes listed in CASE_STUDY.md).
+
+## Stack
+Next 16.4.6 (App Router, Turbopack, `cacheComponents`, `partialPrefetching`), React 19.3.0, TypeScript 5.9 strict,
+Tailwind 4.3.3, GSAP 3.15.1, lucide-react 1.72, Zod 4.6.7, Vitest 5.1, Playwright 1.65, Node 24. Read `AGENTS.md`: this
+Next differs from older docs; check `node_modules/next/dist/docs/`.
 
 ## Scripts
-`npm run dev` (port 3006) · `build` · `start` (3006) · `lint` · `typecheck` (`next typegen && tsc --noEmit`) ·
-`test` (vitest run) · `e2e` (Playwright builds + starts the app on 3006 itself; reuses a running server locally).
+`npm run dev` (3006) · `build` · `start` (3006) · `lint` · `typecheck` · `test` · `e2e` (chromium; builds and serves itself) ·
+`e2e:all` (adds firefox and webkit).
 
-## What exists (component inventory)
-- Tokens: `src/app/globals.css` (CSS variables exactly per DESIGN_REFERENCE + `--amber-soft` hover and `--amber-ink`
-  for amber text on light; mapped in `@theme inline` → `bg-ink`, `text-amber-ink`, `rounded-sharp`, `font-display`...).
-  Also: skip link, `:focus-visible` amber outline, reduced-motion rule, **250px lock** (`#root` and `[data-fixed]` →
-  500px, fixed also `right:auto`; `html{overflow-x:auto}`), `#root{overflow-x:clip}`.
-- **Rule for later slices: every `position: fixed` element must carry the `data-fixed` attribute** (that is how the
-  250px lock finds it; e.g. the configurator's fixed price bar).
-- Fonts: `src/app/layout.tsx` — Archivo (with `wdth` axis, use `[font-stretch:112%|125%]`) as `--font-display-face`,
-  Inter as `--font-text`; next/font self-hosts at build time.
-- Layout: `src/app/layout.tsx` (`#root` wrapper, skip link to `#main`, header in Suspense, footer). Metadata title
-  template `%s | ORVANE`; `robots: noindex` (concept brand; flip in step 9 if Steeven wants indexing).
-- Header/menu: `src/components/layout/SiteHeader.tsx` (floating dark pills: wordmark, desktop pill nav Models/Configure/
-  Technology/Story, Test drive link, Menu button), `SiteMenu.tsx` (full-screen dialog with every route: focus trap, Esc,
-  scroll lock, focus return, aria-expanded/controls), `SiteFooter.tsx` (grouped nav, "Concept project by VIZAM" chip,
-  CONCEPT_DATA_NOTE), `Wordmark.tsx` (original arc mark + wide "ORVANE").
-- UI primitives `src/components/ui/`: `Button.tsx` (`Button`, `LinkButton`, `buttonClasses`; variant primary|solid|ghost,
-  tone dark|light, size md|lg, 44px min height), `Layout.tsx` (`Container` max 1440, `Section` tone ink|carbon|paper|bone
-  with data-tone, spacing default|compact|none), `Typography.tsx` (`Eyebrow`, `Heading` level/size incl. `display`,
-  `TwoTone`), `StatRow.tsx` (auto "Concept data" caption), `ConceptNote.tsx`, `VehicleImage.tsx` (slot key → next/image,
-  or labelled placeholder at the slot's ratio with `data-image-pending`), `PageHeader.tsx` (page h1 block, clears header).
-- Motion: `src/components/motion/Reveal.tsx` (GSAP + ScrollTrigger loaded lazily via `src/lib/gsap.ts`, 800ms power3.out,
-  once, no-op under reduced motion), `src/hooks/useReducedMotion.ts` (`useSyncExternalStore`).
-- Data: `src/data/vehicles.ts` (Aren/Sola/Vire, trims, 4 packages each, features, CONCEPT_DATA_NOTE, CURRENCY CAD;
-  paints Lunar Silver (default)/Glacier White/Basalt Black/Tide Blue/Ember, wheels Aero 20/Blade 21/Forge 22, interiors
-  Onyx/Dune/Ember — shared names matching `docs/image-requests/01` and `02`, per-model prices),
-  `src/data/images.ts` (slot registry keyed by the brief filenames: `hero-<model>`, `<model>-view-side|front|rear`,
-  `<model>-ext-<paint>`, `<model>-int-<trim>`, `<model>-detail-light|cabin`, `hero-home-*`, `wheel-*`; all `src: null`
-  for now; helpers `exteriorSlot`, `interiorSlot`), `src/data/site.ts` (SITE, routes, primaryNav, navGroups, allRoutePaths).
-- Types: `src/types/index.ts`. Logic: `src/lib/configurator.ts` (getDefaultConfig, getPriceBreakdown, getTotalPrice,
-  formatPrice, repairConfig, isValidConfig, serialize/parseConfig, togglePackage, CONFIG_STORAGE_KEY),
-  `src/lib/schemas.ts` (configStateSchema, createTestDriveSchema(now)/testDriveSchema, contactSchema, honeypot `website`
-  field, todayIsoDate), `src/lib/nav.ts`, `src/lib/cn.ts`.
-- Routes (stubs: metadata + one h1 + intro): `/`, `/models`, `/models/[slug]` (generateStaticParams,
-  `ensureStatic = "navigation"` so unknown slugs return a real 404; hero placeholder + StatRow + ConceptNote),
-  `/configure`, `/technology`, `/innovation`, `/performance`, `/design`, `/story`, `/gallery`, `/contact`, `/test-drive`,
-  `not-found.tsx`.
-- Tests: `src/lib/configurator.test.ts`, `src/lib/schemas.test.ts`, `src/components/ui/VehicleImage.test.tsx`
-  (30 tests); `e2e/smoke.spec.ts` (every route h1 + footer label, 404s, menu at 390, no h-scroll at 390, 250px lock).
+## Environment variables (names only)
+`NEXT_PUBLIC_SITE_URL` (optional, public, "config" visibility on Vercel; defaults to `http://localhost:3006`). Nothing else.
 
-## Last verified checks (2026-11-11, step 1)
-| Check | Command | Result |
-|---|---|---|
-| Lint | `npm run lint` | pass, 0 problems |
-| Typecheck | `npm run typecheck` | pass |
-| Unit | `npm test` | pass, 3 files / 30 tests |
-| Build | `npm run build` | pass, 18 static pages, /models/[aren,sola,vire] prerendered |
-| E2E | `npm run e2e` | pass, 19/19 (chromium), final run on the committed tree (includes a fresh build) |
-| Browser | Playwright screenshots `/` and `/models/aren` at 240/390/768/1440 + menu | no h-scroll at 390/768/1440; 240 locks at 500 |
-| Audit | `npm audit` | 7 moderate, all dev-only (minimatch via typescript-eslint ≤8.72.2 from eslint-config-next); `--omit=dev`: 0. `npm audit fix` (no force) did not resolve |
+## Where things are
+Architecture and the how-to for adding models, paints, packages: [ARCHITECTURE.md](ARCHITECTURE.md). Tokens and components:
+[DESIGN_SYSTEM.md](DESIGN_SYSTEM.md). Vercel steps, robots/noindex flip, forms-go-live list, rollback: [DEPLOYMENT.md](DEPLOYMENT.md).
 
-## Known issues and risks
-- Dev-only audit findings above: handle in step 8 with `vizam-dependency-audit-fix` (scoped override or wait for
-  eslint-config-next update). Never `--force`.
-- With Cache Components, `notFound()` after the shell streams returns 200; keep `ensureStatic = "navigation"` (or
-  equivalent) on dynamic routes that must 404.
-- At 240px the fixed header is 500px wide but fixed elements do not pan with the page on desktop Chromium, so the Menu
-  button sits off-screen there (real phones pan the visual viewport). This is how Steeven's rule is specified; not changed.
-- Codex returns already exist in `docs/image-requests/returned/` (PNG, uncommitted). Step 2 must convert to WebP, audit,
-  set `src` in `src/data/images.ts`, and write `docs/image-manifest.json`. Exterior images all show Blade wheels, so the
-  configurator's wheel choice will need a separate wheel visual (the `wheel-*` slots).
-- Test-drive "date not in the past" uses the visitor's local date; the server action (step 6) runs in server time.
-  Use `createTestDriveSchema(new Date())` on the server and allow one day of slack if needed.
+## Rules to keep (gotchas)
+- Every `position: fixed` element carries `data-fixed` (the 250 px lock finds it).
+- With Cache Components, `notFound()` after the shell streams returns 200: keep `ensureStatic = "navigation"` on `/models/[slug]`.
+- `Reveal` hides only under `html.js-motion` and with opacity, never `visibility: hidden`.
+- Option cards in e2e are picked by clicking the label (WebKit ignores forced clicks on sr-only inputs).
+- Scoped override for `minimatch` in `package.json` (dev-only advisory): remove when typescript-eslint depends on minimatch >= 11.0.1.
+- Test-drive date check uses the server's clock minus 24 h for time-zone slack.
 
-## Setup
-- `npm install`, then the scripts above. Env var names: none (see `.env.example`).
+## Step 9 changes (this run)
+- Viewed all 23 step-8 contact sheets (desktop and phone). Fixed: `/technology` header stats at 390 px (`390-720 kW` was
+  clipped; `StatRow` now uses `text-2xl` below `md` for values longer than 5 characters); configurator price bar in the
+  summary step (label and CAD wrapped on two or three lines; `Concept price` is now no-wrap with tighter tracking on phones, and
+  Back is icon-only below 640 px with an `sr-only` "Back" label); `layout.tsx` default Twitter image pointed at the removed
+  `/twitter-image.png`, now `/opengraph-image.png`. Everything else on the sheets looked right (the repeated fixed header
+  inside section shots is a screenshot artefact).
+- Wrote README, ARCHITECTURE, DESIGN_SYSTEM, DEPLOYMENT, CASE_STUDY and the portfolio screenshots; ticked step 9 in the plan.
+
+## Last verified checks (2026-11-12, final tree)
+| Check | Result |
+|---|---|
+| `npm run lint` | pass, 0 problems |
+| `npm run typecheck` | pass |
+| `npm test` | pass, 10 files / 88 tests |
+| `npm run build` | pass (run by the e2e web server and by a separate build before the screenshots) |
+| `npm run e2e` (chromium, full) | 162 passed (4.5 min) |
+| WebKit, first full run (3 workers, before the UI edits above) | 156 passed, 5 failed, 1 skipped (clipboard); the 5 failures were 30 s timeouts or an unmet 5 s wait under load; all 5 pass when rerun alone with `--workers=1` (configurator keyboard flow, price total, security third-party requests, performance switcher, test-drive no-request) |
+| WebKit, final tree | `--project=webkit --workers=2`, full: 160 passed, 1 failed, 1 skipped (clipboard) in 10.0 min. The one failure (`slice-d.spec.ts:87` "validates a field on blur": `aria-invalid` not set within 5 s, a hydration-timing flake) passes when rerun alone. Different tests flaked in the two full runs, none failed twice, so there is no known genuine WebKit failure |
+| Firefox | not run: Playwright's Firefox does not start on this machine (Windows side-by-side configuration error) |
+| `npm audit` | 0 (last run in step 8; dependencies unchanged since) |
+| Lighthouse 13.6 (step 8, mobile, simulated) | accessibility 100 and best practices 100 on `/` and `/configure`; SEO 69 by design; performance 44-65 (hydration) |
+
+## Open risks
+- Firefox, real Safari, real phones and screen readers are not tested.
+- CSP keeps `'unsafe-inline'` for scripts and styles (static prerender cannot carry a nonce). Forms are demonstrations; real
+  collection needs the list in [DEPLOYMENT.md](DEPLOYMENT.md) section 4 and an independent security and privacy review.
+- Deep link `/configure?model=sola|vire` shows the Aren stage image until hydration (trade-off of the LCP fix).
+- WebKit under 3 parallel workers is timing-sensitive on this laptop; use `--workers=1` or 2 when verifying.
+- Source images are at most 1672 px wide; heroes on very large or high-density screens are upscaled.
+- Imagery is AI-generated; small artefacts remain (wheel detail, hubcap-like Aero wheel).
+- No sitemap exists (only needed if indexing is enabled).
 
 ## Next step
-Step 2 (Assets): convert the returned Codex PNGs to compressed WebP under `public/images/<model>/`, run
-`site-media` `image-audit.mjs`, fill `src` for the matching keys in `src/data/images.ts`, create
-`docs/image-manifest.json` and a licence note; Envato stock only for atmosphere. Then step 3 (Slice A).
-
-## Waiting for approval
-- None for step 2. Pending from step 0: `media.env` (Pixabay/Unsplash keys) missing.
+1. **Steeven's UI/UX review gate** on the local build (`npm run build && npm run start`, http://localhost:3006) and the
+   screenshots in `docs/portfolio/`. Taste notes go back as change requests.
+2. His decision on pushing: create or add a GitHub remote, push the branch, and open a Vercel **preview** (follow
+   [DEPLOYMENT.md](DEPLOYMENT.md); `NEXT_PUBLIC_SITE_URL` as "config"). Production deployment needs his separate approval.
+3. Main session: run `vizam-project-retro`, and fill the "Actual" token figure in [PROJECT_PLAN.md](PROJECT_PLAN.md).

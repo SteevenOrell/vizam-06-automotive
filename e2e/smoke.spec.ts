@@ -8,12 +8,12 @@ const ROUTES: { path: string; h1: RegExp }[] = [
   { path: "/models/vire", h1: /^vire$/i },
   { path: "/configure", h1: /configure your orvane/i },
   { path: "/technology", h1: /engineered/i },
-  { path: "/innovation", h1: /working on next/i },
-  { path: "/performance", h1: /power you can place/i },
-  { path: "/design", h1: /fewer lines/i },
-  { path: "/story", h1: /built around the drive/i },
+  { path: "/innovation", h1: /four questions/i },
+  { path: "/performance", h1: /quick, and never in a hurry/i },
+  { path: "/design", h1: /shape follows composure/i },
+  { path: "/story", h1: /quieter idea/i },
   { path: "/gallery", h1: /studio and road/i },
-  { path: "/contact", h1: /talk to orvane/i },
+  { path: "/contact", h1: /request information/i },
   { path: "/test-drive", h1: /book a test drive/i },
 ];
 

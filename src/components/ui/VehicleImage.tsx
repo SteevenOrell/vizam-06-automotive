@@ -9,7 +9,9 @@ interface VehicleImageProps {
   className?: string;
   /** next/image sizes attribute; set it whenever the image is not full width. */
   sizes?: string;
+  /** Preload and fetch eagerly: only for the single above-the-fold hero image. */
   priority?: boolean;
+  quality?: 75 | 85;
   /** Override alt text (defaults to the slot's alt). Pass "" for decorative use. */
   alt?: string;
 }
@@ -18,7 +20,7 @@ interface VehicleImageProps {
  * Renders an image slot at its intrinsic aspect ratio. While the asset is pending (src null) it renders a
  * labelled placeholder with the same proportions, so layouts are final before imagery arrives.
  */
-export function VehicleImage({ slot: key, className, sizes = "100vw", priority = false, alt }: VehicleImageProps) {
+export function VehicleImage({ slot: key, className, sizes = "100vw", priority = false, alt, quality }: VehicleImageProps) {
   const slot = getImageSlot(key);
   const ratio = slot ? `${slot.width} / ${slot.height}` : "16 / 9";
 
@@ -30,7 +32,8 @@ export function VehicleImage({ slot: key, className, sizes = "100vw", priority =
         width={slot.width}
         height={slot.height}
         sizes={sizes}
-        priority={priority}
+        preload={priority}
+        quality={quality}
         className={cn("h-auto w-full object-cover", className)}
       />
     );

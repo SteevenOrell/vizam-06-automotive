@@ -11,7 +11,7 @@
   --bone: #e7e2da;
   --amber: #d9772b; /* single accent */
   --amber-soft: #e58b45; /* hover state of amber surfaces */
-  --amber-ink: #a8541a; /* amber for text on light surfaces (AA) */
+  --amber-ink: #9a4a14; /* amber for text on light surfaces (AA) */
 
   --radius-sharp: 2px;
   --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
@@ -111,6 +111,20 @@ body {
   }
 }
 
+/* ---------- Scroll cue (home hero) ---------- */
+@keyframes scroll-cue {
+  0% { transform: translateY(-100%); }
+  60%, 100% { transform: translateY(100%); }
+}
+
+.scroll-cue-line::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--paper);
+  animation: scroll-cue 2.2s var(--ease-out-expo) infinite;
+}
+
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   html {
@@ -125,4 +139,147 @@ body {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* ---------- Configurator ---------- */
+.stage-fade-x {
+  mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent);
+}
+
+.stage-fade-y {
+  mask-image: linear-gradient(to bottom, transparent, #000 8%, #000 92%, transparent);
+}
+
+/* The fixed price bar sits over the page bottom on phones; keep the footer clear of it. */
+@media (max-width: 1023px) {
+  body:has([data-config-bar]) #root > footer {
+    padding-bottom: 5.5rem;
+  }
+}
+
+/* Print only the configuration summary, on white. */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  #config-summary,
+  #config-summary * {
+    visibility: visible;
+  }
+
+  #config-summary {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    padding: 0;
+    background: #fff;
+    color: #000;
+  }
+
+  #config-summary * {
+    color: #000 !important;
+    border-color: #999 !important;
+  }
+
+  html,
+  body {
+    background: #fff !important;
+  }
+}
+
+.stage-fade-radial {
+  mask-image: radial-gradient(closest-side, #000 86%, transparent 100%);
+}
+
+/* ---------- Editorial: tab panel swap ---------- */
+@keyframes panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.panel-in:not([hidden]) {
+  animation: panel-in 400ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ---------- Reveal fallback ----------
+   Reveals start hidden only when the inline script in layout.tsx has set js-motion on <html> (JavaScript on, motion not
+   reduced). Reveal / RevealLines mark an element data-revealed once GSAP owns it, or immediately if GSAP fails to load
+   (the same script adds motion-failed after 4s). So nothing stays hidden without JS, with reduced motion, or on failure. */
+html.js-motion:not(.motion-failed) [data-reveal="fade"]:not([data-revealed]),
+html.js-motion:not(.motion-failed) [data-reveal="stagger"]:not([data-revealed]) > * {
+  /* Opacity only, never visibility: hidden. Not-yet-revealed headings and links must stay in the accessibility tree
+     and tab order (screen readers, heading navigation); focusing them scrolls them in, which triggers the reveal. */
+  opacity: 0;
+}
+
+html.js-motion:not(.motion-failed) [data-reveal="mask"]:not([data-revealed]) {
+  clip-path: inset(0 0 100% 0);
+}
+
+html.js-motion:not(.motion-failed) [data-reveal="lines"]:not([data-revealed]) [data-line] {
+  transform: translateY(110%);
+}
+
+/* ---------- Navigation motion (all of it off under reduced motion) ---------- */
+html {
+  /* Keeps focused and anchored elements clear of the fixed header. */
+  scroll-padding-top: 5.5rem;
+  scrollbar-gutter: stable;
+}
+
+/* Menu links rise in one after another each time the overlay opens. */
+@keyframes menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+#site-menu:not([hidden]) .menu-item {
+  animation: menu-in 500ms var(--ease-out-expo) both;
+  animation-delay: calc(60ms + var(--i, 0) * 40ms);
+}
+
+/* Route change: the new page fades in (set by SiteHeader on pathname change). */
+@keyframes page-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+html[data-nav] #main > * {
+  animation: page-in 320ms ease-out both;
+}
+
+/* Fixed configurator price bar must not cover focused controls. */
+@media (max-width: 1023px) {
+  html:has([data-config-bar]) {
+    scroll-padding-bottom: 6rem;
+  }
+}
+
+/* Headline balance everywhere, and wrapped text without lone words. */
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
 }

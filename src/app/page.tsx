@@ -1,31 +1,38 @@
 import type { Metadata } from "next";
-import { LinkButton } from "@/components/ui/Button";
-import { PageHeader } from "@/components/ui/PageHeader";
-import { TwoTone } from "@/components/ui/Typography";
-import { routes } from "@/data/site";
+import { pageMetadata } from "@/lib/metadata";
+import { BrandPhilosophy } from "@/components/sections/BrandPhilosophy";
+import { CtaBand } from "@/components/sections/CtaBand";
+import { FeaturedModels } from "@/components/sections/FeaturedModels";
+import { HomeHero } from "@/components/sections/HomeHero";
+import { PerformanceHighlights } from "@/components/sections/PerformanceHighlights";
+import { TechShowcase } from "@/components/sections/TechShowcase";
+
+const home = pageMetadata({
+  title: "Electric performance, concept by VIZAM",
+  description: "ORVANE is a fictional electric performance car brand: grand touring sedan, performance SUV and coupé. A VIZAM portfolio concept.",
+  path: "/",
+});
 
 export const metadata: Metadata = {
+  ...home,
   title: { absolute: "ORVANE | Electric performance, concept by VIZAM" },
-  description:
-    "ORVANE is a fictional electric performance car brand: grand touring sedan, performance SUV and coupé. A VIZAM portfolio concept.",
+  openGraph: { ...home.openGraph, title: "ORVANE | Electric performance, concept by VIZAM" },
+  twitter: { ...home.twitter, title: "ORVANE | Electric performance, concept by VIZAM" },
 };
 
-// Stub: Slice A builds the full homepage (hero stage, hotspots, stat row, lineup).
 export default function HomePage() {
   return (
-    <PageHeader
-      eyebrow="Electric performance"
-      title={<TwoTone muted="The calm side of" strong="electric performance." />}
-      intro="Three concept models, one engineering idea: power that stays composed."
-    >
-      <div className="mt-10 flex flex-wrap gap-3">
-        <LinkButton href={routes.models.href} size="lg">
-          Explore models
-        </LinkButton>
-        <LinkButton href={routes.configure.href} variant="ghost" size="lg">
-          Configure
-        </LinkButton>
-      </div>
-    </PageHeader>
+    <>
+      <HomeHero />
+      <FeaturedModels />
+      <BrandPhilosophy />
+      <PerformanceHighlights />
+      <TechShowcase />
+      <CtaBand
+        eyebrow="Your turn"
+        title="See how calm electric performance feels."
+        text="Request a concept test drive, or build your own ORVANE and save it for later. Nothing is sent or stored in this demonstration."
+      />
+    </>
   );
 }

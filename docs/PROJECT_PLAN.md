@@ -15,14 +15,21 @@ No push, merge or deploy without his say. Night run: not authorised.
 
 - [x] 0 Intake: references saved and mapped, media key check, plan + handoff
 - [x] 1 Setup: Next.js scaffold, tokens, layout, nav, footer, data models, 250px lock, test tooling (Opus)
-- [ ] 2 Assets: Codex briefs, stock picks, audit, manifest, licence doc
-- [ ] 3 Slice A: Homepage, Models, vehicle detail template (3 models) → screenshot checkpoint for Steeven
-- [ ] 4 Slice B: Configurator (state, pricing, summary, save/restart)
-- [ ] 5 Slice C: Technology, Innovation, Performance, Design Philosophy, Brand Story
-- [ ] 6 Slice D: Gallery, Contact, Book a Test Drive
-- [ ] 7 Polish: motion pass, reduced motion, mobile nav, image performance
-- [ ] 8 QA: unit + e2e, quality gate, content QA, dependency audit, security review (Opus)
-- [ ] 9 Delivery: README, architecture, design system, deploy notes, portfolio screenshots, handoff, retro
+- [x] 2 Assets: Codex briefs, stock picks, audit, manifest, licence doc
+- [x] 3 Slice A: Homepage, Models, vehicle detail template (3 models) → screenshot checkpoint for Steeven
+- [x] 4 Slice B: Configurator (state, pricing, summary, save/restart)
+- [x] 5 Slice C: Technology, Innovation, Performance, Design Philosophy, Brand Story
+- [x] 6 Slice D: Gallery, Contact, Book a Test Drive
+- [x] 7 Polish: motion pass, reduced motion, mobile nav, image performance, metadata, headers, a11y sweep (see PERFORMANCE_REVIEW.md)
+- [x] 8 QA: unit + e2e, quality gate, content QA, dependency audit, security review (Opus) (see SECURITY_REVIEW.md, PERFORMANCE_REVIEW.md)
+- [x] 9 Delivery: README, architecture, design system, deploy notes, portfolio screenshots, case study, handoff (retro: main session)
+
+## Estimated vs actual
+
+Estimate 1.8-2.6M tokens. Actual: ~2.3M Claude tokens (9 subagent rounds 2.07M: setup 181k, assets 86k, Slice A 323k, configurator 237k,
+Slice C 231k, Slice D 228k, polish 223k, QA 259k, delivery 306k; main session ~0.25M), within estimate. Plus ~0.15M
+Codex tokens for 59 generated images (separate Codex quota). Over budget per step: Slice A (+8%), delivery (+100%:
+contact-sheet review and WebKit reruns folded in). Two stops on the 5-hour limit (one 429, one at Steeven's 90% rule).
 
 ## Blocked / waiting on Steeven
 

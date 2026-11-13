@@ -27,6 +27,8 @@ export interface TrimVariant {
   description: string;
   priceDelta: number;
   specs: VehicleSpecs;
+  /** Package ids that come with this trim at no extra cost. */
+  includesPackages?: string[];
 }
 
 export type PaintFinish = "solid" | "metallic" | "pearl" | "matte";
@@ -63,6 +65,10 @@ export interface PackageOption {
   description: string;
   includes: string[];
   priceDelta: number;
+  /** Package ids that must also be selected (or included by the trim). */
+  requires?: string[];
+  /** Package ids this one cannot be combined with (applies in both directions). */
+  conflictsWith?: string[];
 }
 
 export type VehicleImageRole = "hero" | "profile" | "front" | "rear" | "interior" | "detail";
@@ -72,6 +78,40 @@ export interface VehicleFeatures {
   interior: string[];
   technology: string[];
   safety: string[];
+}
+
+/** A named feature with a short explanation. */
+export interface FeatureNote {
+  title: string;
+  text: string;
+}
+
+/** A feature pinned to a point on the exterior image. x and y are percentages of the image box. */
+export interface Hotspot extends FeatureNote {
+  id: string;
+  x: number;
+  y: number;
+}
+
+export interface GalleryItem {
+  /** Slot key from src/data/images.ts. */
+  slot: string;
+  caption: string;
+}
+
+/** Editorial copy and presentation data for a model page. All figures elsewhere are concept data. */
+export interface VehicleContent {
+  /** One-line character used on cards. */
+  character: string;
+  /** Narrative paragraphs for the model page intro. */
+  story: string[];
+  /** The model page hero: light paper tone with the name behind the car, or dark cinematic with the name overlaid. */
+  heroTone: "paper" | "dark";
+  hotspots: Hotspot[];
+  interiorNotes: FeatureNote[];
+  technologyNotes: FeatureNote[];
+  safetyNotes: FeatureNote[];
+  gallery: GalleryItem[];
 }
 
 export interface Vehicle {
@@ -90,6 +130,7 @@ export interface Vehicle {
   interiors: InteriorOption[];
   packages: PackageOption[];
   features: VehicleFeatures;
+  content: VehicleContent;
   /** Image slot keys, resolved by `src/data/images.ts`. */
   images: Record<VehicleImageRole, string>;
 }

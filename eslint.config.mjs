@@ -16,6 +16,10 @@ const eslintConfig = defineConfig([
     "playwright-report/**",
     "test-results/**",
     "blob-report/**",
+    // Local QA scripts and screenshots (git-ignored).
+    "docs/qa/**",
+    "docs/checkpoints/**",
+    "docs/image-requests/returned/**",
   ]),
 ]);
 

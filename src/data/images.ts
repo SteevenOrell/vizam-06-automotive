@@ -1,11 +1,12 @@
 import type { ImageSlot, VehicleImageRole } from "@/types";
+import { imageAssets } from "./image-assets";
 import { vehicles } from "./vehicles";
 
 /**
  * Image slot registry. Keys match the filenames in docs/image-requests/ (01-vehicle-sets.md and
- * 02-heroes-and-wheels.md). `src: null` means the asset is pending and `VehicleImage` renders a labelled
- * placeholder at the final aspect ratio. Step 2 (assets) sets `src` to compressed WebP files under
- * /public/images and records each one in docs/image-manifest.json.
+ * 02-heroes-and-wheels.md). Real files and sizes come from ./image-assets (compressed WebP under /public/images, listed in
+ * docs/image-manifest.json). `src: null` means a slot has no asset and `VehicleImage` renders a labelled
+ * placeholder at the final aspect ratio.
  */
 const ROLE_SIZES: Record<VehicleImageRole, { width: number; height: number; label: string }> = {
   hero: { width: 2800, height: 1575, label: "Cinematic hero" },
@@ -56,7 +57,30 @@ const siteSlots: Record<string, ImageSlot> = {
   "wheel-forge": { src: null, alt: "Forge 22-inch wheel with five split spokes and amber ring", width: 1400, height: 1400, label: "Forge wheel" },
 };
 
-export const imageSlots: Record<string, ImageSlot> = { ...Object.fromEntries(entries), ...siteSlots };
+const ED = { width: 1672, height: 941 } as const;
+
+/** Editorial scenes (docs/image-requests/03-editorial.md). `src` arrives through ./image-assets; see ./editorial-images for fallbacks. */
+const editorialSlots: Record<string, ImageSlot> = {
+  "ed-platform": { src: null, alt: "Bare ORVANE electric platform seen from above: flat battery pack between the axles, motors, suspension and wheels, with an amber glow along the battery edge", ...ED, label: "Platform" },
+  "ed-battery-module": { src: null, alt: "Macro view of a machined aluminium battery module with cooling channels on a dark workbench", ...ED, label: "Battery module" },
+  "ed-cockpit-night": { src: null, alt: "Driver's view of the ORVANE Aren cabin at night: slim dashboard, one wide display with a soft amber light wave and a dark road ahead", ...ED, label: "Cockpit at night" },
+  "ed-wind-tunnel": { src: null, alt: "ORVANE Aren in a wind tunnel with thin white smoke streamlines flowing over the roofline", ...ED, label: "Wind tunnel" },
+  "ed-lab-light": { src: null, alt: "Light-engineering lab with a full-width light blade unit glowing warm white on a test rig", ...ED, label: "Light lab" },
+  "ed-track-vire": { src: null, alt: "ORVANE Vire in Ember cornering on an empty circuit at golden hour", ...ED, label: "Vire on track" },
+  "ed-brake-detail": { src: null, alt: "Brake disc and plain dark caliper seen through thin silver wheel spokes", ...ED, label: "Brake detail" },
+  "ed-clay-studio": { src: null, alt: "Full-size clay model of the Aren in a design studio, half clay and half silver film, with a designer seen from behind", ...ED, label: "Clay studio" },
+  "ed-sketch-desk": { src: null, alt: "Designer's desk seen from above with pencil sketches of a low sedan and material swatches", ...ED, label: "Sketch desk" },
+  "ed-atelier": { src: null, alt: "Calm assembly atelier with polished concrete floor, skylights and one Aren in Glacier White on a low platform", ...ED, label: "Atelier" },
+  "ed-founding-garage": { src: null, alt: "Small workshop at dusk with a car under a grey dust sheet, a workbench, one warm lamp and the door open to a coastal road", ...ED, label: "Founding garage" },
+  "ed-coast-road": { src: null, alt: "Aerial view of an empty coastal road at blue hour with one small silver sedan and a thin line of headlight", ...ED, label: "Coast road" },
+};
+
+const allSlots: Record<string, ImageSlot> = { ...Object.fromEntries(entries), ...siteSlots, ...editorialSlots };
+
+/** Slots with a delivered file get its path and real pixel size; the rest stay placeholders (src: null). */
+export const imageSlots: Record<string, ImageSlot> = Object.fromEntries(
+  Object.entries(allSlots).map(([key, slot]) => [key, imageAssets[key] ? { ...slot, ...imageAssets[key] } : slot]),
+);
 
 export function getImageSlot(key: string): ImageSlot | undefined {
   return imageSlots[key];

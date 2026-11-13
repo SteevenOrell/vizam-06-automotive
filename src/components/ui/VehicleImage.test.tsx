@@ -4,12 +4,11 @@ import { isActivePath } from "@/lib/nav";
 import { VehicleImage } from "./VehicleImage";
 
 describe("VehicleImage", () => {
-  it("renders a labelled placeholder at the slot's aspect ratio while the asset is pending", () => {
+  it("renders the real image with alt text once the asset is delivered", () => {
     render(<VehicleImage slot="vire-view-side" />);
-    const img = screen.getByRole("img", { name: /vire.*image pending/i });
-    expect(img.getAttribute("data-image-pending")).toBe("vire-view-side");
-    expect(img.style.aspectRatio).toBe("2400 / 1350");
-    expect(img.textContent).toMatch(/Vire/);
+    const img = screen.getByRole("img", { name: /vire.*side profile/i });
+    expect(img.getAttribute("src")).toContain("vire-view-side.webp");
+    expect(img.hasAttribute("data-image-pending")).toBe(false);
   });
 
   it("falls back to 16 / 9 for unknown slots", () => {

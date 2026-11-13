@@ -1,3 +1,4 @@
+import { vehicleContent } from "./vehicle-content";
 import type { ColourOption, InteriorOption, Vehicle, VehicleSlug, WheelOption } from "@/types";
 
 /**
@@ -124,6 +125,7 @@ const aren: Vehicle = {
       description: "A more generous second row.",
       includes: ["Reclining rear seats", "Rear climate zone", "Rear control tablet"],
       priceDelta: 5200,
+      requires: ["aren-acoustic"],
     },
   ],
   features: {
@@ -133,6 +135,7 @@ const aren: Vehicle = {
     safety: ["Eight airbags", "Automatic emergency braking", "Blind-spot monitoring", "Driver attention monitor"],
   },
   images: imageKeys("aren"),
+  content: vehicleContent.aren,
 };
 
 const sola: Vehicle = {
@@ -164,6 +167,7 @@ const sola: Vehicle = {
       name: "Sola Terrain",
       description: "Raised air suspension and terrain modes for unpaved roads.",
       priceDelta: 9000,
+      includesPackages: ["sola-winter"],
       specs: { powerKw: 460, zeroToHundredS: 4.0, rangeKm: 580, topSpeedKmh: 210, batteryKwh: 116, drive: "Dual-motor AWD" },
     },
     {
@@ -205,6 +209,7 @@ const sola: Vehicle = {
       description: "Two fold-flat seats for short trips.",
       includes: ["Two rear-facing seats", "Third-row air vents", "Powered fold"],
       priceDelta: 3800,
+      conflictsWith: ["sola-utility"],
     },
   ],
   features: {
@@ -214,6 +219,7 @@ const sola: Vehicle = {
     safety: ["Ten airbags", "Automatic emergency braking", "Hill descent control", "Rear occupant alert"],
   },
   images: imageKeys("sola"),
+  content: vehicleContent.sola,
 };
 
 const vire: Vehicle = {
@@ -252,6 +258,7 @@ const vire: Vehicle = {
       name: "Vire Track",
       description: "Tri-motor drive, carbon aero and track-ready cooling.",
       priceDelta: 46000,
+      includesPackages: ["vire-carbon"],
       specs: { powerKw: 720, zeroToHundredS: 2.3, rangeKm: 430, topSpeedKmh: 305, batteryKwh: 92, drive: "Tri-motor AWD" },
     },
   ],
@@ -265,6 +272,7 @@ const vire: Vehicle = {
       description: "Hardware for regular circuit days.",
       includes: ["Carbon-ceramic brakes", "Track telemetry app", "Battery pre-conditioning for laps"],
       priceDelta: 9800,
+      conflictsWith: ["vire-grand-tour"],
     },
     {
       id: "vire-carbon",
@@ -295,6 +303,7 @@ const vire: Vehicle = {
     safety: ["Six airbags", "Automatic emergency braking", "Stability control with track mode", "Rear cross-traffic alert"],
   },
   images: imageKeys("vire"),
+  content: vehicleContent.vire,
 };
 
 export const vehicles: readonly Vehicle[] = [aren, sola, vire];
@@ -307,4 +316,11 @@ export function isVehicleSlug(value: unknown): value is VehicleSlug {
 
 export function getVehicle(slug: string): Vehicle | undefined {
   return vehicles.find((v) => v.slug === slug);
+}
+
+/** Previous and next model in lineup order, wrapping around. */
+export function getAdjacentVehicles(slug: string): { prev: Vehicle; next: Vehicle } | undefined {
+  const i = vehicles.findIndex((v) => v.slug === slug);
+  if (i === -1) return undefined;
+  return { prev: vehicles[(i - 1 + vehicles.length) % vehicles.length], next: vehicles[(i + 1) % vehicles.length] };
 }

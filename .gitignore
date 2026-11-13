@@ -49,3 +49,7 @@ docs/image-requests/returned/
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# QA output and checkpoints
+docs/qa/
+docs/checkpoints/

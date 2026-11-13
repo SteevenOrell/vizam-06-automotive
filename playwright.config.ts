@@ -6,6 +6,8 @@ const BASE_URL = `http://localhost:${PORT}`;
 export default defineConfig({
   testDir: "./e2e",
   fullyParallel: true,
+  // The suite is load-sensitive on a laptop (production build plus heavy pages): cap parallel workers.
+  workers: process.env.CI ? 2 : 3,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 1 : 0,
   reporter: [["list"], ["html", { open: "never" }]],
@@ -13,7 +15,13 @@ export default defineConfig({
     baseURL: BASE_URL,
     trace: "retain-on-failure",
   },
-  projects: [{ name: "chromium", use: { ...devices["Desktop Chrome"] } }],
+  // `npm run e2e` runs chromium only (fast default); `npm run e2e:all` adds Firefox and WebKit
+  // (needs `npx playwright install firefox webkit` once).
+  projects: [
+    { name: "chromium", use: { ...devices["Desktop Chrome"] } },
+    { name: "firefox", use: { ...devices["Desktop Firefox"] } },
+    { name: "webkit", use: { ...devices["Desktop Safari"] } },
+  ],
   // Builds and serves the production app itself; reuses a server already running on 3006 locally.
   webServer: {
     command: "npm run build && npm run start",
