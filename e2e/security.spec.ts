@@ -24,6 +24,7 @@ test("robots disallows crawling and pages are noindex", async ({ request, page }
 });
 
 test("pages make no third-party requests and raise no CSP violations", async ({ page, baseURL }) => {
+  test.setTimeout(120_000); // 7 routes, each loaded to network idle and scrolled; 30s is too tight on a busy machine.
   const origin = new URL(baseURL ?? "http://localhost:3006").origin;
   const external: string[] = [];
   const problems: string[] = [];

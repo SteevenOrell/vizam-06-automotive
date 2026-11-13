@@ -45,7 +45,7 @@ export function HomeHero() {
           <Eyebrow accent="dark" className="mb-3 lg:mb-5">
             ORVANE Aren · Concept
           </Eyebrow>
-          <p aria-hidden="true" className="font-display text-[clamp(4.5rem,21vw,17rem)] font-semibold uppercase leading-[0.82] tracking-[0.02em] [font-stretch:125%]">
+          <p aria-hidden="true" className="font-display text-[clamp(3.75rem,13vw,10.5rem)] font-semibold uppercase leading-[0.82] tracking-[0.02em] [font-stretch:125%]">
             Aren
           </p>
         </div>
