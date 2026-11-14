@@ -28,7 +28,7 @@ export default function Page() {
       <PageHeader
         eyebrow="Technology"
         title="Engineered to stay out of the way."
-        intro="One platform sits under all three ORVANE concept models: a low battery, a shared motor family, one thermal loop and one software stack. The aim is a car that feels calm, predictable and quick."
+        intro="One platform sits under all five ORVANE concept models: a low battery, a shared motor family, one thermal loop and one software stack. The aim is a car that feels calm, predictable and quick."
       >
         <div className="mt-14 md:mt-20">
           <StatRow stats={technologyStats} />

@@ -600,6 +600,216 @@
       "photographer": null,
       "subject": "Aren on a coastal road with ORVANE wordmark, 1200x630 PNG",
       "composition": "social card"
+    },
+    {
+      "file": "public/images/tarn/tarn-ext-lunar-silver.webp",
+      "slot": "tarn-ext-lunar-silver",
+      "page": "/configure",
+      "source": "gemini-ai",
+      "sourceId": "gemini/tarn-ext-lunar-silver.jpeg#tarn-ext-lunar-silver",
+      "photographer": null,
+      "subject": "Tarn pickup, lunar silver paint",
+      "composition": "studio front three-quarter"
+    },
+    {
+      "file": "public/images/tarn/tarn-view-side.webp",
+      "slot": "tarn-view-side",
+      "page": "/models/tarn",
+      "source": "gemini-ai",
+      "sourceId": "gemini/tarn-view-side.jpeg#tarn-view-side",
+      "photographer": null,
+      "subject": "Tarn pickup, side profile",
+      "composition": "studio side profile"
+    },
+    {
+      "file": "public/images/tarn/tarn-view-rear.webp",
+      "slot": "tarn-view-rear",
+      "page": "/models/tarn",
+      "source": "gemini-ai",
+      "sourceId": "gemini/tarn-view-rear.jpeg#tarn-view-rear",
+      "photographer": null,
+      "subject": "Tarn pickup, rear three-quarter",
+      "composition": "studio rear three-quarter"
+    },
+    {
+      "file": "public/images/tarn/tarn-int-onyx.webp",
+      "slot": "tarn-int-onyx",
+      "page": "/models/tarn",
+      "source": "gemini-ai",
+      "sourceId": "gemini/tarn-int-onyx.jpeg#tarn-int-onyx",
+      "photographer": null,
+      "subject": "Tarn pickup cabin, onyx trim",
+      "composition": "studio cockpit view"
+    },
+    {
+      "file": "public/images/vanta/vanta-ext-lunar-silver.webp",
+      "slot": "vanta-ext-lunar-silver",
+      "page": "/configure",
+      "source": "gemini-ai",
+      "sourceId": "gemini/vanta-ext-lunar-silver.jpeg#vanta-ext-lunar-silver",
+      "photographer": null,
+      "subject": "Vanta track coupe, lunar silver paint",
+      "composition": "studio front three-quarter"
+    },
+    {
+      "file": "public/images/vanta/vanta-view-front.webp",
+      "slot": "vanta-view-front",
+      "page": "/models/vanta",
+      "source": "gemini-ai",
+      "sourceId": "gemini/vanta-view-front.jpeg#vanta-view-front",
+      "photographer": null,
+      "subject": "Vanta track coupe, front view",
+      "composition": "studio front three-quarter, low"
+    },
+    {
+      "file": "public/images/vanta/vanta-view-side.webp",
+      "slot": "vanta-view-side",
+      "page": "/models/vanta",
+      "source": "gemini-ai",
+      "sourceId": "gemini/vanta-view-side.jpeg#vanta-view-side",
+      "photographer": null,
+      "subject": "Vanta track coupe, side profile",
+      "composition": "studio side profile"
+    },
+    {
+      "file": "public/images/vanta/vanta-view-rear.webp",
+      "slot": "vanta-view-rear",
+      "page": "/models/vanta",
+      "source": "gemini-ai",
+      "sourceId": "gemini/vanta-view-rear.jpeg#vanta-view-rear",
+      "photographer": null,
+      "subject": "Vanta track coupe, straight rear",
+      "composition": "studio rear view"
+    },
+    {
+      "file": "public/images/vanta/vanta-int-onyx.webp",
+      "slot": "vanta-int-onyx",
+      "page": "/models/vanta",
+      "source": "gemini-ai",
+      "sourceId": "gemini/vanta-int-onyx.jpeg#vanta-int-onyx",
+      "photographer": null,
+      "subject": "Vanta track coupe cabin, onyx trim",
+      "composition": "studio cockpit view"
+    },
+    {
+      "file": "public/images/tarn/tarn-ext-glacier-white.webp",
+      "slot": "tarn-ext-glacier-white",
+      "page": "/configure",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/04-tarn-vanta-variants.md#tarn-ext-glacier-white",
+      "photographer": null,
+      "subject": "Tarn pickup, glacier white paint",
+      "composition": "studio front three-quarter"
+    },
+    {
+      "file": "public/images/tarn/tarn-ext-basalt-black.webp",
+      "slot": "tarn-ext-basalt-black",
+      "page": "/configure",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/04-tarn-vanta-variants.md#tarn-ext-basalt-black",
+      "photographer": null,
+      "subject": "Tarn pickup, basalt black paint",
+      "composition": "studio front three-quarter"
+    },
+    {
+      "file": "public/images/tarn/tarn-ext-tide-blue.webp",
+      "slot": "tarn-ext-tide-blue",
+      "page": "/configure",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/04-tarn-vanta-variants.md#tarn-ext-tide-blue",
+      "photographer": null,
+      "subject": "Tarn pickup, tide blue paint",
+      "composition": "studio front three-quarter"
+    },
+    {
+      "file": "public/images/tarn/tarn-ext-ember.webp",
+      "slot": "tarn-ext-ember",
+      "page": "/configure",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/04-tarn-vanta-variants.md#tarn-ext-ember",
+      "photographer": null,
+      "subject": "Tarn pickup, ember paint",
+      "composition": "studio front three-quarter"
+    },
+    {
+      "file": "public/images/tarn/tarn-int-dune.webp",
+      "slot": "tarn-int-dune",
+      "page": "/models/tarn",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/04-tarn-vanta-variants.md#tarn-int-dune",
+      "photographer": null,
+      "subject": "Tarn pickup cabin, dune trim",
+      "composition": "studio cockpit view"
+    },
+    {
+      "file": "public/images/tarn/tarn-int-ember.webp",
+      "slot": "tarn-int-ember",
+      "page": "/models/tarn",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/04-tarn-vanta-variants.md#tarn-int-ember",
+      "photographer": null,
+      "subject": "Tarn pickup cabin, ember trim",
+      "composition": "studio cockpit view"
+    },
+    {
+      "file": "public/images/vanta/vanta-ext-glacier-white.webp",
+      "slot": "vanta-ext-glacier-white",
+      "page": "/configure",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/04-tarn-vanta-variants.md#vanta-ext-glacier-white",
+      "photographer": null,
+      "subject": "Vanta track coupe, glacier white paint",
+      "composition": "studio front three-quarter"
+    },
+    {
+      "file": "public/images/vanta/vanta-ext-basalt-black.webp",
+      "slot": "vanta-ext-basalt-black",
+      "page": "/configure",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/04-tarn-vanta-variants.md#vanta-ext-basalt-black",
+      "photographer": null,
+      "subject": "Vanta track coupe, basalt black paint",
+      "composition": "studio front three-quarter"
+    },
+    {
+      "file": "public/images/vanta/vanta-ext-tide-blue.webp",
+      "slot": "vanta-ext-tide-blue",
+      "page": "/configure",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/04-tarn-vanta-variants.md#vanta-ext-tide-blue",
+      "photographer": null,
+      "subject": "Vanta track coupe, tide blue paint",
+      "composition": "studio front three-quarter"
+    },
+    {
+      "file": "public/images/vanta/vanta-ext-ember.webp",
+      "slot": "vanta-ext-ember",
+      "page": "/configure",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/04-tarn-vanta-variants.md#vanta-ext-ember",
+      "photographer": null,
+      "subject": "Vanta track coupe, ember paint",
+      "composition": "studio front three-quarter"
+    },
+    {
+      "file": "public/images/vanta/vanta-int-dune.webp",
+      "slot": "vanta-int-dune",
+      "page": "/models/vanta",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/04-tarn-vanta-variants.md#vanta-int-dune",
+      "photographer": null,
+      "subject": "Vanta track coupe cabin, dune trim",
+      "composition": "studio cockpit view"
+    },
+    {
+      "file": "public/images/vanta/vanta-int-ember.webp",
+      "slot": "vanta-int-ember",
+      "page": "/models/vanta",
+      "source": "codex-ai",
+      "sourceId": "docs/image-requests/04-tarn-vanta-variants.md#vanta-int-ember",
+      "photographer": null,
+      "subject": "Vanta track coupe cabin, ember trim",
+      "composition": "studio cockpit view"
     }
   ]
 }

@@ -402,8 +402,13 @@ export function stageForStep(step: StepId): StageView {
 }
 
 /** Front 3/4 is always available; the other angles only exist in Lunar Silver. */
+/** Views with no rendered image for a model, even in Lunar Silver. */
+const MISSING_ANGLES: Partial<Record<VehicleSlug, StageAngle[]>> = { tarn: ["front"] };
+
 export function availableAngles(config: ConfigState): StageAngle[] {
-  return config.colour === SILVER_ID ? ["front34", "rear", "side", "front"] : ["front34"];
+  if (config.colour !== SILVER_ID) return ["front34"];
+  const missing = MISSING_ANGLES[config.model] ?? [];
+  return (["front34", "rear", "side", "front"] as StageAngle[]).filter((a) => !missing.includes(a));
 }
 
 /** Image slot key shown on the stage. */

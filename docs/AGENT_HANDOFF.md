@@ -1,9 +1,9 @@
 # Agent handoff: ORVANE (vizam-06-automotive)
 
-_Last updated: 2026-11-12 America/Toronto, after step 9 (delivery). All nine plan steps are done._
+_Last updated: 2026-11-13 America/Toronto, after adding Tarn and Vanta (branch `feat/tarn-vanta`, not pushed). Earlier: all nine plan steps done._
 
 ## Objective
-VIZAM portfolio concept: premium website for ORVANE, a fictional electric performance car brand. 12 page types, an
+VIZAM portfolio concept (five models: Aren, Sola, Vire, Tarn, Vanta): premium website for ORVANE, a fictional electric performance car brand. 12 page types, an
 image-based configurator, validated demo forms, tests, documentation, portfolio screenshots. Plan: [PROJECT_PLAN.md](PROJECT_PLAN.md).
 
 ## Repository
@@ -83,6 +83,45 @@ Architecture and the how-to for adding models, paints, packages: [ARCHITECTURE.m
 2. His decision on pushing: create or add a GitHub remote, push the branch, and open a Vercel **preview** (follow
    [DEPLOYMENT.md](DEPLOYMENT.md); `NEXT_PUBLIC_SITE_URL` as "config"). Production deployment needs his separate approval.
 3. Main session: run `vizam-project-retro`, and fill the "Actual" token figure in [PROJECT_PLAN.md](PROJECT_PLAN.md).
+
+## Tarn and Vanta (2026-11-13, branch `feat/tarn-vanta`)
+- **Tarn** (Electric pickup, concept base CAD 98,000; 480 kW, 0-100 4.4 s, 640 km, 200 km/h, 135 kWh; trims Work / Haul (includes Tow) / Summit;
+  packages Tow, Bed Utility, Worksite Power (requires Bed Utility), Winter). **Vanta** (Track coupe, CAD 235,000; 820 kW, 2.4 s, 380 km, 330 km/h,
+  96 kWh; trims Vanta / Circuit (includes Carbon Aero) / Apex (Carbon Aero + Track); packages Track (conflicts with Road Comfort), Carbon Aero,
+  Max Downforce (requires Carbon Aero), Road Comfort). All figures are fictional concept data. Data in `vehicles.ts` / `vehicle-content.ts`.
+- Images: 9 Gemini base images (Steeven's own generation, Lunar Silver and Onyx) plus 12 Codex variants (4 paints, Dune and Ember cabins per model),
+  all WebP in `public/images/tarn|vanta/`, all 12 variants checked and accepted (same shape and angle, no text). Tarn has no straight-front view
+  (`MISSING_ANGLES` hides "Front" in the configurator); neither model has `detail-*` close-ups, so `images.ts` reuses the front, rear and side
+  images for the hero / front / detail roles, skips duplicate slot keys and `InteriorSection` hides the cabin detail when no asset exists.
+  Tarn hero = front 3/4 (the rear 3/4 crops badly); Vanta hero = straight front.
+- Home lineup: three-column grid of five equal-height cards plus a sixth "Which one is yours?" tile. `/models` has five panels and a five-column
+  comparison table (min width 52 rem, scrolls in its own region). Gallery: 8 new tiles and Tarn / Vanta filter chips (38 entries). Menu and footer
+  links come from `site.ts`; selects and switchers read the vehicle list. "Three models" wording updated everywhere (the design page's light-blade
+  strip still shows three example faces: no Tarn or Vanta light close-up exists).
+- `Vehicle.limitedOptionsNote` (optional) shows a note in the configurator colour and cabin steps when a model offers only part of the shared lists;
+  no model uses it now. Remember: a model offers a paint only if its list in `vehicles.ts` has it and the image exists.
+- Portfolio screenshots refreshed: `home-models`, `models-index` (1440 and 390), new `model-tarn-hero` and `model-vanta-hero` (both widths).
+  `docs/3d/` stays untracked (`docs/3d/source|work` in .gitignore).
+
+### Image audit (80 images, after the variants)
+`image-audit.mjs validate --images public`: 12 FAIL, all accepted: the 7 from step 8 plus 5 new near-duplicates between paint variants of the
+same car (tarn ember~lunar-silver, tarn ember~tide-blue, tarn glacier-white~lunar-silver, vanta ember~tide-blue, vanta glacier-white~lunar-silver).
+Details in ASSET_LICENSES.md. `register` run (80 images).
+
+### Checks (2026-11-13, tree before the last hero tweak noted below)
+| Check | Result |
+|---|---|
+| `npm run lint` | pass, 0 problems |
+| `npm run typecheck` | pass |
+| `npm test` | pass, 11 files / 106 tests (new: `src/lib/tarn-vanta.test.ts`: image files on disk for every model, price maths, rules) |
+| `npm run build` | pass |
+| `npm run e2e` (chromium, full) | 183 passed (6.3 min), 0 failed; new `e2e/tarn-vanta.spec.ts` |
+| `vizam-content-qa` (7 routes, before the variants) | 0 FAIL, 73 WARN (soft-on-retina 1.0-1.1x as before, repeated images across pages, repeated concept paragraph); contact sheets for /models/tarn, /models, /performance viewed |
+After the e2e run only one data line changed (Tarn hero image back to its front 3/4); lint, typecheck, unit tests and build were rerun afterwards and pass, the e2e was not rerun in full.
+
+## Next step (Tarn / Vanta)
+Main session: push `feat/tarn-vanta`, open the PR, merge, redeploy (see Deployment). Optional: Tarn and Vanta detail close-ups and light signature
+images so their detail sections match the others.
 
 ## Deployment (2026-11-12)
 - GitHub: `SteevenOrell/vizam-06-automotive` (private), default branch `main`. PR #1 (`feat/initial-build`) merged.

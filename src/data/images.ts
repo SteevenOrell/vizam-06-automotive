@@ -20,16 +20,11 @@ const ROLE_SIZES: Record<VehicleImageRole, { width: number; height: number; labe
 const STUDIO = { width: 2400, height: 1350 } as const;
 
 const entries: [string, ImageSlot][] = [];
+/** Models without a detailed cabin close-up (no `<slug>-detail-cabin` asset yet). */
+const NO_CABIN_DETAIL = new Set(["tarn", "vanta"]);
 
 for (const v of vehicles) {
   const name = `ORVANE ${v.name} ${v.category.toLowerCase()}`;
-  for (const role of Object.keys(v.images) as VehicleImageRole[]) {
-    const size = ROLE_SIZES[role];
-    entries.push([
-      v.images[role],
-      { src: null, alt: `${name}, ${size.label.toLowerCase()}`, width: size.width, height: size.height, label: size.label, model: v.slug },
-    ]);
-  }
   // Configurator stage: one front three-quarter per paint, one cabin view per interior.
   for (const c of v.colours) {
     entries.push([
@@ -43,11 +38,29 @@ for (const v of vehicles) {
       { src: null, alt: `${name} cabin in ${i.name} trim`, ...STUDIO, label: `${i.name} interior`, model: v.slug },
     ]);
   }
-  entries.push([
-    `${v.slug}-detail-cabin`,
-    { src: null, alt: `${name}, centre console detail`, width: 1600, height: 1200, label: "Cabin detail", model: v.slug },
-  ]);
+  for (const role of Object.keys(v.images) as VehicleImageRole[]) {
+    const key = v.images[role];
+    if (entries.some(([k]) => k === key)) continue; // a role can reuse a paint or cabin slot (Tarn, Vanta)
+    const size = ROLE_SIZES[role];
+    entries.push([key, { src: null, alt: `${name}, ${size.label.toLowerCase()}`, width: size.width, height: size.height, label: size.label, model: v.slug }]);
+  }
+  if (!NO_CABIN_DETAIL.has(v.slug)) {
+    entries.push([
+      `${v.slug}-detail-cabin`,
+      { src: null, alt: `${name}, centre console detail`, width: 1600, height: 1200, label: "Cabin detail", model: v.slug },
+    ]);
+  }
 }
+
+/** Alt text for slots whose generic role text would be wrong. */
+const ALT_OVERRIDES: Record<string, string> = {
+  "tarn-view-side": "ORVANE Tarn electric pickup in Lunar Silver, side profile showing the crew cab and long bed",
+  "tarn-view-rear": "ORVANE Tarn electric pickup in Lunar Silver, rear three-quarter view with the bed and rear light bar",
+  "vanta-view-front": "ORVANE Vanta track coupe in Lunar Silver, front view with slim split lights and carbon splitter",
+  "vanta-view-side": "ORVANE Vanta track coupe in Lunar Silver, side profile with the large rear wing",
+  "vanta-view-rear": "ORVANE Vanta track coupe in Lunar Silver seen from directly behind, with the large wing and full-width light",
+};
+for (const e of entries) if (ALT_OVERRIDES[e[0]]) e[1].alt = ALT_OVERRIDES[e[0]];
 
 const siteSlots: Record<string, ImageSlot> = {
   "hero-home-desktop": { src: null, alt: "ORVANE Aren in Lunar Silver on a wet coastal road at blue hour", width: 2800, height: 1575, label: "Home hero" },

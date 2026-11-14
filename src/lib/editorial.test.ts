@@ -4,8 +4,8 @@ import { compareBars, driveLayouts, specRange } from "./editorial";
 
 describe("editorial helpers", () => {
   it("finds ranges across every trim", () => {
-    expect(specRange(vehicles, "batteryKwh")).toEqual([88, 122]);
-    expect(specRange(vehicles, "powerKw")).toEqual([390, 720]);
+    expect(specRange(vehicles, "batteryKwh")).toEqual([88, 135]);
+    expect(specRange(vehicles, "powerKw")).toEqual([390, 1100]);
   });
   it("groups trims by drive layout in order and keeps every trim", () => {
     const groups = driveLayouts(vehicles);
@@ -16,8 +16,8 @@ describe("editorial helpers", () => {
     const bars = compareBars(vehicles.map((v) => ({ slug: v.slug, name: v.name, specs: v.specs })));
     expect(Math.max(...bars.map((b) => b.rangePct))).toBe(100);
     expect(Math.max(...bars.map((b) => b.accelPct))).toBe(100);
-    const vire = bars.find((b) => b.slug === "vire")!;
-    expect(vire.accelPct).toBe(100);
-    expect(vire.rangePct).toBeLessThan(100);
+    const vanta = bars.find((b) => b.slug === "vanta")!;
+    expect(vanta.accelPct).toBe(100);
+    expect(vanta.rangePct).toBeLessThan(100);
   });
 });

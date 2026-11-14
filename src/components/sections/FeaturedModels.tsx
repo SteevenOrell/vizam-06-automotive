@@ -8,7 +8,7 @@ import { Eyebrow, Heading, TwoTone } from "@/components/ui/Typography";
 import { VehicleImage } from "@/components/ui/VehicleImage";
 import { vehicles } from "@/data/vehicles";
 
-/** Home: the three models as equal-height cards. The whole card links to the detail page; Configure sits above it. */
+/** Home: the five models as equal-height cards in a three-column grid, with a sixth tile that links to the comparison. The whole card links to the detail page; Configure sits above it. */
 export function FeaturedModels() {
   return (
     <Section tone="carbon" aria-labelledby="lineup-title">
@@ -18,21 +18,21 @@ export function FeaturedModels() {
             The lineup
           </Eyebrow>
           <Heading id="lineup-title" level={2} size="xl">
-            <TwoTone muted="Three models." strong="One engineering idea." />
+            <TwoTone muted="Five models." strong="One engineering idea." />
           </Heading>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-paper/80">
-            A sedan, an SUV and a coupé share one platform, one battery philosophy and one rule: power stays composed.
+            A sedan, an SUV, a coupé, a pickup and a track car share one platform, one battery philosophy and one rule: power stays composed.
           </p>
         </Reveal>
 
-        <ul className="grid gap-6 lg:grid-cols-3 lg:gap-8">
+        <ul className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
           {vehicles.map((v) => (
             <li key={v.slug} className="flex">
               <article className="group relative flex w-full flex-col overflow-hidden rounded-sharp border border-graphite bg-ink">
                 <div className="overflow-hidden">
                   <VehicleImage
                     slot={v.images.profile}
-                    sizes="(min-width: 1440px) 416px, (min-width: 1024px) 29vw, (min-width: 768px) 90vw, 100vw"
+                    sizes="(min-width: 1440px) 416px, (min-width: 1024px) 29vw, (min-width: 768px) 45vw, 100vw"
                     className="aspect-[16/9] transition-transform duration-700 ease-out-expo group-hover:scale-[1.03]"
                   />
                 </div>
@@ -75,6 +75,23 @@ export function FeaturedModels() {
               </article>
             </li>
           ))}
+          <li className="flex">
+            <div className="flex w-full flex-col justify-between rounded-sharp border border-dashed border-graphite p-6 md:p-8">
+              <div>
+                <Eyebrow accent="dark">Compare</Eyebrow>
+                <h3 className="mt-3 font-display text-3xl font-semibold [font-stretch:112%]">Which one is yours?</h3>
+                <p className="mt-3 text-base leading-relaxed text-paper/80">
+                  Power, range, price and body style for all five, side by side, or build the one you like in the configurator.
+                </p>
+              </div>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <LinkButton href="/models">Compare all models</LinkButton>
+                <LinkButton href="/configure" variant="ghost">
+                  Open the configurator
+                </LinkButton>
+              </div>
+            </div>
+          </li>
         </ul>
         <ConceptNote className="mt-8 max-w-3xl" />
       </Container>

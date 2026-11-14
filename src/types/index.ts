@@ -3,7 +3,7 @@
  * All vehicle figures are fictional concept data.
  */
 
-export type VehicleSlug = "aren" | "sola" | "vire";
+export type VehicleSlug = "aren" | "sola" | "vire" | "tarn" | "vanta";
 
 export type DriveLayout = "RWD" | "Dual-motor AWD" | "Tri-motor AWD";
 
@@ -133,6 +133,8 @@ export interface Vehicle {
   content: VehicleContent;
   /** Image slot keys, resolved by `src/data/images.ts`. */
   images: Record<VehicleImageRole, string>;
+  /** Shown in the configurator when only part of the shared paint and cabin lists is offered for this model. */
+  limitedOptionsNote?: string;
 }
 
 /** Configurator state as stored in localStorage. */

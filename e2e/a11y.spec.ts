@@ -7,6 +7,8 @@ const ROUTES = [
   "/models/aren",
   "/models/sola",
   "/models/vire",
+  "/models/tarn",
+  "/models/vanta",
   "/configure",
   "/technology",
   "/innovation",

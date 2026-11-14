@@ -9,7 +9,7 @@ owner's approval (see [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)).
 
 ## Features
 
-- **12 page types**: home, models index, model detail (`/models/aren`, `/models/sola`, `/models/vire`), configurator,
+- **12 page types**: home, models index, model detail (`/models/aren`, `sola`, `vire`, `tarn`, `vanta`: five models), configurator,
   technology, innovation, performance, design philosophy, brand story, gallery, test drive, contact. Plus a designed 404.
 - **Image-based configurator** (`/configure`): 7 steps (model, variant, colour, wheels, interior, packages, summary),
   live price breakdown, package rules (requires / conflicts / included by trim), stage with exterior, interior and wheel
@@ -87,7 +87,7 @@ src/
   lib/            pure logic and tests: configurator, schemas, demo-forms, gallery, carousel, metadata, gsap loader
   types/          shared TypeScript types
 e2e/              Playwright specs (smoke, slice-a, configurator, slice-c, slice-d, a11y, security)
-public/images/    compressed WebP images (aren, sola, vire, brand, editorial)
+public/images/    compressed WebP images (aren, sola, vire, tarn, vanta, brand, editorial)
 docs/             project documentation (see below)
 scripts/          make-brand-assets.mjs (Open Graph / icon generation)
 ```

@@ -47,7 +47,7 @@ export default function Page() {
               <div className="mt-6 space-y-5 text-lg leading-relaxed text-ink/90">
                 <p>The concept imagines a workshop at the end of a coast road, a dust sheet over something half finished and a small team who would rather talk about how a car feels at the end of a long drive than how fast it is off the line.</p>
                 <p className="text-slate">Their question is simple and, in this story, unanswered: why do electric cars still feel busy? Too many screens, too many surfaces, too many ways to be impressed.</p>
-                <p className="text-slate">The answer the concept gives is subtraction. Fewer parts, one line of light, and a platform calm enough to carry three very different cars.</p>
+                <p className="text-slate">The answer the concept gives is subtraction. Fewer parts, one line of light, and a platform calm enough to carry five very different cars.</p>
               </div>
             </Reveal>
           </div>
@@ -123,7 +123,7 @@ export default function Page() {
           <h2 id="closing-title" className="max-w-3xl font-display text-[clamp(2rem,4.6vw,3.75rem)] font-semibold leading-[1.02] [font-stretch:112%]">
             The story is invented. The cars are yours to explore.
           </h2>
-          <p className="mt-4 max-w-xl text-lg leading-relaxed text-paper/90">Meet the three concept models, or request a concept test drive. Nothing is sent or stored in this demonstration.</p>
+          <p className="mt-4 max-w-xl text-lg leading-relaxed text-paper/90">Meet the five concept models, or request a concept test drive. Nothing is sent or stored in this demonstration.</p>
           <div className="mt-8 flex flex-wrap gap-3">
             <LinkButton href="/models" size="lg">
               Explore the models

@@ -42,8 +42,8 @@ describe("model content", () => {
 describe("getAdjacentVehicles", () => {
   it("wraps around the lineup", async () => {
     const { getAdjacentVehicles } = await import("@/data/vehicles");
-    expect(getAdjacentVehicles("aren")).toMatchObject({ prev: { slug: "vire" }, next: { slug: "sola" } });
-    expect(getAdjacentVehicles("vire")).toMatchObject({ prev: { slug: "sola" }, next: { slug: "aren" } });
+    expect(getAdjacentVehicles("aren")).toMatchObject({ prev: { slug: "vanta" }, next: { slug: "sola" } });
+    expect(getAdjacentVehicles("vire")).toMatchObject({ prev: { slug: "sola" }, next: { slug: "tarn" } });
     expect(getAdjacentVehicles("nope")).toBeUndefined();
   });
 });

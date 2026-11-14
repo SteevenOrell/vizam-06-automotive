@@ -2,10 +2,12 @@ import { expect, test } from "@playwright/test";
 
 const ROUTES: { path: string; h1: RegExp }[] = [
   { path: "/", h1: /electric performance/i },
-  { path: "/models", h1: /three ways/i },
+  { path: "/models", h1: /five ways/i },
   { path: "/models/aren", h1: /^aren$/i },
   { path: "/models/sola", h1: /^sola$/i },
   { path: "/models/vire", h1: /^vire$/i },
+  { path: "/models/tarn", h1: /^tarn$/i },
+  { path: "/models/vanta", h1: /^vanta$/i },
   { path: "/configure", h1: /configure your orvane/i },
   { path: "/technology", h1: /engineered/i },
   { path: "/innovation", h1: /four questions/i },
@@ -53,7 +55,7 @@ test.describe("mobile menu at 390px", () => {
     expect(await page.evaluate(() => document.documentElement.style.overflow)).toBe("hidden");
 
     // Every route is reachable from the overlay.
-    for (const href of ["/models/aren", "/models/sola", "/models/vire", "/technology", "/innovation", "/performance", "/design", "/story", "/gallery", "/configure", "/test-drive", "/contact"]) {
+    for (const href of ["/models/aren", "/models/sola", "/models/vire", "/models/tarn", "/models/vanta", "/technology", "/innovation", "/performance", "/design", "/story", "/gallery", "/configure", "/test-drive", "/contact"]) {
       await expect(dialog.locator(`a[href="${href}"]`)).toHaveCount(1);
     }
 

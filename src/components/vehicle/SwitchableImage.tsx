@@ -87,6 +87,7 @@ export function SwitchableImage({ options, defaultId, groupLabel, sizes, childre
         {children}
       </div>
 
+      {options.length > 1 ? (
       <div role="group" aria-label={groupLabel} className="mt-4 flex flex-wrap items-center gap-2">
         {options.map((o) => {
           const pressed = o.id === activeId;
@@ -110,6 +111,7 @@ export function SwitchableImage({ options, defaultId, groupLabel, sizes, childre
           );
         })}
       </div>
+      ) : null}
       <p aria-live="polite" className="mt-3 text-sm text-mist">
         <span className="text-paper">{active.label}</span>
         {active.detail ? ` · ${active.detail}` : ""}

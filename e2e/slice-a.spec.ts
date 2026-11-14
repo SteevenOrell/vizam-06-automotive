@@ -33,7 +33,7 @@ test.describe("home", () => {
 
   test("model cards link to the detail and configure pages", async ({ page }) => {
     await ready(page, "/");
-    for (const slug of ["aren", "sola", "vire"]) {
+    for (const slug of ["aren", "sola", "vire", "tarn", "vanta"]) {
       const card = page.locator("article", { has: page.locator(`a[href="/models/${slug}"]`) });
       await expect(card).toHaveCount(1);
       await expect(card.locator(`a[href="/configure?model=${slug}"]`)).toHaveCount(1);
@@ -45,17 +45,17 @@ test.describe("home", () => {
   test("model cards have equal height", async ({ page }) => {
     await ready(page, "/");
     const heights = await page.locator("article").evaluateAll((els) => els.map((e) => Math.round(e.getBoundingClientRect().height)));
-    expect(heights).toHaveLength(3);
+    expect(heights).toHaveLength(5);
     expect(new Set(heights).size).toBe(1);
   });
 });
 
 test.describe("models page", () => {
-  test("lists three panels and an accessible comparison table", async ({ page }) => {
+  test("lists five panels and an accessible comparison table", async ({ page }) => {
     await ready(page, "/models");
-    await expect(page.getByRole("heading", { level: 2, name: /^(Aren|Sola|Vire)$/, includeHidden: true })).toHaveCount(3);
-    const table = page.getByRole("table", { name: /Concept specifications of the ORVANE Aren, Sola and Vire/ });
-    await expect(table.getByRole("columnheader")).toHaveCount(3);
+    await expect(page.getByRole("heading", { level: 2, name: /^(Aren|Sola|Vire|Tarn|Vanta)$/, includeHidden: true })).toHaveCount(5);
+    const table = page.getByRole("table", { name: /Concept specifications of the ORVANE Aren, Sola, Vire, Tarn and Vanta/ });
+    await expect(table.getByRole("columnheader")).toHaveCount(5);
     await expect(table.getByRole("rowheader").first()).toBeVisible();
     await expect(page.locator("div[role='region'][aria-labelledby='compare-title']")).toBeVisible();
   });
@@ -155,7 +155,7 @@ test.describe("model page /models/aren", () => {
     await expect(page.getByRole("link", { name: "Configure Aren" })).toHaveAttribute("href", "/configure?model=aren");
     await expect(page.getByRole("link", { name: "Book a test drive" }).first()).toHaveAttribute("href", "/test-drive?model=aren");
     const pager = page.getByRole("navigation", { name: "More models" });
-    await expect(pager.getByRole("link", { name: /Previous model/ })).toHaveAttribute("href", "/models/vire");
+    await expect(pager.getByRole("link", { name: /Previous model/ })).toHaveAttribute("href", "/models/vanta");
     await expect(pager.getByRole("link", { name: /Next model/ })).toHaveAttribute("href", "/models/sola");
   });
 });
@@ -173,7 +173,7 @@ test.describe("hotspots hidden on phones, list shown", () => {
 for (const width of [390, 1440]) {
   test.describe(`no horizontal overflow at ${width}px`, () => {
     test.use({ viewport: { width, height: 900 } });
-    for (const path of ["/", "/models", "/models/aren", "/models/sola", "/models/vire"]) {
+    for (const path of ["/", "/models", "/models/aren", "/models/sola", "/models/vire", "/models/tarn", "/models/vanta"]) {
       test(path, async ({ page }) => {
         await ready(page, path);
         expect(await noOverflow(page)).toBeLessThanOrEqual(0);

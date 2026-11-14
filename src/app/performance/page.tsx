@@ -19,7 +19,7 @@ import { cn } from "@/lib/cn";
 export const metadata: Metadata = pageMetadata({
   title: "Performance",
   description:
-    "Concept figures for Aren, Sola and Vire: power, acceleration and range compared, plus chassis, braking and the four drive modes.",
+    "Concept figures for Aren, Sola, Vire, Tarn and Vanta: power, acceleration and range compared, plus chassis, braking and the four drive modes.",
   path: "/performance",
 });
 
@@ -110,7 +110,7 @@ export default function Page() {
       <Section tone="ink" aria-labelledby="compare-title">
         <Container>
           <Reveal>
-            <SectionIntro id="compare-title" eyebrow="Side by side" title="Three characters, compared." text="Quickest is not the same as furthest. Each model trades one for the other differently." className="mb-12 md:mb-16" />
+            <SectionIntro id="compare-title" eyebrow="Side by side" title="Five characters, compared." text="Quickest is not the same as furthest. Each model trades one for the other differently." className="mb-12 md:mb-16" />
           </Reveal>
           <CompareChart bars={bars} />
           <ConceptNote className="mt-8" />

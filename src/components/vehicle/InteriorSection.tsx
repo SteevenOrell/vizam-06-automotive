@@ -28,7 +28,9 @@ export function InteriorSection({ vehicle: v }: { vehicle: Vehicle }) {
             <TwoTone muted="A cabin with" strong="room to think." />
           </Heading>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-paper/80">
-            Three interior trims share one layout. Choose the material, and the light, texture and mood of the cabin change with it.
+            {v.interiors.length > 1
+              ? "Three interior trims share one layout. Choose the material, and the light, texture and mood of the cabin change with it."
+              : `The ${v.name} cabin is shown in Onyx. More trims are in development.`}
           </p>
         </Reveal>
 
@@ -51,11 +53,13 @@ export function InteriorSection({ vehicle: v }: { vehicle: Vehicle }) {
               ))}
             </ul>
             {/* The one scroll-linked vehicle reveal on the page: the cabin detail settles from a slight zoom. */}
+            {getImageSlot(`${v.slug}-detail-cabin`)?.src ? (
             <div className="mt-8 overflow-hidden rounded-sharp">
               <ScrollMedia range="self" scaleFrom={1.18} scaleTo={1}>
                 <VehicleImage slot={`${v.slug}-detail-cabin`} sizes="(min-width: 1440px) 514px, (min-width: 1024px) 36vw, 100vw" className="aspect-[4/3]" />
               </ScrollMedia>
             </div>
+            ) : null}
           </div>
         </div>
       </Container>

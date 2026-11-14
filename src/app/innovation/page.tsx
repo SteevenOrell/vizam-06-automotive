@@ -61,7 +61,7 @@ export default function Page() {
         </Container>
       </Section>
 
-      <CtaBand eyebrow="See where it leads" title="The ideas, in three cars." text="Each model carries a different share of these directions. Explore the lineup or request a concept test drive." />
+      <CtaBand eyebrow="See where it leads" title="The ideas, in five cars." text="Each model carries a different share of these directions. Explore the lineup or request a concept test drive." />
     </>
   );
 }

@@ -114,4 +114,79 @@ export const vehicleContent: Record<VehicleSlug, VehicleContent> = {
     ],
     gallery: gallery("vire", [{ slot: "vire-ext-ember", caption: "Ember" }]),
   },
+  tarn: {
+    character: "Carries the load, keeps the calm.",
+    story: [
+      "Tarn is the ORVANE for people who need a bed, a hitch and a long day of range, and still want the cabin to feel like the rest of the lineup. The battery sits low between the axles, so a loaded bed or a trailer behind it does not change how the truck feels from the driver's seat.",
+      "The nose carries the family light blade edge to edge. At the back, a light bar runs along the top of the bed, so the truck is read the same way at night as it is by day.",
+    ],
+    heroTone: "dark",
+    hotspots: [
+      { id: "light", title: "Full-width front light blade", text: "One slim blade across the nose replaces separate headlamps, and doubles as the welcome and charging indicator.", x: 27, y: 47 },
+      { id: "mirrors", title: "Camera-based side mirrors", text: "Slim camera pods feed small displays inside the doors, with a clear view even when a wide trailer is hitched.", x: 55, y: 37 },
+      { id: "handles", title: "Flush door handles", text: "Handles sit level with the doors and present as you approach with the phone key.", x: 63, y: 43 },
+      { id: "bed", title: "Bed with rear light bar", text: "A long bed with a light bar along the rear corner, so the tail stays visible from behind a load.", x: 85, y: 41 },
+    ],
+    interiorNotes: [
+      { title: "Five seats", text: "A crew cab with real room for three adults in the rear and a flat floor to stow gear." },
+      { title: "Wide curved display", text: "A driver display and a centre screen under one curved glass, with a dedicated controls strip below." },
+      { title: "Ambient light rail", text: "A thin warm line across the dashboard and doors. Brightness follows the time of day." },
+      { title: "Large centre console", text: "A deep, lidded console between the front seats with a wireless charging pad and cup holders." },
+    ],
+    technologyNotes: [
+      { title: "Over-the-air updates", text: "Drive, comfort and interface improvements arrive while the truck is parked and plugged in." },
+      { title: "Phone-as-key", text: "Unlock, start and share access with the crew without a physical key." },
+      { title: "Trailer and load planner", text: "Plans the route and the charge stops for the towed weight, and updates as conditions change." },
+      { title: "Vehicle-to-load power outlet", text: "Power tools, a compressor or a campsite kitchen from standard outlets in the bed." },
+    ],
+    safetyNotes: [
+      { title: "Ten airbags", text: "Front, side, curtain and knee protection, extended to the second row." },
+      { title: "Automatic emergency braking", text: "Detects vehicles, cyclists and pedestrians ahead and brakes when the driver does not." },
+      { title: "Trailer sway control", text: "Brakes individual wheels and trims motor torque to settle a swaying trailer." },
+      { title: "Surround camera view", text: "A bird's-eye picture around the truck for tight yards, ramps and trailer coupling." },
+    ],
+    gallery: [
+      { slot: "tarn-view-side", caption: "Side profile" },
+      { slot: "tarn-view-rear", caption: "Rear three-quarter" },
+      { slot: "tarn-int-onyx", caption: "Onyx interior" },
+    ],
+  },
+  vanta: {
+    character: "Shaped by airflow, built for the circuit.",
+    story: [
+      "Vanta starts from the air. The nose is low and wide, the sides are cut to feed the cooling, and a large rear wing sets the balance at speed. Every carbon panel is there because it does a job.",
+      "Inside, there are two carbon-shell seats, a flat-bottom wheel and a display that wraps around the driver. The rest stays out of the way, so the road and the lap are what you see.",
+    ],
+    heroTone: "dark",
+    hotspots: [
+      { id: "wing", title: "Large rear wing", text: "A wide carbon wing on tall stays adds downforce at speed. Its angle follows the drive mode.", x: 81, y: 20 },
+      { id: "lights", title: "Slim split front lights", text: "Two thin light lines sit low in the nose, above the carbon splitter, and glow amber when the car wakes.", x: 30, y: 64 },
+      { id: "vents", title: "Bonnet vents", text: "Openings in the bonnet let air from the front cooling stack escape, reducing lift over the nose.", x: 24, y: 45 },
+      { id: "skirts", title: "Carbon side skirts", text: "Textured carbon sills guide air along the sides and away from the rear wheels.", x: 66, y: 68 },
+    ],
+    interiorNotes: [
+      { title: "Two seats", text: "Two fixed-back seats set low in the floor, with a harness-ready design and a clear view of the road." },
+      { title: "Carbon-shell bucket seats", text: "Carbon shells with suede-like inserts hold the driver in place through long, fast corners." },
+      { title: "Flat-bottom wheel", text: "A compact wheel with clear grip points and an unobstructed view of the display." },
+      { title: "Physical drive-mode dial", text: "A machined dial on the centre console. Reach for it without looking." },
+    ],
+    technologyNotes: [
+      { title: "Wraparound driver display", text: "Instruments curve around the driver, with a track layout that shows only what matters at pace." },
+      { title: "Camera-based side mirrors", text: "Slim cameras and door-mounted screens reduce drag and widen the view to the rear." },
+      { title: "Lap timer and telemetry", text: "Record laps, sector times and motor temperatures, and review them on your phone." },
+      { title: "Over-the-air updates", text: "Drive calibrations and interface improvements arrive without a visit to a service centre." },
+    ],
+    safetyNotes: [
+      { title: "Six airbags", text: "Front, side and head protection tuned for a low, two-seat body." },
+      { title: "Automatic emergency braking", text: "Detects vehicles, cyclists and pedestrians ahead and brakes when the driver does not." },
+      { title: "Stability control with track mode", text: "Two calibrations: full intervention on the road, a wider margin on a closed circuit." },
+      { title: "Rear cross-traffic alert", text: "Warns of approaching vehicles when reversing out of a space." },
+    ],
+    gallery: [
+      { slot: "vanta-view-front", caption: "Front view" },
+      { slot: "vanta-view-side", caption: "Side profile" },
+      { slot: "vanta-view-rear", caption: "Rear view" },
+      { slot: "vanta-int-onyx", caption: "Onyx interior" },
+    ],
+  },
 };

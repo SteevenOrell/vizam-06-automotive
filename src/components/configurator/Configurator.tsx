@@ -36,11 +36,11 @@ import { SummaryPanel } from "./SummaryPanel";
 import { VehicleStage } from "./VehicleStage";
 
 const HEADINGS: Record<StepId, { title: string; intro: string }> = {
-  model: { title: "Choose your model", intro: "Three ORVANE concepts. Each starts from its own base concept price." },
+  model: { title: "Choose your model", intro: "Five ORVANE concepts. Each starts from its own base concept price." },
   trim: { title: "Choose a variant", intro: "Variants change the concept figures and price." },
-  colour: { title: "Exterior colour", intro: "Five paints. The stage updates as you choose." },
+  colour: { title: "Exterior colour", intro: "Choose a paint. The stage updates as you choose." },
   wheels: { title: "Wheels", intro: "Three designs, 20 to 22 inch." },
-  interior: { title: "Interior", intro: "Three cabin trims. The stage switches to the interior view." },
+  interior: { title: "Interior", intro: "Choose a cabin trim. The stage switches to the interior view." },
   packages: { title: "Packages", intro: "Optional. Where packages cannot be combined, the reason is shown." },
   summary: { title: "Your configuration", intro: "Review the build, save it on this device, or book a test drive." },
 };

@@ -31,18 +31,18 @@ version has changed APIs, so check `node_modules/next/dist/docs/` before using f
 
 - `src/types/index.ts`: shared types (`Vehicle`, `TrimVariant`, `ColourOption`, `WheelOption`, `InteriorOption`,
   `PackageOption`, `ConfigState`, content and gallery types).
-- `src/data/vehicles.ts`: the three models with specs (kW, 0-100, range, top speed, battery, drive), trims with price
+- `src/data/vehicles.ts`: the five models (Aren, Sola, Vire, Tarn the electric pickup, Vanta the track coupé) with specs (kW, 0-100, range, top speed, battery, drive), trims with price
   deltas, per-model price lists for the shared paints / wheels / interiors, four packages each, feature lists, and the
   `CONCEPT_DATA_NOTE` string. Currency is CAD. All numbers are fictional.
 - `src/data/vehicle-content.ts` (story, hotspots in %, notes, gallery picks), `src/data/editorial.ts` (copy for
   technology, innovation, performance, design, story; numbers are derived from `vehicles.ts` by `src/lib/editorial.ts`),
-  `src/data/gallery.ts` (30 curated entries), `src/data/site.ts` (site name, routes, navigation groups),
+  `src/data/gallery.ts` (38 curated entries), `src/data/site.ts` (site name, routes, navigation groups),
   `src/data/silhouettes.ts` (SVG paths used to place the model name behind the car).
 - Images: see section 6.
 
 **Add a model**: add the slug to `VehicleSlug`, add a `Vehicle` entry in `vehicles.ts` (specs, trims, price lists,
 packages), content in `vehicle-content.ts`, the image slots (hero, three views, five paints, three interiors, two details)
-in `image-assets.ts`, and a silhouette in `silhouettes.ts`. Pages, configurator and summary pick it up from the data;
+in `image-assets.ts` (Tarn and Vanta have no straight-front view for Tarn, no detail close-ups and reuse their front three-quarter / rear / side images for the hero, front and detail roles; `images.ts` skips duplicate keys and `MISSING_ANGLES` in `configurator.ts` hides the Tarn Front view), and a silhouette in `silhouettes.ts`. Pages, configurator and summary pick it up from the data;
 `generateStaticParams` reads the vehicle list.
 
 **Add a paint, wheel or interior**: paints, wheels and interiors are shared lists with one price delta per model, so add the

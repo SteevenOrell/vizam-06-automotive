@@ -306,9 +306,180 @@ const vire: Vehicle = {
   content: vehicleContent.vire,
 };
 
-export const vehicles: readonly Vehicle[] = [aren, sola, vire];
 
-export const VEHICLE_SLUGS = ["aren", "sola", "vire"] as const satisfies readonly VehicleSlug[];
+const tarn: Vehicle = {
+  slug: "tarn",
+  name: "Tarn",
+  category: "Electric pickup",
+  tagline: "Built to carry, quiet to arrive.",
+  summary:
+    "A crew-cab electric pickup with a full-width light blade and a bed made for real loads. Strong low-speed torque for towing, a quiet cabin for the drive there.",
+  specs: { powerKw: 480, zeroToHundredS: 4.4, rangeKm: 640, topSpeedKmh: 200, batteryKwh: 135, drive: "Dual-motor AWD" },
+  basePrice: 98000,
+  trims: [
+    {
+      id: "tarn-work",
+      name: "Tarn Work",
+      description: "Dual-motor drive and the longest range of the three. Concept payload 1,100 kg.",
+      priceDelta: 0,
+      specs: { powerKw: 480, zeroToHundredS: 4.4, rangeKm: 640, topSpeedKmh: 200, batteryKwh: 135, drive: "Dual-motor AWD" },
+    },
+    {
+      id: "tarn-haul",
+      name: "Tarn Haul",
+      description: "Tuned for towing: concept rating 4,500 kg, with the Tow package included.",
+      priceDelta: 14000,
+      includesPackages: ["tarn-tow"],
+      specs: { powerKw: 520, zeroToHundredS: 4.2, rangeKm: 590, topSpeedKmh: 190, batteryKwh: 135, drive: "Dual-motor AWD" },
+    },
+    {
+      id: "tarn-summit",
+      name: "Tarn Summit",
+      description: "Tri-motor drive, air suspension and the quickest Tarn. Concept payload 950 kg.",
+      priceDelta: 30000,
+      specs: { powerKw: 700, zeroToHundredS: 3.5, rangeKm: 560, topSpeedKmh: 210, batteryKwh: 135, drive: "Tri-motor AWD" },
+    },
+  ],
+  colours: colours([0, 0, 2600, 3200, 3600]),
+  wheels: wheels([0, 2800, 5200]),
+  interiors: interiors([0, 2000, 4200]),
+  packages: [
+    {
+      id: "tarn-tow",
+      name: "Tow",
+      description: "Hardware and software for heavy trailers.",
+      includes: ["Integrated tow hitch", "Trailer sway control", "Trailer camera view"],
+      priceDelta: 3200,
+    },
+    {
+      id: "tarn-utility",
+      name: "Bed Utility",
+      description: "A bed set up for work and weekends.",
+      includes: ["Adjustable bed rails", "Lockable bed cover", "Bed lighting and tie-down points"],
+      priceDelta: 2400,
+    },
+    {
+      id: "tarn-power",
+      name: "Worksite Power",
+      description: "Mains-style power from the pack, for tools and camp.",
+      includes: ["Bed power outlets", "Vehicle-to-load export", "Power-use planner"],
+      priceDelta: 2900,
+      requires: ["tarn-utility"],
+    },
+    {
+      id: "tarn-winter",
+      name: "Winter",
+      description: "Warmth and grip for cold climates.",
+      includes: ["Heated front and rear seats", "Heated steering wheel", "Heat pump boost mode"],
+      priceDelta: 2000,
+    },
+  ],
+  features: {
+    exterior: ["Full-width front light blade", "Camera-based side mirrors", "Flush door handles", "Bed with rear light bar"],
+    interior: ["Five seats", "Wide curved display", "Ambient light rail", "Large centre console"],
+    technology: ["Over-the-air updates", "Phone-as-key", "Trailer and load planner", "Vehicle-to-load power outlet"],
+    safety: ["Ten airbags", "Automatic emergency braking", "Trailer sway control", "Surround camera view"],
+  },
+  images: {
+    hero: "tarn-ext-lunar-silver",
+    profile: "tarn-view-side",
+    front: "tarn-ext-lunar-silver",
+    rear: "tarn-view-rear",
+    interior: "tarn-int-onyx",
+    detail: "tarn-view-rear",
+  },
+  content: vehicleContent.tarn,
+};
+
+const vanta: Vehicle = {
+  slug: "vanta",
+  name: "Vanta",
+  category: "Track coupé",
+  tagline: "Downforce, on demand.",
+  summary:
+    "A low two-seat coupé shaped by airflow. Carbon aero, a large rear wing and tri-motor drive, in a cabin that keeps the driver focused on the road ahead.",
+  specs: { powerKw: 820, zeroToHundredS: 2.4, rangeKm: 380, topSpeedKmh: 330, batteryKwh: 96, drive: "Tri-motor AWD" },
+  basePrice: 235000,
+  trims: [
+    {
+      id: "vanta-base",
+      name: "Vanta",
+      description: "Tri-motor drive and active aero, tuned for road and occasional circuit days.",
+      priceDelta: 0,
+      specs: { powerKw: 820, zeroToHundredS: 2.4, rangeKm: 380, topSpeedKmh: 330, batteryKwh: 96, drive: "Tri-motor AWD" },
+    },
+    {
+      id: "vanta-circuit",
+      name: "Vanta Circuit",
+      description: "More output, a stiffer chassis and carbon aero included. Concept downforce 780 kg at 250 km/h.",
+      priceDelta: 38000,
+      includesPackages: ["vanta-carbon"],
+      specs: { powerKw: 960, zeroToHundredS: 2.2, rangeKm: 340, topSpeedKmh: 340, batteryKwh: 96, drive: "Tri-motor AWD" },
+    },
+    {
+      id: "vanta-apex",
+      name: "Vanta Apex",
+      description: "The sharpest calibration: lowest weight, carbon aero and Track hardware included.",
+      priceDelta: 72000,
+      includesPackages: ["vanta-carbon", "vanta-track"],
+      specs: { powerKw: 1100, zeroToHundredS: 2.0, rangeKm: 310, topSpeedKmh: 350, batteryKwh: 96, drive: "Tri-motor AWD" },
+    },
+  ],
+  colours: colours([0, 0, 4200, 6400, 7200]),
+  wheels: wheels([0, 4800, 8400]),
+  interiors: interiors([0, 2400, 5200]),
+  packages: [
+    {
+      id: "vanta-track",
+      name: "Track",
+      description: "Hardware for regular circuit days.",
+      includes: ["Carbon-ceramic brakes", "Track telemetry app", "Battery pre-conditioning for laps"],
+      priceDelta: 11800,
+      conflictsWith: ["vanta-road"],
+    },
+    {
+      id: "vanta-carbon",
+      name: "Carbon Aero",
+      description: "Exposed carbon aero elements.",
+      includes: ["Carbon front splitter", "Carbon side skirts", "Carbon mirror caps"],
+      priceDelta: 9400,
+    },
+    {
+      id: "vanta-downforce",
+      name: "Max Downforce",
+      description: "A steeper rear wing and extra front aero for the circuit.",
+      includes: ["High-angle rear wing", "Front dive planes", "Flat underbody panels"],
+      priceDelta: 6800,
+      requires: ["vanta-carbon"],
+    },
+    {
+      id: "vanta-road",
+      name: "Road Comfort",
+      description: "Easier everyday use.",
+      includes: ["Front axle lift", "Parking sensors and camera", "Acoustic glass"],
+      priceDelta: 3600,
+    },
+  ],
+  features: {
+    exterior: ["Large rear wing", "Slim split front lights", "Bonnet vents", "Carbon side skirts"],
+    interior: ["Two seats", "Carbon-shell bucket seats", "Flat-bottom wheel", "Physical drive-mode dial"],
+    technology: ["Wraparound driver display", "Camera-based side mirrors", "Lap timer and telemetry", "Over-the-air updates"],
+    safety: ["Six airbags", "Automatic emergency braking", "Stability control with track mode", "Rear cross-traffic alert"],
+  },
+  images: {
+    hero: "vanta-view-front",
+    profile: "vanta-view-side",
+    front: "vanta-view-front",
+    rear: "vanta-view-rear",
+    interior: "vanta-int-onyx",
+    detail: "vanta-view-front",
+  },
+  content: vehicleContent.vanta,
+};
+
+export const vehicles: readonly Vehicle[] = [aren, sola, vire, tarn, vanta];
+
+export const VEHICLE_SLUGS = ["aren", "sola", "vire", "tarn", "vanta"] as const satisfies readonly VehicleSlug[];
 
 export function isVehicleSlug(value: unknown): value is VehicleSlug {
   return typeof value === "string" && (VEHICLE_SLUGS as readonly string[]).includes(value);

@@ -1,6 +1,6 @@
 # Case study: ORVANE
 
-A VIZAM portfolio concept: a website for **ORVANE**, an invented electric performance car brand. The brand, its three
+A VIZAM portfolio concept: a website for **ORVANE**, an invented electric performance car brand. The brand, its five
 models, every figure and every image are fictional and labelled that way on the site. Status: built and verified locally,
 not deployed.
 
@@ -17,14 +17,15 @@ and fast pages, and real tests, without copying any real manufacturer.
   hierarchy and interaction principles only; no assets or branding were reused
   ([DESIGN_REFERENCE.md](DESIGN_REFERENCE.md)).
 - **Imagery**: since no licensed 3D model of a fictional car exists, 47 vehicle and brand images (three models, five paints,
-  three interiors, views, details, heroes, wheels) and 12 editorial scenes were generated as a matched set, audited for
+  three interiors, views, details, heroes, wheels) plus, for the later Tarn pickup and Vanta track coupé, 9 images generated
+  with Gemini and 12 paint and cabin variants made by Codex from them and 12 editorial scenes were generated as a matched set, audited for
   sharpness and consistency, converted to WebP and wired through a slot registry. No 3D, no video, no voice.
 - **Built in slices**: setup, assets, home and model pages, configurator, editorial pages, gallery and forms, polish,
   independent QA and security review, delivery.
 
 ## Highlights
 
-- **12 page types**: home, models, three model pages, configurator, technology, innovation, performance, design, story,
+- **12 page types**: home, models, five model pages, configurator, technology, innovation, performance, design, story,
   gallery, test drive, contact, plus a designed 404.
 - **Configurator**: seven steps, live price breakdown, package rules held as data (requires, conflicts, included by trim),
   crossfading stage, save and resume on the device with a versioned and self-repairing storage format, deep links, printable
