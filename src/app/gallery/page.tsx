@@ -53,7 +53,7 @@ export default function Page() {
       <PageHeader
         eyebrow="Gallery"
         title="Studio and road."
-        intro="Aren, Sola and Vire in the studio and out on the road: views, cabins, details and the places they were imagined."
+        intro="The five ORVANE concepts in the studio and out on the road: views, cabins, details and the places they were imagined."
       />
 
       <Section tone="carbon" spacing="compact" aria-labelledby="gallery-grid-title">

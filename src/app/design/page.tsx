@@ -98,7 +98,7 @@ export default function Page() {
             <SectionIntro
               id="light-title"
               eyebrow="Signature"
-              title={<TwoTone muted="One blade of light." strong="Three faces." />}
+              title={<TwoTone muted="One blade of light." strong="Every face." />}
               text="The light blade replaces lamps, badges and chrome. It is the one piece of decoration on an ORVANE, and it does a job: greeting, signalling, lighting the road."
             />
           </Reveal>
@@ -147,7 +147,7 @@ export default function Page() {
       <Section tone="ink" aria-labelledby="silhouettes-title">
         <Container>
           <Reveal>
-            <SectionIntro id="silhouettes-title" eyebrow="Silhouettes" title="Three profiles, one family." text="Seen from the side, the three cars share a shoulder line and a low, forward-set cabin. Swipe, or use the arrows." className="mb-12 md:mb-16" />
+            <SectionIntro id="silhouettes-title" eyebrow="Silhouettes" title="Five profiles, one family." text="Seen from the side, the five cars share a shoulder line and a low, forward-set cabin. Swipe, or use the arrows." className="mb-12 md:mb-16" />
           </Reveal>
           <Gallery slides={slides} label="ORVANE side views" />
           <ConceptNote className="mt-8" />

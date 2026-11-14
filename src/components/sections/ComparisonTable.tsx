@@ -34,8 +34,8 @@ export function ComparisonTable() {
           tabIndex={0}
           className="mt-10 overflow-x-auto rounded-sharp border border-ink/15 bg-paper"
         >
-          <table className="w-full min-w-[34rem] border-collapse text-left">
-            <caption className="sr-only">Concept specifications of the ORVANE Aren, Sola and Vire entry trims</caption>
+          <table className="w-full min-w-[52rem] border-collapse text-left">
+            <caption className="sr-only">Concept specifications of the ORVANE Aren, Sola, Vire, Tarn and Vanta entry trims</caption>
             <thead>
               <tr className="border-b border-ink/15 bg-bone">
                 <td className="p-4 text-xs uppercase tracking-[0.18em] text-slate md:p-5">Concept data</td>

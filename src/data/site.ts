@@ -3,13 +3,13 @@ import type { RouteGroup, SiteRoute } from "@/types";
 export const SITE = {
   name: "ORVANE",
   description:
-    "ORVANE is a fictional electric performance car brand: a VIZAM portfolio concept with three models, a configurator and test-drive booking demo.",
+    "ORVANE is a fictional electric performance car brand: a VIZAM portfolio concept with five models, a configurator and test-drive booking demo.",
   conceptLabel: "Concept project by VIZAM",
 } as const;
 
 export const routes = {
   home: { href: "/", label: "Home", description: "The ORVANE lineup at a glance.", group: "explore" },
-  models: { href: "/models", label: "Models", description: "Aren, Sola and Vire side by side.", group: "models" },
+  models: { href: "/models", label: "Models", description: "All five models side by side.", group: "models" },
   configure: { href: "/configure", label: "Configure", description: "Build your ORVANE and save it.", group: "connect" },
   technology: { href: "/technology", label: "Technology", description: "Battery, motors and software.", group: "explore" },
   innovation: { href: "/innovation", label: "Innovation", description: "What the engineering team is working on.", group: "explore" },
@@ -25,6 +25,8 @@ export const modelRoutes: SiteRoute[] = [
   { href: "/models/aren", label: "Aren", description: "Grand touring sedan", group: "models" },
   { href: "/models/sola", label: "Sola", description: "Performance SUV", group: "models" },
   { href: "/models/vire", label: "Vire", description: "Two-door coupé", group: "models" },
+  { href: "/models/tarn", label: "Tarn", description: "Electric pickup", group: "models" },
+  { href: "/models/vanta", label: "Vanta", description: "Track coupé", group: "models" },
 ];
 
 /** Desktop pill navigation. */

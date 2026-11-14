@@ -11,6 +11,8 @@ import type { Vehicle } from "@/types";
 const darkFocus: Record<string, string> = {
   sola: "object-[80%_60%] lg:object-right",
   vire: "object-[52%_60%] lg:object-left",
+  tarn: "object-[55%_60%] lg:object-center",
+  vanta: "object-[55%_60%] lg:object-center",
 };
 
 const maskSvg = (path: string) =>

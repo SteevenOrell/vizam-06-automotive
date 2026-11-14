@@ -23,7 +23,7 @@ export const technologyStats = [
   { value: `${batteryMin}-${batteryMax}`, unit: "kWh", label: "Battery capacity" },
   { value: `${powerMin}-${powerMax}`, unit: "kW", label: "Peak power" },
   { value: `${rangeMin}-${rangeMax}`, unit: "km", label: "Concept range" },
-  { value: "1", unit: "platform", label: "Under three models" },
+  { value: "1", unit: "platform", label: "Under five models" },
 ];
 
 export interface ExplorerTabData {
@@ -266,7 +266,7 @@ export const storyNotice =
 
 export const storyChapters = [
   { n: "I", title: "A workshop by the sea", text: "The concept imagines a small workshop on a coast road where a handful of engineers argue about what an electric car should feel like. Quiet, they decide, is the thing nobody has finished yet." },
-  { n: "II", title: "One platform, three ideas", text: "Rather than one car, the concept imagines a single platform with room for three characters: a sedan for distance, an SUV for room, a coupé for immediacy." },
+  { n: "II", title: "One platform, five ideas", text: "Rather than one car, the concept imagines a single platform with room for five characters: a sedan for distance, an SUV for room, a coupé for immediacy, a pickup for work and a track car for the limit." },
   { n: "III", title: "The line of light", text: "A single blade of light becomes the signature. It replaces lamps, badges and ornament, and gives every model the same face after dark." },
   { n: "IV", title: "The atelier", text: "Assembly is imagined as a calm room with daylight, not a noisy hall. Fewer stations, more time per car, and every unit finished by hand." },
   { n: "V", title: "Cars that keep improving", text: "The concept ends where it started: with the idea that software lets a car get better after it leaves the atelier." },

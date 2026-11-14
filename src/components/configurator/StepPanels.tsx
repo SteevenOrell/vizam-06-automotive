@@ -150,6 +150,7 @@ export function ColourStep({
           </OptionCard>
         ))}
       </div>
+      {vehicle.limitedOptionsNote ? <p className="mt-3 text-xs text-mist">{vehicle.limitedOptionsNote}</p> : null}
 
       <fieldset className="mt-6 min-w-0 border-0 p-0">
         <legend className="text-xs uppercase tracking-[0.24em] text-mist">Views</legend>
@@ -218,6 +219,7 @@ export function WheelStep({ config, vehicle, onOption }: PanelProps) {
 
 export function InteriorStep({ config, vehicle, onOption }: PanelProps) {
   return (
+    <div>
     <div role="radiogroup" aria-labelledby="step-heading" className="grid gap-3">
       {vehicle.interiors.map((i) => (
         <OptionCard
@@ -239,6 +241,8 @@ export function InteriorStep({ config, vehicle, onOption }: PanelProps) {
           </span>
         </OptionCard>
       ))}
+    </div>
+    {vehicle.limitedOptionsNote ? <p className="mt-3 text-xs text-mist">{vehicle.limitedOptionsNote}</p> : null}
     </div>
   );
 }

@@ -42,7 +42,7 @@ export function BrandPhilosophy() {
               in a line you can predict. The shape follows from that, with long surfaces, short overhangs and one continuous line of light.
             </p>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-slate">
-              The result is a lineup that feels unhurried even when it is not. Three concept models, each with its own character, built on one platform.
+              The result is a lineup that feels unhurried even when it is not. Five concept models, each with its own character, built on one platform.
             </p>
           </Reveal>
         </div>

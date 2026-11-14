@@ -9,7 +9,7 @@ import { vehicles } from "@/data/vehicles";
 export const metadata: Metadata = pageMetadata({
   title: "Models",
   description:
-    "Aren, Sola and Vire: three electric ORVANE concept models compared side by side.",
+    "Aren, Sola, Vire, Tarn and Vanta: five electric ORVANE concept models compared side by side.",
   path: "/models",
 });
 
@@ -18,8 +18,8 @@ export default function Page() {
     <>
       <PageHeader
         eyebrow="Lineup"
-        title="Three ways to go electric."
-        intro="A grand touring sedan, a performance SUV and a two-door coupé. Different bodies, one engineering idea: power that stays composed."
+        title="Five ways to go electric."
+        intro="A grand touring sedan, a performance SUV, a two-door coupé, an electric pickup and a track coupé. Different bodies, one engineering idea: power that stays composed."
       />
       {vehicles.map((v, i) => (
         <ModelPanel key={v.slug} vehicle={v} flip={i % 2 === 1} tone={i % 2 === 0 ? "ink" : "carbon"} />

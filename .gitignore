@@ -53,3 +53,7 @@ next-env.d.ts
 # QA output and checkpoints
 docs/qa/
 docs/checkpoints/
+
+# 3D source and work files (local only)
+docs/3d/source/
+docs/3d/work/

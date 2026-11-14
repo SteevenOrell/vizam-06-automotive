@@ -69,7 +69,7 @@ export default function Page() {
               </Heading>
               <ul className="mt-3 divide-y divide-ink/15 border-y border-ink/15">
                 {[
-                  { href: "/models", label: "Models", text: "Aren, Sola and Vire side by side" },
+                  { href: "/models", label: "Models", text: "All five models side by side" },
                   { href: "/configure", label: "Configure", text: "Build one and see a concept price" },
                   { href: "/test-drive", label: "Test drive", text: "Request a concept test drive" },
                 ].map((l) => (

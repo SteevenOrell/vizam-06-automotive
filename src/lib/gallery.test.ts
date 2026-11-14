@@ -15,7 +15,7 @@ describe("gallery filters", () => {
   it("every chip has images and the model counts add up", () => {
     const counts = countByFilter(galleryEntries);
     for (const f of GALLERY_FILTERS) expect(counts[f.id], f.id).toBeGreaterThan(0);
-    expect(counts.aren + counts.sola + counts.vire).toBe(galleryEntries.filter((t) => t.model).length);
+    expect(counts.aren + counts.sola + counts.vire + counts.tarn + counts.vanta).toBe(galleryEntries.filter((t) => t.model).length);
   });
 });
 
@@ -27,7 +27,7 @@ describe("gallery data", () => {
   });
 
   it("uses at most two paints per model and keeps neighbouring tiles different", () => {
-    for (const model of ["aren", "sola", "vire"]) {
+    for (const model of ["aren", "sola", "vire", "tarn", "vanta"]) {
       expect(galleryEntries.filter((e) => e.slot.startsWith(`${model}-ext-`)).length).toBeLessThanOrEqual(2);
     }
     for (let i = 1; i < galleryEntries.length; i++) {

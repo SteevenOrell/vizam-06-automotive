@@ -22,6 +22,8 @@ export const GALLERY_FILTERS = [
   { id: "aren", label: "Aren" },
   { id: "sola", label: "Sola" },
   { id: "vire", label: "Vire" },
+  { id: "tarn", label: "Tarn" },
+  { id: "vanta", label: "Vanta" },
   { id: "interior", label: "Interior" },
   { id: "detail", label: "Detail" },
   { id: "scene", label: "Atelier & road" },
@@ -36,7 +38,7 @@ export function isGalleryFilter(value: unknown): value is GalleryFilterId {
 /** Model chips match the pictured model; kind chips match the type of image; "all" keeps everything. */
 export function matchesFilter(tile: Pick<GalleryTile, "kind" | "model">, filter: GalleryFilterId): boolean {
   if (filter === "all") return true;
-  if (filter === "aren" || filter === "sola" || filter === "vire") return tile.model === filter;
+  if (filter === "aren" || filter === "sola" || filter === "vire" || filter === "tarn" || filter === "vanta") return tile.model === filter;
   return tile.kind === filter;
 }
 

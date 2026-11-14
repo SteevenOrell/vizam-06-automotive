@@ -18,7 +18,7 @@ export function SpecsSection({ vehicle: v }: { vehicle: Vehicle }) {
         <Heading id="specs-title" level={2} size="xl" className="max-w-4xl">
           Performance specifications
         </Heading>
-        <p className="mt-5 max-w-xl text-lg text-slate">The {v.name} comes in three variants on one platform. Concept data for each.</p>
+        <p className="mt-5 max-w-xl text-lg text-slate">The {v.name} comes in {v.trims.length === 3 ? "three" : v.trims.length} variants on one platform. Concept data for each.</p>
 
         <div role="region" aria-labelledby="specs-title" tabIndex={0} className="mt-10 overflow-x-auto rounded-sharp border border-ink/15">
           <table className="w-full min-w-[40rem] border-collapse text-left">
