@@ -1,0 +1,6 @@
+# Only the app is needed to build on Vercel. Keep local working files out of the upload.
+docs/
+test-results/
+playwright-report/
+.next/
+node_modules/
