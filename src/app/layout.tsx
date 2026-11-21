@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader, SiteHeaderView } from "@/components/layout/SiteHeader";
 import { SITE } from "@/data/site";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 // next/font downloads these at build time and serves them from this site: no runtime Google requests.
@@ -72,6 +73,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           </main>
           <SiteFooter />
         </div>
+        <Analytics />
       </body>
     </html>
   );
